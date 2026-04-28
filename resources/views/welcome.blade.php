@@ -75,21 +75,44 @@
                                 <!-- Main-menu -->
                                 <div class="main-menu d-none d-lg-block">
                                     <nav> 
-                                        <ul id="navigation">                                                                                          
-                                            <li><a href="index.html">Inicio</a></li>
-                                            <li><a href="about.html">Acerca de</a></li>
-                                            <li><a href="services.html">Servicios</a></li>
-                                            <li><a href="blog.html">Blog</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="blog_details.html">Blog Details</a></li>
-                                                    <li><a href="elements.html">Element</a></li>
-                                                </ul>
+                                        <ul id="navigation" class="d-flex align-items-center">
+
+                                          <li><a href="/">Inicio</a></li>
+                                        <li><a href="#">Contactanos</a></li>
+
+                                        @guest
+                                            <li class="ml-3">
+                                                <a href="{{ route('login') }}" class="btn header-btn btn-sm" style="padding: .95rem .95rem; font-size: .92rem;">
+                                                    Login
+                                                </a>
                                             </li>
-                                            <li><a href="contact.html">Contactanos</a></li>
+                                            <li class="ml-2">
+                                                <a href="{{ route('register') }}" class="btn header-btn btn-sm" style="padding: .95rem .95rem; font-size: .92rem;">
+                                                    Registrarse
+                                                </a>
+                                            </li>
+                                        @endguest
+
+                                        @auth
+                                            @if(auth()->user()->role === 'admin')
+                                                <li><a href="/admin/viajes">Panel Admin</a></li>
+                                            @else
+                                                <li><a href="/dashboard">Mi Panel</a></li>
+                                            @endif
+
+                                            <li>
+                                                <form method="POST" action="{{ route('logout') }}">
+                                                    @csrf
+                                                    <button style="background:none;border:none;color:white;cursor:pointer;">
+                                                        Cerrar sesión
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        @endauth
+
                                         </ul>
-                                    </nav>
-                                </div>
+                                        </nav>
+                                        </div>
                                 <!-- Header-btn -->
                                 <div class="header-right-btn d-none d-lg-block ml-20">
                                     <a href="contact.html" class="btn header-btn">Obten tu cotización</a>
@@ -473,7 +496,7 @@
                                 <!-- founder -->
                                 <div class="testimonial-founder d-flex align-items-center">
                                     <div class="founder-img">
-                                        <img src="assets/img/gallery/Homepage_testi.png" alt="">
+                                        <img src="assets/img/gallery/Dashboardpage_testi.png" alt="">
                                     </div>
                                     <div class="founder-text">
                                         <span>Jhaon smith</span>
@@ -492,7 +515,7 @@
                                 <!-- founder -->
                                 <div class="testimonial-founder d-flex align-items-center">
                                     <div class="founder-img">
-                                        <img src="assets/img/gallery/Homepage_testi.png" alt="">
+                                        <img src="assets/img/gallery/Dashboardpage_testi.png" alt="">
                                     </div>
                                     <div class="founder-text">
                                         <span>Jhaon smith</span>
@@ -651,7 +674,7 @@
                             <div class="footer-tittle">
                                 <h4>RESOURCES</h4>
                                 <ul>
-                                    <li><a href="#">Home Insurance</a></li>
+                                    <li><a href="#">Dashboard Insurance</a></li>
                                     <li><a href="#">Travel Insurance</a></li>
                                     <li><a href="#"> Car Insurance</a></li>
                                     <li><a href="#"> Business Insurance</a></li>
