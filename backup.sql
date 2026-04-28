@@ -111,7 +111,7 @@ CREATE TABLE `clientes` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,7 +120,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (9,'Teru','Teru@gmail.com','323232','16 calle 6a avenida','2026-04-28 10:00:19','2026-04-28 10:00:19'),(10,'Cris','cris@gmail.com','5456012','16 calle 6a. Avenida','2026-04-28 10:29:47','2026-04-28 10:29:47');
+INSERT INTO `clientes` VALUES (10,'Cris','cris@gmail.com','5456012','16 calle 6a. Avenida','2026-04-28 10:29:47','2026-04-28 10:29:47');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -398,7 +398,7 @@ CREATE TABLE `users` (
   `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'cliente',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -407,7 +407,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Test User','test@example.com','2026-04-28 07:35:12','$2y$12$hIOKJKlQmEmuNZlnk1DNX.pNYAI.qRL8eDUQ50/sGZr3VP0dWNQhi','i2ZST2fABX','2026-04-28 07:35:13','2026-04-28 07:35:13','admin'),(2,'Cris','cristophercast70@gmail.com',NULL,'$2y$12$1cARc0srHTzxvgaYHgUBD./y0.Mcut.eTEWKhoU5A3jPaUDijg0tO',NULL,'2026-04-28 09:07:40','2026-04-28 09:07:40','admin'),(3,'Cris123','cris@gmail.com',NULL,'$2y$12$5pAnfY6ZyX0ja.pPh0j.sOK4bmuemCHQKrOVMm25BHHmYP3MSck4K',NULL,'2026-04-28 09:49:25','2026-04-28 09:49:25','cliente'),(4,'ecobici','cerdote@gmail.com',NULL,'$2y$12$JN5KYnk9MYfuKrp9WgqaVe7sHupp42oF.4ZrK8Lc4W9ELiv/hR/K6',NULL,'2026-04-28 09:50:30','2026-04-28 09:50:30','cliente');
+INSERT INTO `users` VALUES (1,'Test User','test@example.com','2026-04-28 07:35:12','$2y$12$hIOKJKlQmEmuNZlnk1DNX.pNYAI.qRL8eDUQ50/sGZr3VP0dWNQhi','i2ZST2fABX','2026-04-28 07:35:13','2026-04-28 07:35:13','admin'),(2,'Cris','cristophercast70@gmail.com',NULL,'$2y$12$1cARc0srHTzxvgaYHgUBD./y0.Mcut.eTEWKhoU5A3jPaUDijg0tO',NULL,'2026-04-28 09:07:40','2026-04-28 09:07:40','admin'),(3,'Cris123','cris@gmail.com',NULL,'$2y$12$5pAnfY6ZyX0ja.pPh0j.sOK4bmuemCHQKrOVMm25BHHmYP3MSck4K',NULL,'2026-04-28 09:49:25','2026-04-28 09:49:25','cliente');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -443,7 +443,7 @@ CREATE TABLE `viajes` (
   CONSTRAINT `viajes_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE SET NULL,
   CONSTRAINT `viajes_ibfk_2` FOREIGN KEY (`piloto_id`) REFERENCES `pilotos` (`id`) ON DELETE SET NULL,
   CONSTRAINT `viajes_ibfk_3` FOREIGN KEY (`camion_id`) REFERENCES `camiones` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -452,7 +452,7 @@ CREATE TABLE `viajes` (
 
 LOCK TABLES `viajes` WRITE;
 /*!40000 ALTER TABLE `viajes` DISABLE KEYS */;
-INSERT INTO `viajes` VALUES (30,10,NULL,NULL,'Ciudad de Guatemala, Departamento de Guatemala, Guatemala','Puerto Barrios, Izabal, Guatemala',NULL,NULL,'completado','2026-04-28 13:02:52','2026-04-28 13:07:00',NULL,NULL,14.64161420,-90.51328360,15.72751540,-88.59525060),(32,10,NULL,NULL,'Cobán, Alta Verapaz, Guatemala','Puerto Barrios, Izabal, Guatemala',NULL,NULL,'completado','2026-04-28 13:04:08','2026-04-28 13:08:24',NULL,NULL,15.47020010,-90.37350650,15.72751540,-88.59525060),(33,10,NULL,NULL,'Petén, Guatemala','Ciudad de Guatemala, Departamento de Guatemala, Guatemala',NULL,NULL,'completado','2026-04-28 13:04:31','2026-04-28 13:14:00',NULL,NULL,16.83179060,-90.04506370,14.64161420,-90.51328360),(34,10,NULL,NULL,'Cobán, Alta Verapaz, Guatemala','Ciudad de Guatemala, Departamento de Guatemala, Guatemala',NULL,NULL,'completado','2026-04-28 13:07:28','2026-04-28 13:08:09',NULL,NULL,15.47020010,-90.37350650,14.64161420,-90.51328360),(35,10,NULL,NULL,'Petén, Guatemala','Puerto Barrios, Izabal, Guatemala',NULL,NULL,'completado','2026-04-28 13:07:41','2026-04-28 13:07:41',NULL,NULL,16.83179060,-90.04506370,15.72751540,-88.59525060);
+INSERT INTO `viajes` VALUES (36,10,NULL,NULL,'Cobán, Zona 12, Alta Verapaz, Guatemala','Puerto, Santa Catalina-Canteras, Las Palmas de Gran Canaria, Las Palmas, Canarias, 35007, España',NULL,NULL,'en_ruta','2026-04-29 01:34:44','2026-04-29 02:51:40',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `viajes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -465,4 +465,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-28 12:46:08
+-- Dump completed on 2026-04-28 15:58:40
