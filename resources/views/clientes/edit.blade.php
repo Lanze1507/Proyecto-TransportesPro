@@ -26,7 +26,7 @@
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
                                 <a href="/">
-                                    <img src="{{ asset('assets/img/logo/logo.png') }}" alt="">
+                                    <img src="{{ asset('assets/img/logo/logoNombre.png') }}" alt="">
                                 </a>
                             </div>
                         </div>

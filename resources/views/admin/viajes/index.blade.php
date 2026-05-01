@@ -125,7 +125,7 @@
                             <!-- Logo -->
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="/"><img src="{{ asset('assets/img/logo/logo.png') }}" alt="TransportesPro"></a>
+                                    <a href="/"><img src="{{ asset('assets/img/logo/logoNombre.png') }}" alt="TransportesPro"></a>
                                 </div>
                             </div>
                             <div class="col-xl-10 col-lg-10">
@@ -135,7 +135,6 @@
                                         <nav>
                                             <ul id="navigation" class="d-flex align-items-center">
                                                 <li><a href="/">Inicio</a></li>
-                                                <li><a href="/admin/viajes">Panel Admin</a></li>
                                                 <li><a href="/clientes">Clientes</a></li>
                                                 @guest
                                                     <li class="ml-3">
