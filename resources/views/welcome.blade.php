@@ -45,7 +45,7 @@
                         <div class="row d-flex justify-content-between align-items-center">
                             <div class="header-info-left">
                                 <ul>     
-                                    <li>Phone: +99 (0) 101 0000 888</li>
+                                    <li>Numero: +99 (0) 101 0000 888</li>
                                     <li>Email: noreply@yourdomain.com</li>
                                 </ul>
                             </div>
@@ -67,7 +67,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                                <a href="index.html"><img src="assets/img/logo/logoNombre.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10">
@@ -153,7 +153,7 @@
                             </form>	
                             <!-- Hero Pera -->
                             <div class="hero-pera">
-                                <p>For order status inquiry</p>
+                                <p>Para consulta del estado del pedido</p>
                             </div>
                         </div>
                     </div>
@@ -172,8 +172,8 @@
                             <span class="flaticon-support"></span>
                         </div>
                         <div class="info-caption">
-                            <p>Call Us Anytime</p>
-                            <span>+ (123) 1800-567-8990</span>
+                            <p>Llamanos en cualquier momento</p>
+                            <span>+ (502) 5555-5555</span>
                         </div>
                     </div>
                 </div>
@@ -183,8 +183,8 @@
                             <span class="flaticon-clock"></span>
                         </div>
                         <div class="info-caption">
-                            <p>Sunday CLOSED</p>
-                            <span>Mon - Sat 8.00 - 18.00</span>
+                            <p>domingo CERRADO</p>
+                            <span>Lun - Sab 8.00 - 18.00</span>
                         </div>
                     </div>
                 </div>
@@ -194,8 +194,8 @@
                             <span class="flaticon-place"></span>
                         </div>
                         <div class="info-caption">
-                            <p>Columbia, SC 29201</p>
-                            <span>USA, New York - 10620</span>
+                            <p>Ciudad de Guatemala, 01001</p>
+                            <span>Guatemala</span>
                         </div>
                     </div>
                 </div>
@@ -210,43 +210,71 @@
                 <div class="col-lg-12">
                     <!-- Section Tittle -->
                     <div class="section-tittle text-center mb-80">
-                        <span>Our Services</span>
-                        <h2>What We Can Do For You</h2>
+                        <span>Nuestros servicios</span>
+                        <h2>LO QUE PODEMOS HACER POR TI</h2>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-cat text-center mb-50">
-                        <div class="cat-icon">
-                            <span class="flaticon-shipped"></span>
-                        </div>
-                        <div class="cat-cap">
-                            <h5><a href="services.html">Land Transport</a></h5>
-                            <p>The sea freight service has grown conside rably in recent years. We spend timetting to know your processes to.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-cat text-center mb-50">
-                        <div class="cat-icon">
-                            <span class="flaticon-ship"></span>
-                        </div>
-                        <div class="cat-cap">
-                            <h5><a href="services.html">Ship Transport</a></h5>
-                            <p>The sea freight service has grown conside rably in recent years. We spend timetting to know your processes to.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-cat text-center mb-50">
-                        <div class="cat-icon">
-                            <span class="flaticon-plane"></span>
-                        </div>
-                        <div class="cat-cap">
-                            <h5><a href="services.html">Air Transport</a></h5>
-                            <p>The sea freight service has grown conside rably in recent years. We spend timetting to know your processes to.</p>
-                        </div>
+           <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 col-sm-10">
+        <div class="single-cat text-center mb-50 custom-cat">
+            
+            <div class="cat-icon mb-3">
+                <span class="flaticon-shipped"></span>
+            </div>
+
+            <div class="cat-cap">
+                <h5><a href="#">Transporte terrestre</a></h5>
+                <p>
+                    Movemos tus envíos de forma rápida, segura y totalmente controlada. 
+                    Con nuestra tecnología de seguimiento en tiempo real, puedes conocer 
+                    la ubicación exacta de tu carga en cada momento. Optimizamos rutas, 
+                    reducimos tiempos de entrega y garantizamos que tus productos lleguen 
+                    en perfectas condiciones a su destino.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style id="0r2kpl">
+.custom-cat {
+    padding: 40px 30px;
+    border-radius: 18px;
+    background: #fff;
+    transition: all 0.35s ease;
+    cursor: pointer;
+}
+
+.custom-cat:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+}
+
+.custom-cat .cat-icon span {
+    font-size: 55px;
+    transition: 0.3s;
+}
+
+.custom-cat:hover .cat-icon span {
+    color: #0d6efd;
+    transform: scale(1.15);
+}
+
+.custom-cat h5 a {
+    font-size: 22px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.custom-cat p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #6c757d;
+}
+</style>
                     </div>
                 </div>
             </div>
@@ -261,12 +289,12 @@
                     <div class="about-caption mb-50">
                         <!-- Section Tittle -->
                         <div class="section-tittle mb-35">
-                            <span>About Our Company</span>
-                            <h2>Safe Logistic & Transport  Solutions That Saves our Valuable Time!</h2>
+                            <span>Sobre nuestra compañia</span>
+                            <h2>¡Soluciones logísticas y de transporte seguras que nos ahorran un tiempo valioso!</h2>
                         </div>
-                        <p>Brook presents your services with flexible, convenient and cdpose layouts. You can select your favorite layouts & elements for cular ts with unlimited ustomization possibilities. Pixel-perfect replication of the designers is intended.</p>
-                        <p>Brook presents your services with flexible, convefnient and chient anipurpose layouts. You can select your favorite layouts.</p>
-                        <a href="about.html" class="btn">More About Us</a>
+                        <p>En TransportesPro ofrecemos servicios de transporte confiables, eficientes y adaptados a tus necesidades. Nos especializamos en la gestión de envíos con seguimiento en tiempo real, garantizando seguridad y puntualidad en cada entrega.</p>
+                        <p>Nuestra plataforma permite a los clientes monitorear sus envíos, gestionar rutas y optimizar procesos logísticos, brindando una experiencia moderna, rápida y segura.</p>
+                        <a href="about.html" class="btn">Mas sobre nosotros</a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
@@ -296,99 +324,122 @@
                             <div class="col-lg-12">
                                 <!-- Section Tittle -->
                                 <div class="section-tittle mb-50">
-                                    <span>Get a Qote For Free</span>
-                                    <h2>Request a Free Quote</h2>
-                                    <p>Brook presents your services with flexible, convenient and cdpose layouts. You can select your favorite layouts & elements for.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- form -->
-                        <form action="#" class="contact-form">
-                            <div class="row ">
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="input-form">
-                                        <input type="text" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="input-form">
-                                        <input type="text" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="input-form">
-                                        <input type="text" placeholder="Contact Number">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="select-items">
-                                        <select name="select" id="select1">
-                                            <option value="">Freight Type</option>
-                                            <option value="">Catagories One</option>
-                                            <option value="">Catagories Two</option>
-                                            <option value="">Catagories Three</option>
-                                            <option value="">Catagories Four</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="input-form">
-                                        <input type="text" placeholder="City of Departure">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="input-form">
-                                        <input type="text" placeholder="Incoterms">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="input-form">
-                                        <input type="text" placeholder="Weight">
-                                    </div>
-                                </div>
-                                <!-- Height Width length -->
-                                <div class="col-lg-4 col-md-6 col-sm-6">
-                                    <div class="input-form">
-                                        <input type="text" placeholder="Height">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-6">
-                                    <div class="input-form">
-                                        <input type="text" placeholder="Width">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-6">
-                                    <div class="input-form">
-                                        <input type="text" placeholder="length">
-                                    </div>
-                                </div>
-                                <!-- Radio Button -->
-                                <div class="col-lg-12">
-                                    <div class="radio-wrapper mb-30 mt-15">
-                                        <label>Extra services:</label>
-                                        <div class="select-radio">
-                                            <div class="radio">
-                                                <input id="radio-1" name="radio" type="radio" checked="">
-                                                <label for="radio-1" class="radio-label">Freight</label>
-                                            </div>
-                                            <div class="radio">
-                                                <input id="radio-2" name="radio" type="radio">
-                                                <label for="radio-2" class="radio-label">Express Delivery</label>
-                                            </div>
-                                            <div class="radio">
-                                                <input id="radio-4" name="radio" type="radio">
-                                                <label for="radio-4" class="radio-label">Insurance</label>
-                                            </div>
-                                            <div class="radio">
-                                                <input id="radio-5" name="radio" type="radio">
-                                                <label for="radio-5" class="radio-label">Packaging</label>
-                                            </div>
+                                    <span>Solicita una cotización</span>
+                                        <h2>Calcula el costo de tu envío de forma rápida y segura</h2>
+                                        <p>En TransportesPro te ofrecemos una forma sencilla de obtener una cotización personalizada para tu envío. Completa la información y te brindaremos una solución eficiente, segura y adaptada a tus necesidades.</p>
                                         </div>
-                                    </div> 
-                                </div>
-                                <!-- Button -->
-                                <div class="col-lg-12">
-                                    <button name="submit" class="submit-btn">Request a Quote</button>
+                                        </div>
+                                        </div>
+
+                                        <form action="#" class="contact-form">
+                                            <div class="row">
+                                                
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="input-form">
+                                                        <input type="text" placeholder="Nombre completo">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="input-form">
+                                                        <input type="text" placeholder="Correo electrónico">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-12">
+                                                    <div class="input-form">
+                                                        <input type="text" placeholder="Número de contacto">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="select-items">
+                                                        <select name="select" id="select1">
+                                                            <option value="">Tipo de carga</option>
+                                                            <option value="">Carga general</option>
+                                                            <option value="">Carga perecedera</option>
+                                                            <option value="">Carga peligrosa</option>
+                                                            <option value="">Carga refrigerada</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="input-form">
+                                                        <input type="text" placeholder="Ciudad de origen">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="input-form">
+                                                        <input type="text" placeholder="Incoterms (Ej: FOB, CIF, DDP)">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                                    <div class="input-form">
+                                                        <input type="text" placeholder="Peso total (kg)">
+                                                    </div>
+                                                </div>
+
+                                                <!-- Dimensiones -->
+                                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                                    <div class="input-form">
+                                                        <input type="text" placeholder="Altura (cm)">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                                    <div class="input-form">
+                                                        <input type="text" placeholder="Ancho (cm)">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                                    <div class="input-form">
+                                                        <input type="text" placeholder="Largo (cm)">
+                                                    </div>
+                                                </div>
+
+                                                <!-- Servicios extra -->
+                                                <div class="col-lg-12">
+                                                    <div class="radio-wrapper mb-30 mt-15">
+                                                        <label>Servicios adicionales:</label>
+                                                        <div class="select-radio">
+                                                            
+                                                            <div class="radio">
+                                                                <input id="radio-1" name="radio" type="radio" checked>
+                                                                <label for="radio-1" class="radio-label">Transporte estándar</label>
+                                                            </div>
+
+                                                            <div class="radio">
+                                                                <input id="radio-2" name="radio" type="radio">
+                                                                <label for="radio-2" class="radio-label">Entrega exprés</label>
+                                                            </div>
+
+                                                            <div class="radio">
+                                                                <input id="radio-4" name="radio" type="radio">
+                                                                <label for="radio-4" class="radio-label">Seguro de carga</label>
+                                                            </div>
+
+                                                            <div class="radio">
+                                                                <input id="radio-5" name="radio" type="radio">
+                                                                <label for="radio-5" class="radio-label">Embalaje especializado</label>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Botón -->
+                                                <div class="col-lg-12">
+                                                    <button name="submit" class="submit-btn">
+                                                        Solicitar cotización
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                        </form>
                                 </div>
                             </div>
                         </form>	
@@ -405,39 +456,20 @@
                 <div class="cl-xl-7 col-lg-8 col-md-10">
                     <!-- Section Tittle -->
                     <div class="section-tittle text-center mb-70">
-                        <span>Our Team Mambers</span>
-                        <h2>What We Can Do For You</h2>
+                        <span>Nuestro equipo</span>
+                        <h2>Conoce a nuestro equipo de expertos</h2>
                     </div> 
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="single-team mb-30 text-center">
-                        <div class="team-img">
-                            <img src="assets/img/gallery/team1.png" alt="">
-                            <div class="team-caption">
-                                <h3><a href="#">Mancherwan Kolin</a></h3>
-                                <p>Health agent</p>
-                                <!-- Blog Social -->
-                                <div class="team-social">
-                                    <ul>
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fas fa-globe"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="row justify-content-center">
+                
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="single-team mb-30 text-center">
                         <div class="team-img">
                             <img src="assets/img/gallery/team2.png" alt="">
                             <div class="team-caption">
-                                <h3><a href="#">Mancherwan Kolin</a></h3>
-                                <p>Health agent</p>
+                                <h3><a href="#">Lanse Castellanos</a></h3>
+                                <p>Desarrollador del sistema</p>
                                 <!-- Blog Social -->
                                 <div class="team-social">
                                     <ul>
@@ -456,8 +488,8 @@
                         <div class="team-img">
                             <img src="assets/img/gallery/team3.png" alt="">
                             <div class="team-caption">
-                                <h3><a href="#">Mancherwan Kolin</a></h3>
-                                <p>Health agent</p>
+                                <h3><a href="#">Cristal Muñoz</a></h3>
+                                <p>Administrador de la plataforma</p>
                                 <!-- Blog Social -->
                                 <div class="team-social">
                                     <ul>
@@ -482,8 +514,8 @@
                 <div class="col-xl-7 col-lg-7">
                     <!-- Section Tittle -->
                     <div class="section-tittle section-tittle2 mb-25">
-                        <span>Clients Testimonials</span>
-                        <h2>What Our Clients Say!</h2>
+                        <span>Tetimonios</span>
+                        <h2>Lo que nuestros clientes opinan!</h2>
                     </div> 
                     <div class="h1-testimonial-active mb-70">
                         <!-- Single Testimonial -->
@@ -491,7 +523,7 @@
                             <!-- Testimonial Content -->
                             <div class="testimonial-caption ">
                                 <div class="testimonial-top-cap">
-                                    <p>Srem ipsum adolor dfsit amet, consectetur adipiscing elit, sed dox beiusmod tempor incci didunt ut labore et dolore magna aliqua. Quis cipsucm suspendisse ultrices gravida. Risus commodo vivercra maecenas accumsan lac.</p>
+                                    <p>El servicio es excelente y siempre cumple con las expectativas.</p>
                                 </div>
                                 <!-- founder -->
                                 <div class="testimonial-founder d-flex align-items-center">
@@ -499,8 +531,8 @@
                                         <img src="assets/img/gallery/Dashboardpage_testi.png" alt="">
                                     </div>
                                     <div class="founder-text">
-                                        <span>Jhaon smith</span>
-                                        <p>Creative designer</p>
+                                        <span>Jon Smith</span>
+                                        <p>Diseñador</p>
                                     </div>
                                 </div>
                             </div>
@@ -510,7 +542,7 @@
                             <!-- Testimonial Content -->
                             <div class="testimonial-caption ">
                                 <div class="testimonial-top-cap">
-                                    <p>Srem ipsum adolor dfsit amet, consectetur adipiscing elit, sed dox beiusmod tempor incci didunt ut labore et dolore magna aliqua. Quis cipsucm suspendisse ultrices gravida. Risus commodo vivercra maecenas accumsan lac.</p>
+                                    <p>Muy bueno, los paquetes llegaron a tiempo.</p>
                                 </div>
                                 <!-- founder -->
                                 <div class="testimonial-founder d-flex align-items-center">
@@ -518,8 +550,8 @@
                                         <img src="assets/img/gallery/Dashboardpage_testi.png" alt="">
                                     </div>
                                     <div class="founder-text">
-                                        <span>Jhaon smith</span>
-                                        <p>Creative designer</p>
+                                        <span>Carlitos Lopez</span>
+                                        <p>Programador</p>
                                     </div>
                                 </div>
                             </div>
@@ -527,13 +559,13 @@
                     </div>
                 </div>
                 <!-- Form Start -->
-                <div class="col-xl-4 col-lg-5 col-md-8">
-                    <div class="testimonial-form text-center">
-                        <h3>Always listening, always understanding.</h3>
-                        <input type="text" placeholder="Incoterms">
-                        <button name="submit" class="submit-btn">Request a Quote</button>
-                    </div>
-                </div>
+               <div class="col-xl-4 col-lg-5 col-md-8">
+    <div class="testimonial-form text-center">
+        <h3>Siempre atentos, siempre conectados con tu envío</h3>
+        <input type="text" placeholder="Ingresa tu destino">
+        <button name="submit" class="submit-btn">Solicitar cotización</button>
+    </div>
+</div>
                 <!-- Form End -->
             </div>
         </div>
@@ -546,75 +578,89 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-tittle text-center mb-70">
-                        <span>Our Recent news</span>
-                        <h2>Tourist Blog</h2>
+                        <span>Nuestras noticias recientes</span>
+                        <h2>Blog de turistas</h2>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="home-blog-single mb-30">
-                        <div class="blog-img-cap">
-                            <div class="blog-img">
-                                <img src="assets/img/gallery/blog01.png" alt="">
-                            </div>
-                        </div>
-                        <div class="blog-caption">
-                            <div class="blog-date text-center">
-                                <span>27</span>
-                                <p>SEP</p>
-                            </div>
-                            <div class="blog-cap">
-                                <ul>
-                                    <li><a href="#"><i class="ti-user"></i> Jessica Temphers</a></li>
-                                    <li><a href="#"><i class="ti-comment-alt"></i> 12</a></li>
-                                </ul>
-                                <h3><a href="blog_details.html">Here’s what you should know before.</a></h3>
-                            </div>
-                        </div>
-                    </div>
+           <div class="row">
+
+    <div class="col-lg-4 col-md-6">
+        <div class="home-blog-single mb-30">
+            <div class="blog-img-cap">
+                <div class="blog-img">
+                    <img src="assets/img/gallery/blog01.png" alt="">
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="home-blog-single mb-30">
-                        <div class="blog-img-cap">
-                            <div class="blog-img">
-                                <img src="assets/img/gallery/blog1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="blog-caption">
-                            <div class="blog-date text-center">
-                                <span>27</span>
-                                <p>SEP</p>
-                            </div>
-                            <div class="blog-cap">
-                                <ul>
-                                    <li><a href="#"><i class="ti-user"></i> Jessica Temphers</a></li>
-                                    <li><a href="#"><i class="ti-comment-alt"></i> 12</a></li>
-                                </ul>
-                                <h3><a href="blog_details.html">Here’s what you should know before.</a></h3>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div class="blog-caption">
+                <div class="blog-date text-center">
+                    <span>10</span>
+                    <p>JUN</p>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="home-blog-single mb-30">
-                        <div class="blog-img-cap">
-                            <div class="blog-img">
-                                <img src="assets/img/gallery/blog02.png" alt="">
-                            </div>
-                        </div>
-                        <div class="blog-caption">
-                            <div class="blog-date text-center">
-                                <span>27</span>
-                                <p>SEP</p>
-                            </div>
-                            <div class="blog-cap">
-                                <ul>
-                                    <li><a href="#"><i class="ti-user"></i> Jessica Temphers</a></li>
-                                    <li><a href="#"><i class="ti-comment-alt"></i> 12</a></li>
-                                </ul>
-                                <h3><a href="blog_details.html">Here’s what you should know before.</a></h3>
-                            </div>
+                <div class="blog-cap">
+                    <ul>
+                        <li><a href="#"><i class="ti-user"></i> Admin</a></li>
+                        <li><a href="#"><i class="ti-comment-alt"></i> 5</a></li>
+                    </ul>
+                    <h3>
+                        <a href="#">Consejos para asegurar tus envíos durante el transporte</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+        <div class="home-blog-single mb-30">
+            <div class="blog-img-cap">
+                <div class="blog-img">
+                    <img src="assets/img/gallery/blog1.png" alt="">
+                </div>
+            </div>
+            <div class="blog-caption">
+                <div class="blog-date text-center">
+                    <span>15</span>
+                    <p>JUN</p>
+                </div>
+                <div class="blog-cap">
+                    <ul>
+                        <li><a href="#"><i class="ti-user"></i> Admin</a></li>
+                        <li><a href="#"><i class="ti-comment-alt"></i> 3</a></li>
+                    </ul>
+                    <h3>
+                        <a href="#">Cómo optimizar rutas para entregas más rápidas y eficientes</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6">
+        <div class="home-blog-single mb-30">
+            <div class="blog-img-cap">
+                <div class="blog-img">
+                    <img src="assets/img/gallery/blog02.png" alt="">
+                </div>
+            </div>
+            <div class="blog-caption">
+                <div class="blog-date text-center">
+                    <span>20</span>
+                    <p>JUN</p>
+                </div>
+                <div class="blog-cap">
+                    <ul>
+                        <li><a href="#"><i class="ti-user"></i> Admin</a></li>
+                        <li><a href="#"><i class="ti-comment-alt"></i> 7</a></li>
+                    </ul>
+                    <h3>
+                        <a href="#">Seguimiento en tiempo real: mejora la experiencia del cliente</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
                         </div>
                     </div>
                 </div>
@@ -630,89 +676,99 @@
             <div class="footer-top footer-padding">
                 <!-- footer Heading -->
                 <div class="footer-heading">
-                    <div class="row justify-content-between">
-                        <div class="col-xl-6 col-lg-8 col-md-8">
-                            <div class="wantToWork-caption wantToWork-caption2">
-                                <h2>We Understand The Importance Approaching Each Work!</h2>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4">
-                            <span class="contact-number f-right">+ 1 212-683-9756</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Footer Menu -->
-                <div class="row d-flex justify-content-between">
-                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>COMPANY</h4>
-                                <ul>
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Company</a></li>
-                                    <li><a href="#"> Press & Blog</a></li>
-                                    <li><a href="#"> Privacy Policy</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Open hour</h4>
-                                <ul>
-                                    <li><a href="#">Monday 11am-7pm</a></li>
-                                    <li><a href="#"> Tuesday-Friday 11am-8pm</a></li>
-                                    <li><a href="#"> Saturday 10am-6pm</a></li>
-                                    <li><a href="#"> Sunday 11am-6pm</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>RESOURCES</h4>
-                                <ul>
-                                    <li><a href="#">Dashboard Insurance</a></li>
-                                    <li><a href="#">Travel Insurance</a></li>
-                                    <li><a href="#"> Car Insurance</a></li>
-                                    <li><a href="#"> Business Insurance</a></li>
-                                    <li><a href="#"> Heal Insurance</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6">
-                        <div class="single-footer-caption mb-50">
-                            <!-- logo -->
-                            <div class="footer-logo">
-                                <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                            </div>
-                            <div class="footer-tittle">
-                                <div class="footer-pera">
-                                    <p class="info1">GThe trade war currently ensuing between te US anfd several natxions around thdhe globe, most fiercely with.</p>
-                                </div>
-                            </div>
-                            <!-- Footer Social -->
-                            <div class="footer-social ">
-                                <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                                <a href=""><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fas fa-globe"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
+    <div class="row justify-content-between">
+        <div class="col-xl-6 col-lg-8 col-md-8">
+            <div class="wantToWork-caption wantToWork-caption2">
+                <h2>Entendemos la importancia de cada envío y trabajamos para que llegue seguro y a tiempo</h2>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4">
+            <span class="contact-number f-right">+502 1234-5678</span>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Menu -->
+<div class="row d-flex justify-content-between">
+
+    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
+        <div class="single-footer-caption mb-50">
+            <div class="footer-tittle">
+                <h4>EMPRESA</h4>
+                <ul>
+                    <li><a href="#">Sobre nosotros</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">Noticias</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+        <div class="single-footer-caption mb-50">
+            <div class="footer-tittle">
+                <h4>HORARIOS</h4>
+                <ul>
+                    <li><a href="#">Lunes - Viernes: 8am - 6pm</a></li>
+                    <li><a href="#">Sábado: 9am - 4pm</a></li>
+                    <li><a href="#">Domingo: Cerrado</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+        <div class="single-footer-caption mb-50">
+            <div class="footer-tittle">
+                <h4>SERVICIOS</h4>
+                <ul>
+                    <li><a href="#">Envíos nacionales</a></li>
+                    <li><a href="#">Seguimiento en tiempo real</a></li>
+                    <li><a href="#">Transporte express</a></li>
+                    <li><a href="#">Gestión logística</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6">
+        <div class="single-footer-caption mb-50">
+
+            <div class="footer-logo">
+                <a href="/"><img src="assets/img/logo/logoNombre.png" alt=""></a>
+            </div>
+
+            <div class="footer-tittle">
+                <div class="footer-pera">
+                    <p class="info1">
+                        TransportesPro es una plataforma diseñada para facilitar la gestión de envíos, 
+                        brindando soluciones seguras, rápidas y eficientes para empresas y clientes.
+                    </p>
                 </div>
             </div>
+
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fas fa-globe"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
             <!-- Footer Bottom -->
             <div class="footer-bottom">
                 <div class="row d-flex align-items-center">
                     <div class="col-lg-12">
                         <div class="footer-copy-right text-center">
-                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                            <p>
+                            <p>
+                            Copyright © <script>document.write(new Date().getFullYear());</script> 
+                            TransportesPro. Todos los derechos reservados.</a>
+                            </p>
                         </div>
                     </div>
                 </div>
