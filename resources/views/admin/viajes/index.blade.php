@@ -154,6 +154,47 @@
         </div>
     </div>
     <!-- slider Area End-->
+     <!--? our info Start -->
+    <div class="our-info-area pt-70 pb-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-info mb-30">
+                        <div class="info-icon">
+                            <span class="flaticon-support"></span>
+                        </div>
+                        <div class="info-caption">
+                            <p>Llamanos en cualquier momento</p>
+                            <span>+ (502) 5555-5555</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-info mb-30">
+                        <div class="info-icon">
+                            <span class="flaticon-clock"></span>
+                        </div>
+                        <div class="info-caption">
+                            <p>domingo CERRADO</p>
+                            <span>Lun - Sab 8.00 - 18.00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-info mb-30">
+                        <div class="info-icon">
+                            <span class="flaticon-place"></span>
+                        </div>
+                        <div class="info-caption">
+                            <p>Ciudad de Guatemala, 01001</p>
+                            <span>Guatemala</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- our info End -->
 </main>
 </body>
 </html>
