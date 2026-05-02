@@ -258,6 +258,118 @@
         </div>
     </div>
     <!-- About Area End -->
+    <!--? contact-form start -->
+    <section class="contact-form-area section-bg pt-115 pb-120 fix"
+             data-background="assets/img/gallery/section_bg02.jpg">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-xl-8 col-lg-9">
+                    <div class="contact-form-wrapper">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="section-tittle mb-50">
+                                    <span>Solicita una cotización</span>
+                                    <h2>Calcula el costo de tu envío de forma rápida y segura</h2>
+                                    <p>En TransportesPro te ofrecemos una forma sencilla de obtener
+                                       una cotización personalizada para tu envío. Completa la información
+                                       y te brindaremos una solución eficiente, segura y adaptada a tus necesidades.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <form action="#" class="contact-form">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="input-form">
+                                        <input type="text" placeholder="Nombre completo">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="input-form">
+                                        <input type="text" placeholder="Correo electrónico">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="input-form">
+                                        <input type="text" placeholder="Número de contacto">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="select-items">
+                                        <select name="select" id="select1">
+                                            <option value="">Tipo de carga</option>
+                                            <option value="">Carga general</option>
+                                            <option value="">Carga perecedera</option>
+                                            <option value="">Carga peligrosa</option>
+                                            <option value="">Carga refrigerada</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="input-form">
+                                        <input type="text" placeholder="Ciudad de origen">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="input-form">
+                                        <input type="text" placeholder="Incoterms (Ej: FOB, CIF, DDP)">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="input-form">
+                                        <input type="text" placeholder="Peso total (kg)">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="input-form">
+                                        <input type="text" placeholder="Altura (cm)">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="input-form">
+                                        <input type="text" placeholder="Ancho (cm)">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="input-form">
+                                        <input type="text" placeholder="Largo (cm)">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="radio-wrapper mb-30 mt-15">
+                                        <label>Servicios adicionales:</label>
+                                        <div class="select-radio">
+                                            <div class="radio">
+                                                <input id="radio-1" name="radio" type="radio" checked>
+                                                <label for="radio-1" class="radio-label">Transporte estándar</label>
+                                            </div>
+                                            <div class="radio">
+                                                <input id="radio-2" name="radio" type="radio">
+                                                <label for="radio-2" class="radio-label">Entrega exprés</label>
+                                            </div>
+                                            <div class="radio">
+                                                <input id="radio-4" name="radio" type="radio">
+                                                <label for="radio-4" class="radio-label">Seguro de carga</label>
+                                            </div>
+                                            <div class="radio">
+                                                <input id="radio-5" name="radio" type="radio">
+                                                <label for="radio-5" class="radio-label">Embalaje especializado</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <button name="submit" class="submit-btn">
+                                        Solicitar cotización
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- contact-form end -->
 
     <style>
         .custom-cat {
