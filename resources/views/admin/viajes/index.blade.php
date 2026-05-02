@@ -424,6 +424,62 @@
         </div>
     </div>
     <!-- Team Area End -->
+    <!--? Testimonial Start -->
+    <div class="testimonial-area testimonial-padding section-bg"
+         data-background="assets/img/gallery/section_bg04.jpg">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-xl-7 col-lg-7">
+                    <div class="section-tittle section-tittle2 mb-25">
+                        <span>Testimonios</span>
+                        <h2>Lo que nuestros clientes opinan!</h2>
+                    </div>
+                    <div class="h1-testimonial-active mb-70">
+                        <div class="single-testimonial">
+                            <div class="testimonial-caption">
+                                <div class="testimonial-top-cap">
+                                    <p>El servicio es excelente y siempre cumple con las expectativas.</p>
+                                </div>
+                                <div class="testimonial-founder d-flex align-items-center">
+                                    <div class="founder-img">
+                                        <img src="assets/img/gallery/Dashboardpage_testi.png" alt="">
+                                    </div>
+                                    <div class="founder-text">
+                                        <span>Jon Smith</span>
+                                        <p>Diseñador</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="single-testimonial">
+                            <div class="testimonial-caption">
+                                <div class="testimonial-top-cap">
+                                    <p>Muy bueno, los paquetes llegaron a tiempo.</p>
+                                </div>
+                                <div class="testimonial-founder d-flex align-items-center">
+                                    <div class="founder-img">
+                                        <img src="assets/img/gallery/Dashboardpage_testi.png" alt="">
+                                    </div>
+                                    <div class="founder-text">
+                                        <span>Carlitos Lopez</span>
+                                        <p>Programador</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-5 col-md-8">
+                    <div class="testimonial-form text-center">
+                        <h3>Siempre atentos, siempre conectados con tu envío</h3>
+                        <input type="text" placeholder="Ingresa tu destino">
+                        <button name="submit" class="submit-btn">Solicitar cotización</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
 
     <style>
         .custom-cat {
