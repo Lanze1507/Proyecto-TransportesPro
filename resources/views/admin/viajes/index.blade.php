@@ -76,6 +76,38 @@
                                         <ul id="navigation" class="d-flex align-items-center">
                                             <li><a href="/">Inicio</a></li>
                                             <li><a href="#">Contactanos</a></li>
+
+                                            @guest
+                                                <li class="ml-3">
+                                                    <a href="{{ route('login') }}" class="btn header-btn btn-sm"
+                                                    style="padding: .95rem .95rem; font-size: .92rem;">
+                                                        Login
+                                                    </a>
+                                                </li>
+                                                <li class="ml-2">
+                                                    <a href="{{ route('register') }}" class="btn header-btn btn-sm"
+                                                    style="padding: .95rem .95rem; font-size: .92rem;">
+                                                        Registrarse
+                                                    </a>
+                                                </li>
+                                            @endguest
+
+                                            @auth
+                                                @if(auth()->user()->role === 'admin')
+                                                    <li><a href="/admin/viajes">Panel Admin</a></li>
+                                                @else
+                                                    <li><a href="/dashboard">Mi Panel</a></li>
+                                                @endif
+
+                                                <li>
+                                                    <form method="POST" action="{{ route('logout') }}">
+                                                        @csrf
+                                                        <button style="background:none;border:none;color:white;cursor:pointer;">
+                                                            Cerrar sesión
+                                                        </button>
+                                                    </form>
+                                                </li>
+                                            @endauth
                                         </ul>
                                     </nav>
                                 </div>
