@@ -195,7 +195,7 @@
         </div>
     </div>
     <!-- our info End -->
-     <!--? Categories Area Start -->
+    <!--? Categories Area Start -->
     <div class="categories-area section-padding30">
         <div class="container">
             <div class="row">
@@ -226,6 +226,38 @@
         </div>
     </div>
     <!-- Categories Area End -->
+    <!--? About Area Start -->
+    <div class="about-low-area padding-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="about-caption mb-50">
+                        <div class="section-tittle mb-35">
+                            <span>Sobre nuestra compañia</span>
+                            <h2>¡Soluciones logísticas y de transporte seguras que nos ahorran un tiempo valioso!</h2>
+                        </div>
+                        <p>En TransportesPro ofrecemos servicios de transporte confiables, eficientes
+                           y adaptados a tus necesidades. Nos especializamos en la gestión de envíos
+                           con seguimiento en tiempo real, garantizando seguridad y puntualidad en cada entrega.</p>
+                        <p>Nuestra plataforma permite a los clientes monitorear sus envíos, gestionar
+                           rutas y optimizar procesos logísticos, brindando una experiencia moderna, rápida y segura.</p>
+                        <a href="about.html" class="btn">Mas sobre nosotros</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="about-img">
+                        <div class="about-font-img">
+                            <img src="assets/img/gallery/about2.png" alt="">
+                        </div>
+                        <div class="about-back-img d-none d-lg-block">
+                            <img src="assets/img/gallery/about1.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Area End -->
 
     <style>
         .custom-cat {
