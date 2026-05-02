@@ -125,6 +125,35 @@
         </div>
     </div>
 </header>
-
+<main>
+    <!--? slider Area Start-->
+    <div class="slider-area ">
+        <div class="slider-active">
+            <div class="single-slider slider-height d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-9">
+                            <div class="hero__caption">
+                                <h1>Servicios de <span>Logistica</span> segura y confiable</h1>
+                            </div>
+                            <form action="#" class="search-box">
+                                <div class="input-form">
+                                    <input type="text" placeholder="Tu ID de seguimiento">
+                                </div>
+                                <div class="search-form">
+                                    <a href="#">Track & Trace</a>
+                                </div>
+                            </form>
+                            <div class="hero-pera">
+                                <p>Para consulta del estado del pedido</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider Area End-->
+</main>
 </body>
 </html>
