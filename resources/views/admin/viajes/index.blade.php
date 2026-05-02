@@ -195,6 +195,70 @@
         </div>
     </div>
     <!-- our info End -->
+     <!--? Categories Area Start -->
+    <div class="categories-area section-padding30">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-tittle text-center mb-80">
+                        <span>Nuestros servicios</span>
+                        <h2>LO QUE PODEMOS HACER POR TI</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-8 col-sm-10">
+                    <div class="single-cat text-center mb-50 custom-cat">
+                        <div class="cat-icon mb-3">
+                            <span class="flaticon-shipped"></span>
+                        </div>
+                        <div class="cat-cap">
+                            <h5><a href="#">Transporte terrestre</a></h5>
+                            <p>Movemos tus envíos de forma rápida, segura y totalmente controlada.
+                               Con nuestra tecnología de seguimiento en tiempo real, puedes conocer
+                               la ubicación exacta de tu carga en cada momento. Optimizamos rutas,
+                               reducimos tiempos de entrega y garantizamos que tus productos lleguen
+                               en perfectas condiciones a su destino.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Categories Area End -->
+
+    <style>
+        .custom-cat {
+            padding: 40px 30px;
+            border-radius: 18px;
+            background: #fff;
+            transition: all 0.35s ease;
+            cursor: pointer;
+        }
+        .custom-cat:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+        }
+        .custom-cat .cat-icon span {
+            font-size: 55px;
+            transition: 0.3s;
+        }
+        .custom-cat:hover .cat-icon span {
+            color: #0d6efd;
+            transform: scale(1.15);
+        }
+        .custom-cat h5 a {
+            font-size: 22px;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 12px;
+        }
+        .custom-cat p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #6c757d;
+        }
+    </style>
 </main>
 </body>
 </html>
