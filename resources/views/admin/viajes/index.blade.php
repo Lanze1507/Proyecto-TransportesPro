@@ -480,6 +480,88 @@
         </div>
     </div>
     <!-- Testimonial End -->
+    <!--? Blog Area Start -->
+    <div class="home-blog-area section-padding30">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-tittle text-center mb-70">
+                        <span>Nuestras noticias recientes</span>
+                        <h2>Blog de turistas</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="home-blog-single mb-30">
+                        <div class="blog-img-cap">
+                            <div class="blog-img">
+                                <img src="assets/img/gallery/blog01.png" alt="">
+                            </div>
+                        </div>
+                        <div class="blog-caption">
+                            <div class="blog-date text-center">
+                                <span>10</span>
+                                <p>JUN</p>
+                            </div>
+                            <div class="blog-cap">
+                                <ul>
+                                    <li><a href="#"><i class="ti-user"></i> Admin</a></li>
+                                    <li><a href="#"><i class="ti-comment-alt"></i> 5</a></li>
+                                </ul>
+                                <h3><a href="#">Consejos para asegurar tus envíos durante el transporte</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="home-blog-single mb-30">
+                        <div class="blog-img-cap">
+                            <div class="blog-img">
+                                <img src="assets/img/gallery/blog1.png" alt="">
+                            </div>
+                        </div>
+                        <div class="blog-caption">
+                            <div class="blog-date text-center">
+                                <span>15</span>
+                                <p>JUN</p>
+                            </div>
+                            <div class="blog-cap">
+                                <ul>
+                                    <li><a href="#"><i class="ti-user"></i> Admin</a></li>
+                                    <li><a href="#"><i class="ti-comment-alt"></i> 3</a></li>
+                                </ul>
+                                <h3><a href="#">Cómo optimizar rutas para entregas más rápidas y eficientes</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="home-blog-single mb-30">
+                        <div class="blog-img-cap">
+                            <div class="blog-img">
+                                <img src="assets/img/gallery/blog02.png" alt="">
+                            </div>
+                        </div>
+                        <div class="blog-caption">
+                            <div class="blog-date text-center">
+                                <span>20</span>
+                                <p>JUN</p>
+                            </div>
+                            <div class="blog-cap">
+                                <ul>
+                                    <li><a href="#"><i class="ti-user"></i> Admin</a></li>
+                                    <li><a href="#"><i class="ti-comment-alt"></i> 7</a></li>
+                                </ul>
+                                <h3><a href="#">Seguimiento en tiempo real: mejora la experiencia del cliente</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Blog Area End -->
 
     <style>
         .custom-cat {
