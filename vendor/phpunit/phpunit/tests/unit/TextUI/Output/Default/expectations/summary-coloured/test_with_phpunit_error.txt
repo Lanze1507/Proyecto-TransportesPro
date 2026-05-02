@@ -1,1 +1,0 @@
-[30;43mNo tests executed![0m

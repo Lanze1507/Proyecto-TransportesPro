@@ -1,3 +1,0 @@
-[30;42mOK (1 test, 1 assertion)[0m
-
-2 issues were ignored by baseline.

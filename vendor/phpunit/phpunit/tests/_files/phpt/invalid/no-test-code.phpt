@@ -1,4 +1,0 @@
---TEST--
-Test
---EXPECT--
-Test
