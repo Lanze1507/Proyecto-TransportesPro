@@ -7,6 +7,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\ViajeController;
+use App\Http\Controllers\Operador\ViajeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +93,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+/*
+|----------------------------------------------------------
+| OPERADOR — Gestión de viajes
+|----------------------------------------------------------
+*/
+Route::middleware(['auth', 'operador'])->prefix('operador')->group(function () {
+
+    Route::get('/viajes',                  [App\Http\Controllers\Operador\ViajeController::class, 'index'])   ->name('operador.viajes.index');
+    Route::get('/viajes/{id}',             [App\Http\Controllers\Operador\ViajeController::class, 'show'])    ->name('operador.viajes.show');
+    Route::patch('/viajes/{id}/aprobar',   [App\Http\Controllers\Operador\ViajeController::class, 'aprobar']) ->name('operador.viajes.aprobar');
+    Route::patch('/viajes/{id}/rechazar',  [App\Http\Controllers\Operador\ViajeController::class, 'rechazar'])->name('operador.viajes.rechazar');
+    Route::post('/viajes/{id}/asignar',    [App\Http\Controllers\Operador\ViajeController::class, 'asignar']) ->name('operador.viajes.asignar');
+    Route::patch('/viajes/{id}/cancelar',  [App\Http\Controllers\Operador\ViajeController::class, 'cancelar'])->name('operador.viajes.cancelar');
+
+});
 /*
 |--------------------------------------------------------------------------
 | AUTH (LOGIN / REGISTER)
