@@ -9,17 +9,18 @@ class Viaje extends Model
     protected $table = 'viajes';
 
     protected $fillable = [
-    'cliente_id',
-    'origen',
-    'destino',
-    'estado',
-    'lat_origen',
-    'lng_origen',
-    'lat_destino',
-    'lng_destino'
-];
+        'cliente_id',
+        'piloto_id',
+        'origen',
+        'destino',
+        'estado',
+        'lat_origen',
+        'lng_origen',
+        'lat_destino',
+        'lng_destino'
+    ];
 
-    // 🔥 RELACIONES
+    // RELACIONES
 
     public function cliente()
     {
@@ -31,6 +32,7 @@ class Viaje extends Model
         return $this->belongsTo(Piloto::class);
     }
 
+    // opcional (para futuro)
     public function camion()
     {
         return $this->belongsTo(Camion::class);

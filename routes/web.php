@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\ViajeController;
+use App\Http\Controllers\PilotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ Route::get('/', function () {
 
 /*
 |--------------------------------------------------------------------------
-| GEOCODE (SOLUCIÓN CON cURL - SIN CORS / SIN FALLAS)
+| GEOCODE (SIN CORS)
 |--------------------------------------------------------------------------
 */
 Route::get('/geocode', function (Request $request) {
@@ -39,7 +40,6 @@ Route::get('/geocode', function (Request $request) {
         "User-Agent: TransProApp"
     ]);
 
-    // 🔥 evita problemas SSL en local (Laragon)
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
     $response = curl_exec($ch);
@@ -73,11 +73,17 @@ Route::middleware(['auth','admin'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| ADMIN VIAJES
+| ADMIN (VIAJES + PILOTOS)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth','admin'])->prefix('admin')->group(function () {
+
+    // VIAJES
     Route::resource('viajes', ViajeController::class);
+
+    // PILOTOS (NUEVO)
+    Route::resource('pilotos', PilotoController::class);
+
 });
 
 /*
@@ -93,7 +99,7 @@ Route::middleware('auth')->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| AUTH (LOGIN / REGISTER)
+| AUTH
 |--------------------------------------------------------------------------
 */
 require __DIR__.'/auth.php';

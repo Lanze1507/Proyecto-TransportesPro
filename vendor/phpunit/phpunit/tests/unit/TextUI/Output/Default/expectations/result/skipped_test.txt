@@ -1,4 +1,0 @@
-There was 1 skipped test:
-
-1) FooTest::testBar
-message

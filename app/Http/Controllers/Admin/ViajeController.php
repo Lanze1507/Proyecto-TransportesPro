@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Viaje;
 use App\Models\Cliente;
+use App\Models\Piloto;
 use Illuminate\Http\Request;
 
 class ViajeController extends Controller
@@ -18,7 +19,9 @@ class ViajeController extends Controller
     public function create()
     {
         $clientes = Cliente::all();
-        return view('admin.viajes.create', compact('clientes'));
+        $pilotos = Piloto::all();
+
+    return view('admin.viajes.create', compact('clientes', 'pilotos'));
     }
 
     public function store(Request $request)
