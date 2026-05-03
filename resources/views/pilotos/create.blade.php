@@ -23,6 +23,31 @@
     <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
+
+[!-- Custom styles para este formulario -->
+<style>
+    .custom-input {
+    height: 55px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.custom-input:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40,167,69,0.15);
+}
+
+.save-btn {
+    transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+</style>
+
 <body>
 <!--? Preloader Start -->
 <div id="preloader-active">
