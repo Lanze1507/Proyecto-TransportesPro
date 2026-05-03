@@ -11,16 +11,24 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
 
+        // Admin → panel de viajes
+        if ($user->role === 'admin') {
+            return redirect('/admin/viajes');
+        }
+
+        // Operador → panel operador
+        if ($user->role === 'operador') {
+            return redirect()->route('operador.viajes.index');
+        }
+
+        // Cliente → su dashboard de viajes
         $cliente = $user->cliente;
 
         if (!$cliente) {
-            return view('dashboard_cliente', [
-                'viajes' => collect()
-            ]);
+            return view('dashboard_cliente', ['viajes' => collect()]);
         }
 
         $viajes = $cliente->viajes;
-
         return view('dashboard_cliente', compact('viajes'));
     }
 }
