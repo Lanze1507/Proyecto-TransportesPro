@@ -1,6 +1,6 @@
 <h2>Pilotos</h2>
 
-<a href="/pilotos/create">Nuevo piloto</a>
+<a href="/admin/pilotos/create">➕ Nuevo Piloto</a>
 
 <table>
 @foreach($pilotos as $p)

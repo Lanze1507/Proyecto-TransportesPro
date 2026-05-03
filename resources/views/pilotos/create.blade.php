@@ -1,4 +1,4 @@
-<form method="POST" action="/pilotos">
+<form method="POST" action="{{ route('pilotos.store') }}">
 @csrf
 
 <input name="nombre" placeholder="Nombre del piloto">

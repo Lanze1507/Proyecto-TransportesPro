@@ -136,6 +136,7 @@
                                             <ul id="navigation" class="d-flex align-items-center">
                                                 <li><a href="/">Inicio</a></li>
                                                 <li><a href="/clientes">Clientes</a></li>
+                                                <li><a href="/admin/pilotos">Pilotos</a></li>
                                                 @guest
                                                     <li class="ml-3">
                                                         <a href="{{ route('login') }}" class="btn header-btn btn-sm" style="padding: .95rem .95rem; font-size: .92rem;">Login</a>
@@ -147,7 +148,6 @@
 
                                                 @auth
                                                     @if(auth()->user()->role === 'admin')
-                                                        <li><a href="/admin/viajes">Panel Admin</a></li>
                                                     @else
                                                         <li><a href="/dashboard">Mi Panel</a></li>
                                                     @endif
@@ -210,6 +210,7 @@
                 <div style="margin-bottom:20px; display:flex; gap:10px; flex-wrap: wrap;">
                     <a href="/admin/viajes/create" class="btn btn-primary">➕ Nuevo Viaje</a>
                     <a href="/clientes" class="btn btn-secondary">👥 Gestionar Clientes</a>
+                    <a href="/admin/pilotos" class="btn btn-info"> Gestionar Pilotos</a>
                     <a href="/" class="btn btn-dark">🏠 Inicio</a>
                 </div>
                 <div class="table-responsive">
