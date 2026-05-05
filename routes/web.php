@@ -81,9 +81,11 @@ Route::middleware(['auth','admin'])->prefix('admin')->group(function () {
     // VIAJES
     Route::resource('viajes', ViajeController::class);
 
-    // PILOTOS (NUEVO)
+    // PILOTOS
     Route::resource('pilotos', PilotoController::class);
 
+    //CAMIONES
+    Route::resource('camiones', \App\Http\Controllers\Admin\CamionController::class);
 });
 
 /*
