@@ -137,6 +137,7 @@
                                                 <li><a href="/">Inicio</a></li>
                                                 <li><a href="/clientes">Clientes</a></li>
                                                 <li><a href="/admin/pilotos">Pilotos</a></li>
+                                                <li><a href="/admin/camiones">Camiones</a></li>
                                                 @guest
                                                     <li class="ml-3">
                                                         <a href="{{ route('login') }}" class="btn header-btn btn-sm" style="padding: .95rem .95rem; font-size: .92rem;">Login</a>
@@ -211,6 +212,7 @@
                     <a href="/admin/viajes/create" class="btn btn-primary">➕ Nuevo Viaje</a>
                     <a href="/clientes" class="btn btn-secondary">👥 Gestionar Clientes</a>
                     <a href="/admin/pilotos" class="btn btn-info"> Gestionar Pilotos</a>
+                    <a href="/admin/camiones" class="btn btn-info"> Gestionar Camiones</a>
                     <a href="/" class="btn btn-dark">🏠 Inicio</a>
                 </div>
                 <div class="table-responsive">

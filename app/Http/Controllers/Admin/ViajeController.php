@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Viaje;
 use App\Models\Cliente;
 use App\Models\Piloto;
+use App\Models\Camion;
 use Illuminate\Http\Request;
 
 class ViajeController extends Controller
@@ -20,8 +21,9 @@ class ViajeController extends Controller
     {
         $clientes = Cliente::all();
         $pilotos = Piloto::all();
+        $camiones = Camion::all();
 
-    return view('admin.viajes.create', compact('clientes', 'pilotos'));
+    return view('admin.viajes.create', compact('clientes', 'pilotos', 'camiones'));
     }
 
     public function store(Request $request)

@@ -8,6 +8,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\ViajeController;
 use App\Http\Controllers\PilotoController;
+use App\Http\Controllers\Admin\CamionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,7 +86,7 @@ Route::middleware(['auth','admin'])->prefix('admin')->group(function () {
     Route::resource('pilotos', PilotoController::class);
 
     //CAMIONES
-    Route::resource('camiones', \App\Http\Controllers\Admin\CamionController::class);
+    Route::resource('camiones', CamionController::class);
 });
 
 /*
