@@ -82,7 +82,7 @@ CREATE TABLE `camiones` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `placa` (`placa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,6 +91,7 @@ CREATE TABLE `camiones` (
 
 LOCK TABLES `camiones` WRITE;
 /*!40000 ALTER TABLE `camiones` DISABLE KEYS */;
+INSERT INTO `camiones` VALUES (1,'MO190LPP','KH51-26',1000.00,'disponible','2026-05-06 06:30:48','2026-05-06 06:30:48'),(2,'K123','NIG324',5000.00,'disponible','2026-05-06 06:49:34','2026-05-06 06:49:34');
 /*!40000 ALTER TABLE `camiones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,7 +285,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -293,7 +294,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1),(4,'2026_04_28_033359_add_role_to_users_table',2),(5,'2026_05_03_213046_create_pilotos_table',3),(6,'2026_05_03_215016_add_piloto_id_to_viajes_table',1),(7,'2026_05_03_215016_add_piloto_id_to_viajes_table',1);
+INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1),(4,'2026_04_28_033359_add_role_to_users_table',2),(5,'2026_05_03_213046_create_pilotos_table',3),(6,'2026_05_03_215016_add_piloto_id_to_viajes_table',1),(7,'2026_05_03_215016_add_piloto_id_to_viajes_table',1),(8,'2026_05_05_232811_create_camiones_table',1),(9,'2026_05_05_232811_create_camiones_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -443,7 +444,7 @@ CREATE TABLE `viajes` (
   KEY `camion_id` (`camion_id`),
   CONSTRAINT `viajes_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE SET NULL,
   CONSTRAINT `viajes_ibfk_3` FOREIGN KEY (`camion_id`) REFERENCES `camiones` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -465,4 +466,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-03 18:14:23
+-- Dump completed on 2026-05-05 19:11:16
