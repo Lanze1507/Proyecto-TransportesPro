@@ -138,6 +138,15 @@ body {
                 @endforeach
             </select>
         </div>
+                <div class="form-group mb-3">
+            <label>Piloto</label>
+            <select name="piloto_id" class="form-control">
+                <option value="">Seleccionar piloto</option>
+                @foreach($pilotos as $p)
+                    <option value="{{ $p->id }}">{{ $p->nombre }}</option>
+                @endforeach
+            </select>
+        </div>
 
         <div class="form-group mb-3">
             <label>Origen</label>

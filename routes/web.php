@@ -36,6 +36,7 @@ Route::get('/geocode', function (Request $request) {
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
         "User-Agent: TransProApp"
     ]);
+
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     $response = curl_exec($ch);
     if ($response === false) {
