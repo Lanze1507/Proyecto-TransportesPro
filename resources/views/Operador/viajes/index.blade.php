@@ -7,223 +7,350 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
+
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/slicknav.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome-all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
 <style>
 
-/* Fondo general */
+/* =========================
+   ESTILO GENERAL
+========================= */
+
 body{
-    background:#f5f7fa;
+    background:#f4f7fb;
+    background-image:
+        radial-gradient(circle at top right, rgba(255,94,20,.05), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(11,28,57,.05), transparent 30%);
 }
 
-/* ───────── KPI CARDS ───────── */
+/* =========================
+   WRAP
+========================= */
+
+.operador-wrap{
+    padding:60px 0 80px;
+}
+
+/* =========================
+   TITULOS
+========================= */
+
+.page-title{
+    font-size:42px;
+    font-weight:800;
+    color:#0b1c39;
+    margin-bottom:8px;
+}
+
+.page-subtitle{
+    color:#6b7280;
+    font-size:15px;
+    margin:0;
+}
+
+/* =========================
+   ALERT
+========================= */
+
+.alert-success-custom{
+    background:#fff;
+    color:#0b1c39;
+    border:none;
+    border-left:5px solid #ff5e14;
+    border-radius:14px;
+    padding:18px 22px;
+    margin-bottom:28px;
+    font-size:14px;
+    font-weight:600;
+    box-shadow:0 10px 35px rgba(0,0,0,.06);
+}
+
+/* =========================
+   KPI CARDS
+========================= */
 
 .kpi-card{
-    border-radius:16px;
-    padding:24px 22px;
-    color:#fff;
-    display:flex;
-    align-items:center;
-    gap:18px;
-    box-shadow:0 8px 30px rgba(0,0,0,.10);
-    transition:.25s ease;
+    background:#fff;
+    border-radius:22px;
+    padding:28px;
     position:relative;
     overflow:hidden;
+    transition:.35s ease;
+    box-shadow:0 15px 45px rgba(0,0,0,.06);
+    border:1px solid rgba(0,0,0,.03);
+    height:100%;
+}
+
+.kpi-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 25px 60px rgba(0,0,0,.10);
 }
 
 .kpi-card::before{
     content:'';
     position:absolute;
-    width:120px;
-    height:120px;
-    background:rgba(255,255,255,.08);
+    width:140px;
+    height:140px;
     border-radius:50%;
-    right:-30px;
-    top:-30px;
+    right:-45px;
+    top:-45px;
+    opacity:.08;
 }
 
-.kpi-card:hover{
-    transform:translateY(-6px);
+.kpi-pendiente::before{
+    background:#ffb347;
 }
 
-.kpi-card .kpi-icon{
-    font-size:38px;
-    opacity:.9;
+.kpi-aprobado::before{
+    background:#2563eb;
 }
 
-.kpi-card .kpi-num{
-    font-size:34px;
+.kpi-transito::before{
+    background:#7c3aed;
+}
+
+.kpi-entregado::before{
+    background:#10b981;
+}
+
+.kpi-icon{
+    width:70px;
+    height:70px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:32px;
+    margin-bottom:20px;
+}
+
+.kpi-pendiente .kpi-icon{
+    background:rgba(255,179,71,.15);
+}
+
+.kpi-aprobado .kpi-icon{
+    background:rgba(37,99,235,.12);
+}
+
+.kpi-transito .kpi-icon{
+    background:rgba(124,58,237,.12);
+}
+
+.kpi-entregado .kpi-icon{
+    background:rgba(16,185,129,.12);
+}
+
+.kpi-num{
+    font-size:42px;
     font-weight:800;
+    color:#0b1c39;
     line-height:1;
 }
 
-.kpi-card .kpi-lbl{
-    font-size:13px;
-    opacity:.9;
-    margin-top:4px;
-    letter-spacing:.3px;
+.kpi-lbl{
+    margin-top:8px;
+    color:#6b7280;
+    font-size:14px;
+    font-weight:600;
 }
 
-.kpi-pendiente{
-    background:linear-gradient(135deg,#ffb347,#ff8c42);
-}
-
-.kpi-aprobado{
-    background:linear-gradient(135deg,#3b82f6,#2563eb);
-}
-
-.kpi-transito{
-    background:linear-gradient(135deg,#8b5cf6,#7c3aed);
-}
-
-.kpi-entregado{
-    background:linear-gradient(135deg,#10b981,#059669);
-}
-
-/* ───────── PANEL ───────── */
+/* =========================
+   PANEL
+========================= */
 
 .panel-card{
     background:#fff;
-    border-radius:18px;
-    box-shadow:0 10px 35px rgba(0,0,0,.06);
+    border-radius:24px;
     overflow:hidden;
+    box-shadow:0 15px 50px rgba(0,0,0,.06);
 }
 
-.panel-card .panel-header{
-    background:#0b1c39;
-    color:#fff;
-    padding:18px 24px;
+.panel-header{
+    background:#fff;
+    border-bottom:1px solid #eef2f7;
+    padding:28px 30px;
     display:flex;
     align-items:center;
     justify-content:space-between;
     flex-wrap:wrap;
-    gap:10px;
+    gap:15px;
 }
 
-.panel-card .panel-header h4{
+.panel-header h4{
     margin:0;
-    font-size:19px;
+    font-size:26px;
+    font-weight:800;
+    color:#0b1c39;
+}
+
+.panel-body{
+    padding:30px;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-input{
+    border:none;
+    background:#f7f9fc;
+    height:54px;
+    padding:0 22px;
+    border-radius:999px;
+    width:250px;
+    transition:.3s ease;
+    font-size:14px;
+    color:#0b1c39;
+    box-shadow:inset 0 0 0 1px #e8edf5;
+}
+
+.search-input:focus{
+    outline:none;
+    width:320px;
+    background:#fff;
+    box-shadow:
+        0 0 0 4px rgba(255,94,20,.10),
+        inset 0 0 0 1px #ff5e14;
+}
+
+/* =========================
+   FILTROS
+========================= */
+
+.filtros-bar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:30px;
+}
+
+.btn-filtro{
+    border:none;
+    background:#f3f6fa;
+    color:#6b7280;
+    border-radius:999px;
+    padding:12px 20px;
+    font-size:13px;
     font-weight:700;
+    transition:.25s ease;
+    cursor:pointer;
 }
 
-.panel-card .panel-body{
-    padding:24px;
+.btn-filtro:hover{
+    transform:translateY(-3px);
+    background:#fff2eb;
+    color:#ff5e14;
 }
 
-/* ───────── TABLA ───────── */
+.btn-filtro.active{
+    background:#ff5e14;
+    color:#fff;
+    box-shadow:0 10px 25px rgba(255,94,20,.25);
+}
+
+/* =========================
+   TABLA
+========================= */
+
+.table-responsive{
+    border-radius:18px;
+    overflow:hidden;
+}
 
 .table{
     margin-bottom:0;
 }
 
 .table thead th{
-    background:#f8fafc;
-    border-top:none;
-    border-bottom:1px solid #eef2f7;
+    background:#f7f9fc;
+    border:none;
+    padding:18px 16px;
     font-size:12px;
-    font-weight:700;
+    font-weight:800;
     text-transform:uppercase;
     color:#6b7280;
-    letter-spacing:.5px;
-    padding:14px;
+    letter-spacing:.8px;
 }
 
 .table tbody td{
-    padding:16px 14px;
+    padding:22px 16px;
     vertical-align:middle;
+    border-top:1px solid #f1f5f9;
+    color:#374151;
+    font-size:14px;
 }
 
 .table tbody tr{
-    transition:.2s ease;
+    transition:.25s ease;
 }
 
 .table tbody tr:hover{
-    background:#f9fbfd;
+    background:#fafcff;
 }
 
-/* ───────── BADGES ───────── */
+/* =========================
+   BADGES
+========================= */
 
 .badge-estado{
-    padding:6px 13px;
+    padding:8px 15px;
     border-radius:999px;
-    font-size:12px;
-    font-weight:700;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.4px;
 }
 
 .estado-pendiente{
-    background:#fff3cd;
-    color:#856404;
+    background:#fff4df;
+    color:#c27c00;
 }
 
 .estado-aprobado{
-    background:#dbeafe;
-    color:#1d4ed8;
+    background:#e7f0ff;
+    color:#2563eb;
 }
 
 .estado-en_transito{
-    background:#ede9fe;
-    color:#6d28d9;
+    background:#efe7ff;
+    color:#7c3aed;
 }
 
 .estado-entregado{
-    background:#d1fae5;
-    color:#065f46;
+    background:#dcfce7;
+    color:#059669;
 }
 
 .estado-rechazado{
     background:#fee2e2;
-    color:#991b1b;
+    color:#dc2626;
 }
 
 .estado-cancelado{
     background:#f3f4f6;
-    color:#374151;
+    color:#4b5563;
 }
 
-/* ───────── FILTROS ───────── */
-
-.filtros-bar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-bottom:22px;
-}
-
-.btn-filtro{
-    border-radius:999px;
-    padding:7px 18px;
-    font-size:13px;
-    border:1.5px solid #e5e7eb;
-    background:#fff;
-    color:#374151;
-    cursor:pointer;
-    transition:.2s ease;
-    font-weight:600;
-}
-
-.btn-filtro:hover,
-.btn-filtro.active{
-    background:#ff5e14;
-    color:#fff;
-    border-color:#ff5e14;
-    transform:translateY(-2px);
-}
-
-/* ───────── BOTONES ───────── */
+/* =========================
+   BOTONES
+========================= */
 
 .btn-accion{
-    border-radius:8px;
-    padding:6px 13px;
+    border:none;
+    border-radius:12px;
+    padding:10px 16px;
     font-size:12px;
     font-weight:700;
-    border:none;
-    transition:.2s ease;
+    transition:.25s ease;
 }
 
 .btn-ver{
@@ -254,42 +381,29 @@ body{
     background:#dc2626;
 }
 
-/* ───────── ALERT ───────── */
+/* =========================
+   RESPONSIVE
+========================= */
 
-.alert-success-custom{
-    background:#d1fae5;
-    color:#065f46;
-    border:none;
-    border-left:5px solid #10b981;
-    border-radius:10px;
-    padding:14px 18px;
-    margin-bottom:20px;
-    font-size:14px;
-}
+@media(max-width:768px){
 
-/* ───────── SEARCH ───────── */
+    .page-title{
+        font-size:30px;
+    }
 
-.search-input{
-    border-radius:999px;
-    padding:9px 18px;
-    border:1.5px solid #dbe2ea;
-    font-size:14px;
-    width:240px;
-    outline:none;
-    transition:.25s ease;
-}
+    .panel-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
 
-.search-input:hover,
-.search-input:focus{
-    width:300px;
-    border-color:#ff5e14;
-    box-shadow:0 0 0 4px rgba(255,94,20,.10);
-}
+    .search-input{
+        width:100%;
+    }
 
-/* ───────── WRAP ───────── */
+    .search-input:focus{
+        width:100%;
+    }
 
-.operador-wrap{
-    padding:45px 0 65px;
 }
 
 </style>
@@ -301,7 +415,6 @@ body{
     <div class="header-area">
         <div class="main-header">
 
-            {{-- TOP BAR ORIGINAL --}}
             <div class="header-top d-none d-lg-block">
                 <div class="container">
                     <div class="col-xl-12">
@@ -327,7 +440,7 @@ body{
                                         <span style="
                                             background:#ff5e14;
                                             color:#fff;
-                                            padding:4px 12px;
+                                            padding:5px 14px;
                                             border-radius:999px;
                                             font-size:11px;
                                             font-weight:700;
@@ -344,23 +457,19 @@ body{
                 </div>
             </div>
 
-            {{-- NAVBAR --}}
             <div class="header-bottom header-sticky">
                 <div class="container">
 
                     <div class="row align-items-center">
 
-                        {{-- LOGO --}}
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
                                 <a href="/">
-                                    <img src="{{ asset('assets/img/logo/logoNombre.png') }}"
-                                         alt="TransportesPro">
+                                    <img src="{{ asset('assets/img/logo/logoNombre.png') }}" alt="">
                                 </a>
                             </div>
                         </div>
 
-                        {{-- MENÚ --}}
                         <div class="col-xl-10 col-lg-10">
 
                             <div class="menu-wrapper d-flex align-items-center justify-content-end">
@@ -371,10 +480,8 @@ body{
 
                                         <ul id="navigation" class="d-flex align-items-center">
 
-                                            <li>
-                                                <a href="/">Inicio</a>
-                                            </li>
-                                            
+                                            <li><a href="/">Inicio</a></li>
+
                                             <li>
                                                 <a href="/admin/viajes">
                                                     Panel Admin
@@ -444,20 +551,22 @@ body{
 
 <div class="container operador-wrap">
 
-    <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap">
+    <div class="d-flex align-items-center justify-content-between mb-5 flex-wrap">
+
         <div>
-            <h2 style="font-weight:800;margin:0;">
+            <h2 class="page-title">
                 Panel de Operador
             </h2>
 
-            <p style="color:#6b7280;margin:0;font-size:14px;">
-                Gestión y seguimiento de viajes
+            <p class="page-subtitle">
+                Gestión y seguimiento inteligente de viajes
             </p>
         </div>
 
         <span style="font-size:13px;color:#9ca3af;">
             {{ now()->format('d/m/Y H:i') }}
         </span>
+
     </div>
 
     @if(session('success'))
@@ -466,10 +575,9 @@ body{
         </div>
     @endif
 
-    {{-- KPIs --}}
     <div class="row mb-4">
 
-        <div class="col-lg-3 col-md-6 mb-3">
+        <div class="col-lg-3 col-md-6 mb-4">
             <div class="kpi-card kpi-pendiente">
                 <div class="kpi-icon">⏳</div>
 
@@ -485,7 +593,7 @@ body{
             </div>
         </div>
 
-        <div class="col-lg-3 col-md-6 mb-3">
+        <div class="col-lg-3 col-md-6 mb-4">
             <div class="kpi-card kpi-aprobado">
                 <div class="kpi-icon">✅</div>
 
@@ -501,7 +609,7 @@ body{
             </div>
         </div>
 
-        <div class="col-lg-3 col-md-6 mb-3">
+        <div class="col-lg-3 col-md-6 mb-4">
             <div class="kpi-card kpi-transito">
                 <div class="kpi-icon">🚛</div>
 
@@ -517,7 +625,7 @@ body{
             </div>
         </div>
 
-        <div class="col-lg-3 col-md-6 mb-3">
+        <div class="col-lg-3 col-md-6 mb-4">
             <div class="kpi-card kpi-entregado">
                 <div class="kpi-icon">📦</div>
 
@@ -535,11 +643,11 @@ body{
 
     </div>
 
-    {{-- TABLA --}}
     <div class="panel-card">
 
         <div class="panel-header">
-            <h4>📋 Todos los viajes</h4>
+
+            <h4>📋 Gestión de viajes</h4>
 
             <input
                 class="search-input"
@@ -547,11 +655,11 @@ body{
                 id="buscador"
                 placeholder="🔍 Buscar viaje..."
             >
+
         </div>
 
         <div class="panel-body">
 
-            {{-- FILTROS --}}
             <div class="filtros-bar">
 
                 <button class="btn-filtro active" data-estado="todos">
@@ -604,12 +712,12 @@ body{
 
                         <tr data-estado="{{ $viaje->estado }}">
 
-                            <td style="font-weight:600;color:#9ca3af;font-size:13px;">
+                            <td style="font-weight:700;color:#9ca3af;">
                                 #{{ $viaje->id }}
                             </td>
 
                             <td>
-                                <span style="font-weight:600;">
+                                <span style="font-weight:700;color:#0b1c39;">
                                     {{ $viaje->cliente->nombre ?? '—' }}
                                 </span>
 
@@ -664,7 +772,7 @@ body{
 
                             <td>
 
-                                <div class="d-flex gap-1 flex-wrap">
+                                <div class="d-flex gap-2 flex-wrap">
 
                                     <a href="{{ route('operador.viajes.show', $viaje->id) }}"
                                        class="btn-accion btn-ver">
@@ -683,6 +791,7 @@ body{
                                             <button class="btn-accion btn-aprobar">
                                                 Aprobar
                                             </button>
+
                                         </form>
 
                                         <form method="POST"
@@ -695,6 +804,7 @@ body{
                                             <button class="btn-accion btn-rechazar">
                                                 Rechazar
                                             </button>
+
                                         </form>
 
                                     @endif
@@ -708,7 +818,8 @@ body{
                     @empty
 
                         <tr>
-                            <td colspan="9" style="text-align:center;padding:40px;color:#9ca3af;">
+                            <td colspan="9"
+                                style="text-align:center;padding:50px;color:#9ca3af;">
                                 No hay viajes registrados aún.
                             </td>
                         </tr>
@@ -722,6 +833,7 @@ body{
             </div>
 
         </div>
+
     </div>
 
 </div>
