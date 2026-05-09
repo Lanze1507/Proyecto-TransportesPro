@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Viaje;
@@ -9,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\ViajeController;
 use App\Http\Controllers\PilotoController;
 use App\Http\Controllers\Admin\CamionController;
+use App\Http\Controllers\Operador\ViajeController as OperadorViajeController; // ← único import nuevo
 
 /*
 |--------------------------------------------------------------------------
@@ -25,16 +25,12 @@ Route::get('/', function () {
 |--------------------------------------------------------------------------
 */
 Route::get('/geocode', function (Request $request) {
-
     if (!$request->q) {
         return response()->json([]);
     }
-
     $query = urlencode($request->q);
     $url = "https://nominatim.openstreetmap.org/search?format=json&q={$query}";
-
     $ch = curl_init();
-
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -42,17 +38,13 @@ Route::get('/geocode', function (Request $request) {
     ]);
 
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
     $response = curl_exec($ch);
-
     if ($response === false) {
         return response()->json([
             'error' => curl_error($ch)
         ], 500);
     }
-
     curl_close($ch);
-
     return response($response)->header('Content-Type', 'application/json');
 });
 
@@ -62,30 +54,25 @@ Route::get('/geocode', function (Request $request) {
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth','admin'])->group(function () {
-
     Route::get('/clientes', [ClienteController::class, 'index'])->name('clientes');
     Route::get('/clientes/create', [ClienteController::class, 'create']);
     Route::post('/clientes', [ClienteController::class, 'store']);
     Route::get('/clientes/{id}/edit', [ClienteController::class, 'edit']);
     Route::put('/clientes/{id}', [ClienteController::class, 'update']);
     Route::delete('/clientes/{id}', [ClienteController::class, 'destroy']);
-
 });
 
 /*
 |--------------------------------------------------------------------------
-| ADMIN (VIAJES + PILOTOS)
+| ADMIN (VIAJES + PILOTOS + CAMIONES)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth','admin'])->prefix('admin')->group(function () {
-
     // VIAJES
     Route::resource('viajes', ViajeController::class);
-
     // PILOTOS
     Route::resource('pilotos', PilotoController::class);
-
-    //CAMIONES
+    // CAMIONES
     Route::resource('camiones', CamionController::class);
 });
 
@@ -102,6 +89,34 @@ Route::middleware('auth')->group(function () {
 
 /*
 |--------------------------------------------------------------------------
+| OPERADOR — Gestión de viajes
+| Accesible para roles: admin y operador (definido en OperadorMiddleware)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'operador'])->prefix('operador')->group(function () {
+
+    Route::get('/viajes',                  [OperadorViajeController::class, 'index'])
+        ->name('operador.viajes.index');
+
+    Route::get('/viajes/{id}',             [OperadorViajeController::class, 'show'])
+        ->name('operador.viajes.show');
+
+    Route::patch('/viajes/{id}/aprobar',   [OperadorViajeController::class, 'aprobar'])
+        ->name('operador.viajes.aprobar');
+
+    Route::patch('/viajes/{id}/rechazar',  [OperadorViajeController::class, 'rechazar'])
+        ->name('operador.viajes.rechazar');
+
+    Route::post('/viajes/{id}/asignar',    [OperadorViajeController::class, 'asignar'])
+        ->name('operador.viajes.asignar');
+
+    Route::patch('/viajes/{id}/cancelar',  [OperadorViajeController::class, 'cancelar'])
+        ->name('operador.viajes.cancelar');
+
+});
+
+/*
+|--------------------------------------------------------------------------
 | AUTH
 |--------------------------------------------------------------------------
 */
@@ -113,15 +128,11 @@ require __DIR__.'/auth.php';
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth'])->group(function () {
-
     Route::get('/dashboard', [DashboardController::class, 'index']);
-
     Route::post('/viaje/completar/{id}', function ($id) {
         $viaje = Viaje::findOrFail($id);
         $viaje->estado = 'completado';
         $viaje->save();
-
         return response()->json(['success' => true]);
     });
-
 });
