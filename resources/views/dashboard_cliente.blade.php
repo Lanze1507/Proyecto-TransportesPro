@@ -725,7 +725,7 @@ body{
 
     <span class="estado-badge estado-entregado">
 
-        Paquete llego al destino
+        Entregado
 
     </span>
 
@@ -1272,14 +1272,14 @@ async function mostrarMapa(
 
                 animate:true,
 
-                duration:0.4
+                duration:0.6
 
             });
 
             i++;
 
             // VELOCIDAD MÁS LENTA
-            setTimeout(mover, 2);
+            setTimeout(mover, 1);
 
         }
 
