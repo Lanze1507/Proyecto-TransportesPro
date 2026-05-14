@@ -438,6 +438,55 @@ body{
 
                 </div>
 
+                    {{-- CAMIÓN --}}
+<div class="col-12 mb-4">
+
+    <label class="form-label">
+        Camión
+    </label>
+
+    <div class="custom-search">
+
+        <input
+            type="text"
+            id="buscarCamion"
+            class="form-control"
+            placeholder="🔍 Buscar camión..."
+            autocomplete="off"
+        >
+
+        <div id="listaCamiones" class="search-results">
+
+            @foreach($camiones as $c)
+
+                <div
+                    class="search-item"
+                    data-id="{{ $c->id }}"
+                    data-text="{{ strtolower($c->placa . ' ' . $c->modelo . ' ' . $c->capacidad) }}"
+                >
+
+                    {{ $c->placa }}
+                    -
+                    {{ $c->modelo }}
+                    -
+                    {{ $c->capacidad }}
+
+                </div>
+
+            @endforeach
+
+        </div>
+
+        <input
+            type="hidden"
+            name="camion_id"
+            id="camion_id"
+        >
+
+    </div>
+
+</div>
+
                 {{-- ORIGEN --}}
                 <div class="col-lg-6 mb-4 position-relative">
 
@@ -685,6 +734,42 @@ setupSearch(
     'listaPilotos',
     'piloto_id'
 );
+
+setupSearch(
+    'buscarCamion',
+    'listaCamiones',
+    'camion_id'
+);
+
+// CAMIONES
+document.getElementById('buscarCamion')
+.addEventListener('input', function(){
+
+    let filtro = this.value.toLowerCase();
+
+    let select = document.getElementById('camionSelect');
+
+    let opciones = select.querySelectorAll('option');
+
+    opciones.forEach(op => {
+
+        let texto = op.textContent.toLowerCase();
+
+        op.hidden = !texto.includes(filtro);
+
+    });
+
+});
+
+// EVITAR ENTER
+document.getElementById('buscarCamion')
+.addEventListener('keydown', function(e){
+
+    if(e.key === 'Enter'){
+        e.preventDefault();
+    }
+
+});
 
 </script>
 

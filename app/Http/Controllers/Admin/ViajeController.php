@@ -3,52 +3,275 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\Viaje;
 use App\Models\Cliente;
 use App\Models\Piloto;
 use App\Models\Camion;
+use App\Models\ViajeHistorial;
+
 use Illuminate\Http\Request;
 
 class ViajeController extends Controller
 {
     public function index()
     {
-        $viajes = Viaje::with('cliente')->get();
-        return view('admin.viajes.index', compact('viajes'));
+        $viajes = Viaje::with(
+
+            'cliente',
+            'piloto',
+            'camion'
+
+        )->get();
+
+        return view(
+            'admin.viajes.index',
+            compact('viajes')
+        );
     }
 
     public function create()
     {
         $clientes = Cliente::all();
+
         $pilotos = Piloto::all();
+
         $camiones = Camion::all();
 
-    return view('admin.viajes.create', compact('clientes', 'pilotos', 'camiones'));
+        return view(
+            'admin.viajes.create',
+            compact(
+                'clientes',
+                'pilotos',
+                'camiones'
+            )
+        );
     }
 
     public function store(Request $request)
     {
-        Viaje::create($request->all());
-        return redirect('/admin/viajes');
+        $viaje = Viaje::create($request->all());
+
+        /*
+        |--------------------------------------------------------------------------
+        | HISTORIAL INICIAL
+        |--------------------------------------------------------------------------
+        */
+
+        ViajeHistorial::create([
+
+            'viaje_id' => $viaje->id,
+
+            'estado' => $viaje->estado,
+
+            'descripcion' =>
+                '📦 Viaje creado en el sistema'
+
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | PILOTO
+        |--------------------------------------------------------------------------
+        */
+
+        if($viaje->piloto){
+
+            ViajeHistorial::create([
+
+                'viaje_id' => $viaje->id,
+
+                'estado' => $viaje->estado,
+
+                'descripcion' =>
+                    '👨‍✈️ Piloto asignado: '
+                    . $viaje->piloto->nombre
+
+            ]);
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | CAMIÓN
+        |--------------------------------------------------------------------------
+        */
+
+        if($viaje->camion){
+
+            ViajeHistorial::create([
+
+                'viaje_id' => $viaje->id,
+
+                'estado' => $viaje->estado,
+
+                'descripcion' =>
+                    '🚛 Camión asignado: '
+                    . $viaje->camion->placa
+
+            ]);
+
+        }
+
+        return redirect('/admin/viajes')
+            ->with(
+                'success',
+                'Viaje creado correctamente'
+            );
     }
 
     public function edit($id)
     {
         $viaje = Viaje::findOrFail($id);
+
         $clientes = Cliente::all();
-        return view('admin.viajes.edit', compact('viaje','clientes'));
+
+        $pilotos = Piloto::all();
+
+        $camiones = Camion::all();
+
+        return view(
+            'admin.viajes.edit',
+            compact(
+                'viaje',
+                'clientes',
+                'pilotos',
+                'camiones'
+            )
+        );
     }
 
     public function update(Request $request, $id)
     {
         $viaje = Viaje::findOrFail($id);
+
+        $estadoAnterior = $viaje->estado;
+
+        $pilotoAnterior = $viaje->piloto_id;
+
+        $camionAnterior = $viaje->camion_id;
+
         $viaje->update($request->all());
-        return redirect('/admin/viajes');
+
+        /*
+        |--------------------------------------------------------------------------
+        | CAMBIO DE ESTADO
+        |--------------------------------------------------------------------------
+        */
+
+        if($estadoAnterior != $viaje->estado){
+
+            ViajeHistorial::create([
+
+                'viaje_id' => $viaje->id,
+
+                'estado' => $viaje->estado,
+
+                'descripcion' =>
+                    '📍 Estado actualizado de "'
+                    . $estadoAnterior .
+                    '" a "'
+                    . $viaje->estado .
+                    '"'
+
+            ]);
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | CAMBIO DE PILOTO
+        |--------------------------------------------------------------------------
+        */
+
+        if($pilotoAnterior != $viaje->piloto_id){
+
+            if($viaje->piloto){
+
+                ViajeHistorial::create([
+
+                    'viaje_id' => $viaje->id,
+
+                    'estado' => $viaje->estado,
+
+                    'descripcion' =>
+                        '👨‍✈️ Nuevo piloto asignado: '
+                        . $viaje->piloto->nombre
+
+                ]);
+
+            }
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | CAMBIO DE CAMIÓN
+        |--------------------------------------------------------------------------
+        */
+
+        if($camionAnterior != $viaje->camion_id){
+
+            if($viaje->camion){
+
+                ViajeHistorial::create([
+
+                    'viaje_id' => $viaje->id,
+
+                    'estado' => $viaje->estado,
+
+                    'descripcion' =>
+                        '🚛 Nuevo camión asignado: '
+                        . $viaje->camion->placa
+
+                ]);
+
+            }
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | CAMBIOS GENERALES
+        |--------------------------------------------------------------------------
+        */
+
+        if(
+            $estadoAnterior == $viaje->estado
+            &&
+            $pilotoAnterior == $viaje->piloto_id
+            &&
+            $camionAnterior == $viaje->camion_id
+        ){
+
+            ViajeHistorial::create([
+
+                'viaje_id' => $viaje->id,
+
+                'estado' => $viaje->estado,
+
+                'descripcion' =>
+                    '✏️ Información del viaje actualizada'
+
+            ]);
+
+        }
+
+        return redirect('/admin/viajes')
+            ->with(
+                'success',
+                'Viaje actualizado correctamente'
+            );
     }
 
     public function destroy($id)
     {
         Viaje::destroy($id);
-        return back();
+
+        return back()
+            ->with(
+                'success',
+                'Viaje eliminado'
+            );
     }
 }

@@ -11,24 +11,69 @@ class DashboardController extends Controller
     {
         $user = auth()->user();
 
-        // Admin → panel de viajes
+        /*
+        |--------------------------------------------------------------------------
+        | ADMIN
+        |--------------------------------------------------------------------------
+        */
         if ($user->role === 'admin') {
+
             return redirect('/admin/viajes');
+
         }
 
-        // Operador → panel operador
+        /*
+        |--------------------------------------------------------------------------
+        | OPERADOR
+        |--------------------------------------------------------------------------
+        */
         if ($user->role === 'operador') {
-            return redirect()->route('operador.viajes.index');
+
+            return redirect()
+                ->route('operador.viajes.index');
+
         }
 
-        // Cliente → su dashboard de viajes
+        /*
+        |--------------------------------------------------------------------------
+        | CLIENTE
+        |--------------------------------------------------------------------------
+        */
+
         $cliente = $user->cliente;
 
         if (!$cliente) {
-            return view('dashboard_cliente', ['viajes' => collect()]);
+
+            return view(
+                'dashboard_cliente',
+                [
+                    'viajes' => collect()
+                ]
+            );
+
         }
 
-        $viajes = $cliente->viajes;
-        return view('dashboard_cliente', compact('viajes'));
+        /*
+        |--------------------------------------------------------------------------
+        | CARGAR TODO EL SISTEMA
+        |--------------------------------------------------------------------------
+        */
+
+        $viajes = Viaje::with([
+
+            'cliente',
+            'piloto',
+            'camion',
+            'historial'
+
+        ])
+        ->where('cliente_id', $cliente->id)
+        ->latest()
+        ->get();
+
+        return view(
+            'dashboard_cliente',
+            compact('viajes')
+        );
     }
 }

@@ -337,6 +337,82 @@ body{
     color:#065f46;
 }
 
+/* INFO EXTRA */
+
+.extra-info{
+
+    font-size:13px;
+
+    color:#64748b;
+
+    margin-top:6px;
+
+    line-height:1.6;
+}
+
+/* TIMELINE */
+
+.timeline-box{
+
+    margin-top:18px;
+
+    padding-top:18px;
+
+    border-top:1px dashed #e2e8f0;
+}
+
+.timeline-item{
+
+    position:relative;
+
+    padding-left:28px;
+
+    margin-bottom:14px;
+}
+
+.timeline-item:last-child{
+
+    margin-bottom:0;
+}
+
+.timeline-dot{
+
+    position:absolute;
+
+    left:0;
+    top:4px;
+
+    width:12px;
+    height:12px;
+
+    border-radius:50%;
+
+    background:#ff5e14;
+
+    box-shadow:
+        0 0 0 4px rgba(255,94,20,.12);
+}
+
+.timeline-content{
+
+    font-size:13px;
+
+    color:#475569;
+
+    line-height:1.5;
+}
+
+.timeline-date{
+
+    display:block;
+
+    margin-top:4px;
+
+    font-size:11px;
+
+    color:#94a3b8;
+}
+
 /* BOTÓN MAPA */
 
 .btn-map{
@@ -600,49 +676,169 @@ body{
                 </tr>
             </thead>
 
-            <tbody>
-            @forelse($viajes as $viaje)
-                <tr>
-                    <td>{{ $viaje->origen }}</td>
-                    <td>{{ $viaje->destino }}</td>
+           <tbody>
 
-                    <td>
-                        @if($viaje->lat_destino && $viaje->lng_destino)
-    <button class="btn-map"
-        onclick="mostrarMapa('{{ $viaje->lat_destino }}','{{ $viaje->lng_destino }}', '{{ $viaje->id }}')">
-        Ver mapa
-    </button>
-@else
-    <span class="text-muted">Sin ubicación</span>
-@endif
-                    </td>
+@forelse($viajes as $viaje)
 
-                    <td>{{ $viaje->fecha_salida }}</td>
+<tr>
 
-                    <td>
-                        @if($viaje->estado == 'pendiente')
-                            <span class="estado-badge estado-pendiente">
-                            Pendiente
+    {{-- ORIGEN --}}
+    <td>
+
+        <strong>
+            {{ $viaje->origen }}
+        </strong>
+
+        <div class="extra-info">
+
+            🚛
+            {{ $viaje->camion->placa ?? 'Sin camión' }}
+
+        </div>
+
+    </td>
+
+    {{-- DESTINO --}}
+    <td>
+
+        <strong>
+            {{ $viaje->destino }}
+        </strong>
+
+        <div class="extra-info">
+
+            👨‍✈️
+            {{ $viaje->piloto->nombre ?? 'Sin piloto asignado' }}
+
+        </div>
+
+    </td>
+
+    {{-- UBICACIÓN --}}
+    <td>
+
+        @if($viaje->lat_destino && $viaje->lng_destino)
+
+            <button
+                class="btn-map"
+                onclick="
+                    mostrarMapa(
+                        '{{ $viaje->lat_destino }}',
+                        '{{ $viaje->lng_destino }}',
+                        '{{ $viaje->id }}'
+                    )
+                "
+            >
+
+                Ver seguimiento
+
+            </button>
+
+        @else
+
+            <span class="text-muted">
+
+                Sin ubicación
+
+            </span>
+
+        @endif
+
+    </td>
+
+    {{-- FECHA --}}
+    <td>
+
+        {{ $viaje->created_at
+            ? $viaje->created_at->format('d/m/Y')
+            : '—'
+        }}
+
+    </td>
+
+    {{-- ESTADO --}}
+    <td>
+
+        @if($viaje->estado == 'pendiente')
+
+            <span class="estado-badge estado-pendiente">
+
+                Pendiente
+
+            </span>
+
+        @elseif($viaje->estado == 'en_ruta')
+
+            <span class="estado-badge estado-ruta">
+
+                En ruta
+
+            </span>
+
+        @else
+
+            <span class="estado-badge estado-entregado">
+
+                Entregado
+
+            </span>
+
+        @endif
+
+        {{-- TIMELINE --}}
+        <div class="timeline-box">
+
+            @forelse($viaje->historial as $evento)
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-content">
+
+                        {{ $evento->descripcion }}
+
+                        <span class="timeline-date">
+
+                            {{ $evento->created_at->format('d/m/Y H:i') }}
+
                         </span>
-                        @elseif($viaje->estado == 'en_ruta')
-                            <span class="estado-badge estado-ruta">
-                            En ruta
-                        </span>
-                        @else
-                            <span class="estado-badge estado-entregado">
-                            Entregado
-                        </span>
-                        @endif
-                    </td>
-                </tr>
+
+                    </div>
+
+                </div>
+
             @empty
-                <tr>
-                    <td colspan="5" class="text-center text-muted">
-                        No tienes envíos registrados
-                    </td>
-                </tr>
+
+                <small class="text-muted">
+
+                    Sin historial disponible
+
+                </small>
+
             @endforelse
-            </tbody>
+
+        </div>
+
+    </td>
+
+</tr>
+
+@empty
+
+<tr>
+
+    <td colspan="5" class="text-center text-muted">
+
+        No tienes envíos registrados
+
+    </td>
+
+</tr>
+
+@endforelse
+
+</tbody>
         </table>
 
     </div>
