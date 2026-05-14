@@ -50,7 +50,71 @@ class ViajeController extends Controller
 
     public function store(Request $request)
     {
-        $viaje = Viaje::create($request->all());
+        /*
+        |--------------------------------------------------------------------------
+        | GEOCODE ORIGEN
+        |--------------------------------------------------------------------------
+        */
+
+        $origenCoords = $this->geocode(
+            $request->origen
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | GEOCODE DESTINO
+        |--------------------------------------------------------------------------
+        */
+
+        $destinoCoords = $this->geocode(
+            $request->destino
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | CREAR VIAJE
+        |--------------------------------------------------------------------------
+        */
+
+        $viaje = Viaje::create([
+
+            'cliente_id' => $request->cliente_id,
+
+            'piloto_id' => $request->piloto_id,
+
+            'camion_id' => $request->camion_id,
+
+            'origen' => $request->origen,
+
+            'destino' => $request->destino,
+
+            'estado' => $request->estado,
+
+            /*
+            |--------------------------------------------------------------------------
+            | ORIGEN
+            |--------------------------------------------------------------------------
+            */
+
+            'lat_origen' =>
+                $origenCoords['lat'] ?? null,
+
+            'lng_origen' =>
+                $origenCoords['lng'] ?? null,
+
+            /*
+            |--------------------------------------------------------------------------
+            | DESTINO
+            |--------------------------------------------------------------------------
+            */
+
+            'lat_destino' =>
+                $destinoCoords['lat'] ?? null,
+
+            'lng_destino' =>
+                $destinoCoords['lng'] ?? null,
+
+        ]);
 
         /*
         |--------------------------------------------------------------------------
@@ -151,7 +215,53 @@ class ViajeController extends Controller
 
         $camionAnterior = $viaje->camion_id;
 
-        $viaje->update($request->all());
+        /*
+        |--------------------------------------------------------------------------
+        | NUEVAS COORDENADAS
+        |--------------------------------------------------------------------------
+        */
+
+        $origenCoords = $this->geocode(
+            $request->origen
+        );
+
+        $destinoCoords = $this->geocode(
+            $request->destino
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | ACTUALIZAR VIAJE
+        |--------------------------------------------------------------------------
+        */
+
+        $viaje->update([
+
+            'cliente_id' => $request->cliente_id,
+
+            'piloto_id' => $request->piloto_id,
+
+            'camion_id' => $request->camion_id,
+
+            'origen' => $request->origen,
+
+            'destino' => $request->destino,
+
+            'estado' => $request->estado,
+
+            'lat_origen' =>
+                $origenCoords['lat'] ?? null,
+
+            'lng_origen' =>
+                $origenCoords['lng'] ?? null,
+
+            'lat_destino' =>
+                $destinoCoords['lat'] ?? null,
+
+            'lng_destino' =>
+                $destinoCoords['lng'] ?? null,
+
+        ]);
 
         /*
         |--------------------------------------------------------------------------
@@ -273,5 +383,57 @@ class ViajeController extends Controller
                 'success',
                 'Viaje eliminado'
             );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | GEOCODE
+    |--------------------------------------------------------------------------
+    */
+
+    private function geocode($direccion)
+    {
+        $query = urlencode($direccion);
+
+        $url =
+            "https://nominatim.openstreetmap.org/search?format=json&q={$query}";
+
+        $opts = [
+
+            "http" => [
+
+                "header" =>
+                    "User-Agent: TransProApp\r\n"
+
+            ]
+
+        ];
+
+        $context =
+            stream_context_create($opts);
+
+        $response =
+            file_get_contents(
+                $url,
+                false,
+                $context
+            );
+
+        $data =
+            json_decode($response, true);
+
+        if(!empty($data)){
+
+            return [
+
+                'lat' => $data[0]['lat'],
+
+                'lng' => $data[0]['lon']
+
+            ];
+
+        }
+
+        return null;
     }
 }

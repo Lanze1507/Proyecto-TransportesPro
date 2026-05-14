@@ -16,7 +16,9 @@
 <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css"/>
 <style>
 
 body{
@@ -720,19 +722,17 @@ body{
         @if($viaje->lat_destino && $viaje->lng_destino)
 
             <button
-                class="btn-map"
-                onclick="
-                    mostrarMapa(
-                        '{{ $viaje->lat_destino }}',
-                        '{{ $viaje->lng_destino }}',
-                        '{{ $viaje->id }}'
-                    )
-                "
-            >
-
-                Ver seguimiento
-
-            </button>
+    class="btn-map"
+    onclick="mostrarMapa(
+        '{{ $viaje->lat_origen }}',
+        '{{ $viaje->lng_origen }}',
+        '{{ $viaje->lat_destino }}',
+        '{{ $viaje->lng_destino }}',
+        '{{ $viaje->id }}'
+    )"
+>
+    Ver seguimiento
+</button>
 
         @else
 
@@ -960,184 +960,340 @@ body{
 
 <!-- MODAL MAPA -->
 <div class="modal fade" id="mapModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5>Ubicación del envío</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
 
-      <div class="modal-body">
-        <div id="map" style="height:400px;"></div>
-      </div>
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    🚚 Seguimiento del envío
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body p-0">
+
+                <div id="map" style="height:650px;width:100%;"></div>
+
+            </div>
+
+        </div>
     </div>
-  </div>
 </div>
 
 <!-- JS -->
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+
 <script>
-window.addEventListener('load', function() {
-    const preloader = document.getElementById('preloader-active');
-    if (preloader) {
-        preloader.style.transition = 'opacity 0.5s ease';
+
+window.addEventListener('load', function(){
+
+    const preloader =
+        document.getElementById('preloader-active');
+
+    if(preloader){
+
+        preloader.style.transition =
+            'opacity .5s ease';
+
         preloader.style.opacity = '0';
+
         setTimeout(() => {
+
             preloader.style.display = 'none';
+
         }, 500);
+
     }
+
 });
 
 let map;
 let marker;
 let trailLine;
-let pulseCircle;
-let animationFrame;
 
-// Ruta
-const ruta = [
-    [14.6349, -90.5069],
-    [14.9, -90.2],
-    [15.0, -90.0],
-    [15.1, -89.9],
-    [15.2, -89.8],
-    [15.5, -89.2],
-    [15.7276, -88.5944]
-];
-
-// Icono camión
+// ICONO CAMIÓN
 const camionIcon = L.icon({
-    iconUrl: 'https://cdn-icons-png.flaticon.com/512/1995/1995470.png',
-    iconSize: [42, 42],
-    iconAnchor: [21, 42],
-    popupAnchor: [0, -38]
+
+    iconUrl:
+        'https://cdn-icons-png.flaticon.com/512/1995/1995470.png',
+
+    iconSize:[42,42],
+
+    iconAnchor:[21,42]
+
 });
 
-function mostrarMapa(lat, lng, viajeId) {
+// MAPA
+async function mostrarMapa(
+    latOrigen,
+    lngOrigen,
+    latDestino,
+    lngDestino,
+    viajeId
+){
 
-    const modal = new bootstrap.Modal(document.getElementById('mapModal'));
+    const modal =
+        new bootstrap.Modal(
+            document.getElementById('mapModal')
+        );
+
     modal.show();
 
-    setTimeout(() => {
+    setTimeout(async () => {
 
-        if (map) {
+        // LIMPIAR
+        if(map){
+
             map.remove();
-            cancelAnimationFrame(animationFrame);
+
         }
 
-        map = L.map('map', {
-            zoomControl: false,
-            scrollWheelZoom: false
-        });
+        // MAPA
+        map = L.map('map');
 
-        // Mapa más limpio
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap & CartoDB'
-        }).addTo(map);
+        // TILES
+        L.tileLayer(
+            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                attribution:
+                    '&copy; OpenStreetMap'
+            }
+        ).addTo(map);
 
-        // Ruta base (gris)
-        const routeLine = L.polyline(ruta, {
-            color: '#dee2e6',
-            weight: 4,
-            opacity: 0.6
-        }).addTo(map);
+        // COORDENADAS
+        const origen = [
 
-        // Ruta recorrida (verde)
-        trailLine = L.polyline([ruta[0]], {
-            color: '#20c997',
-            weight: 5,
-            opacity: 1
-        }).addTo(map);
+            parseFloat(latOrigen),
 
-        // Efecto pulso
-        pulseCircle = L.circleMarker(ruta[0], {
-            radius: 10,
-            fillColor: '#0dcaf0',
-            fillOpacity: 0.2,
-            stroke: false
-        }).addTo(map);
+            parseFloat(lngOrigen)
 
-        map.fitBounds(routeLine.getBounds(), { padding: [50, 50] });
+        ];
 
-        // Marcador
-        marker = L.marker(ruta[0], { icon: camionIcon }).addTo(map)
-            .bindPopup("<b>🚚 En camino</b><br>Tu envío está en ruta")
-            .openPopup();
+        const destino = [
 
-        // 🔥 MOVIMIENTO SUAVE REAL
-        let segment = 0;
-        let progress = 0;
+            parseFloat(latDestino),
 
-        function animar() {
+            parseFloat(lngDestino)
 
-            if (segment >= ruta.length - 1) {
+        ];
 
-    // 🔥 FORZAR POSICIÓN EXACTA FINAL
-    const finalPos = ruta[ruta.length - 1];
+        /*
+        |--------------------------------------------------------------------------
+        | RUTA REAL
+        |--------------------------------------------------------------------------
+        */
 
-    marker.setLatLng(finalPos);
-    pulseCircle.setLatLng(finalPos);
-    trailLine.addLatLng(finalPos);
+        const url =
+            `https://router.project-osrm.org/route/v1/driving/` +
+            `${lngOrigen},${latOrigen};` +
+            `${lngDestino},${latDestino}` +
+            `?overview=full&geometries=geojson`;
 
-    map.panTo(finalPos, {
-        animate: true,
-        duration: 0.5
-    });
+        const response =
+            await fetch(url);
 
-    marker.bindPopup("<b>✅ Entregado</b><br>Entrega completada").openPopup();
+        const data =
+            await response.json();
 
-    // actualizar BD
-    fetch(`/viaje/completar/${viajeId}`, {
-        method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            'Content-Type': 'application/json'
+        if(!data.routes || !data.routes.length){
+
+            alert('No se pudo generar la ruta');
+
+            return;
+
         }
-    })
-    .then(res => res.json())
-    .then(() => {
-        setTimeout(() => location.reload(), 1200);
+
+        const coords =
+            data.routes[0]
+            .geometry
+            .coordinates;
+
+        // [lng,lat] -> [lat,lng]
+        const ruta =
+            coords.map(c => [
+
+                c[1],
+
+                c[0]
+
+            ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | DIBUJAR RUTA
+        |--------------------------------------------------------------------------
+        */
+
+        const routeLine = L.polyline(
+
+            ruta,
+
+            {
+
+                color:'#2563eb',
+
+                weight:6,
+
+                opacity:.75
+
+            }
+
+        ).addTo(map);
+
+        map.fitBounds(
+
+            routeLine.getBounds(),
+
+            {
+
+                padding:[40,40]
+
+            }
+
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | CAMIÓN
+        |--------------------------------------------------------------------------
+        */
+
+        marker = L.marker(
+
+            ruta[0],
+
+            {
+
+                icon: camionIcon
+
+            }
+
+        ).addTo(map);
+
+        /*
+        |--------------------------------------------------------------------------
+        | LÍNEA RECORRIDA
+        |--------------------------------------------------------------------------
+        */
+
+        trailLine = L.polyline([], {
+
+            color:'#10b981',
+
+            weight:6
+
+        }).addTo(map);
+
+        /*
+        |--------------------------------------------------------------------------
+        | ANIMACIÓN
+        |--------------------------------------------------------------------------
+        */
+
+        let i = 0;
+
+        function mover(){
+
+           if(i >= ruta.length){
+
+    marker.bindPopup(
+
+        '<b>✅ Entregado</b><br>El envío llegó a destino'
+
+    ).openPopup();
+
+    fetch(
+
+        `/viaje/completar/${viajeId}`,
+
+        {
+
+            method:'POST',
+
+            headers:{
+
+                'X-CSRF-TOKEN':
+                    '{{ csrf_token() }}',
+
+                'Content-Type':
+                    'application/json'
+
+            }
+
+        }
+
+    )
+    .then(response => response.json())
+
+    .then(data => {
+
+        // ESPERAR UN POCO
+        setTimeout(() => {
+
+            location.reload();
+
+        }, 1800);
+
     });
 
     return;
+
 }
-
-            let start = ruta[segment];
-            let end = ruta[segment + 1];
-
-            progress += 0.005; // velocidad suave
-
-            if (progress >= 1) {
-                progress = 0;
-                segment++;
-            }
-
-            let lat = start[0] + (end[0] - start[0]) * progress;
-            let lng = start[1] + (end[1] - start[1]) * progress;
-
-            const pos = [lat, lng];
+            const pos = ruta[i];
 
             marker.setLatLng(pos);
-            trailLine.addLatLng(pos);
-            pulseCircle.setLatLng(pos);
 
-            // movimiento suave sin zoom brusco
+            trailLine.addLatLng(pos);
+
             map.panTo(pos, {
-                animate: true,
-                duration: 0.3
+
+                animate:true,
+
+                duration:0.4
+
             });
 
-            animationFrame = requestAnimationFrame(animar);
+            i++;
+
+            // VELOCIDAD MÁS LENTA
+            setTimeout(mover, 2);
+
         }
 
-        animar();
+        mover();
+
+        /*
+        |--------------------------------------------------------------------------
+        | FIX MAPA
+        |--------------------------------------------------------------------------
+        */
+
+        setTimeout(() => {
+
+            map.invalidateSize();
+
+        }, 500);
 
     }, 300);
+
 }
 
-// BUSCADOR EN TIEMPO REAL
+/*
+|--------------------------------------------------------------------------
+| BUSCADOR
+|--------------------------------------------------------------------------
+*/
+
 document
 .getElementById('buscadorEnvios')
 
@@ -1147,7 +1303,9 @@ document
         this.value.toLowerCase();
 
     let filas =
-        document.querySelectorAll('table tbody tr');
+        document.querySelectorAll(
+            'table tbody tr'
+        );
 
     filas.forEach(fila => {
 
@@ -1155,8 +1313,11 @@ document
             fila.innerText.toLowerCase();
 
         fila.style.display =
+
             texto.includes(filtro)
+
                 ? ''
+
                 : 'none';
 
     });
