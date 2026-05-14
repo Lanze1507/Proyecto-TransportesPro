@@ -23,6 +23,29 @@
     <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
+<style>
+    .buscador-pro{
+
+    border-radius:14px;
+
+    border:1.5px solid #dbe2ea;
+
+    padding:14px 18px;
+
+    transition:.3s ease;
+
+    width:100%;
+}
+
+.buscador-pro:focus{
+
+    border-color:#ff5e14;
+
+    box-shadow:0 0 0 4px rgba(255,94,20,.12);
+
+    transform:scale(1.015);
+}
+</style>
 <body>
 <!--? Preloader Start -->
 <div id="preloader-active">
@@ -153,6 +176,16 @@
                     <div class="section-tittle mb-0">
                         <span>Administración</span>
                         <h2 class="mb-0">Listado de Pilotos</h2>
+                        <div class="mt-3" style="max-width: 420px;">
+
+    <input
+        type="text"
+        id="buscadorPilotos"
+        class="form-control buscador-pro"
+        placeholder="🔍 Buscar piloto por nombre, teléfono o licencia..."
+    >
+
+</div>
                     </div>
                 </div>
                 <div class="col-md-6 text-md-right mt-3 mt-md-0">
@@ -164,7 +197,7 @@
                 <div class="col-12">
                     <div class="card p-3 p-md-4" style="border-radius: 12px;">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover mb-0">
+                            <table class="table table-striped table-hover mb-0" id="tablaPilotos">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th>Nombre</th>
@@ -331,5 +364,36 @@
 <script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
 <script src="{{ asset('assets/js/plugins.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
+<script>
+
+document
+.getElementById('buscadorPilotos')
+
+.addEventListener('input', function(){
+
+    let filtro =
+        this.value.toLowerCase();
+
+    let filas =
+        document.querySelectorAll(
+            '#tablaPilotos tbody tr'
+        );
+
+    filas.forEach(fila => {
+
+        let texto =
+            fila.innerText.toLowerCase();
+
+        fila.style.display =
+            texto.includes(filtro)
+                ? ''
+                : 'none';
+
+    });
+
+});
+
+</script>
+
 </body>
 </html>

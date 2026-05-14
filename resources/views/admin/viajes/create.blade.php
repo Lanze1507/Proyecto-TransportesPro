@@ -2,9 +2,8 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Nuevo Viaje</title>
+<title>Nuevo Viaje - TransportesPro</title>
 
-<!-- CSS COMPLETO (igual que index) -->
 <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/slicknav.css') }}">
@@ -18,216 +17,545 @@
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
 <style>
-body {
-    margin: 0;
-    min-height: 100vh;
 
-    /* 🔥 FONDO CON IMAGEN */
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-        url('{{ asset("assets/img/gallery/footer_bg.jpg") }}') no-repeat center center;
-    background-size: cover;
+body{
+    margin:0;
+    min-height:100vh;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background:
+        linear-gradient(rgba(7,15,30,.75), rgba(7,15,30,.78)),
+        url('{{ asset("assets/img/gallery/footer_bg.jpg") }}')
+        no-repeat center center;
+
+    background-size:cover;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:40px 20px;
 }
 
-/* 🔥 CARD GRANDE */
-.card {
-    width: 100%;
-    max-width: 1100px; /* MÁS GRANDE */
-    border-radius: 16px;
-    border: none;
-    backdrop-filter: blur(12px);
-    background: rgba(255,255,255,0.95);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+/* CARD */
+
+.card-viaje{
+    width:100%;
+    max-width:1400px;
+
+    border:none;
+    border-radius:22px;
+
+    overflow:hidden;
+
+    background:rgba(255,255,255,.96);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.28);
+
+    animation:fadeUp .5s ease;
 }
 
 /* HEADER */
-.card-header {
-    background: #000;
-    color: white;
-    font-size: 22px;
-    font-weight: 600;
-    padding: 18px;
-    border-radius: 16px 16px 0 0;
+
+.card-header-custom{
+    background:
+        linear-gradient(135deg,#07152c,#0b1c39);
+
+    padding:28px 35px;
+
+    color:white;
+
+    position:relative;
+}
+
+.card-header-custom::before{
+    content:'';
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    background:rgba(255,255,255,.05);
+
+    border-radius:50%;
+
+    right:-60px;
+    top:-60px;
+}
+
+.card-header-custom h2{
+    margin:0;
+    font-size:30px;
+    font-weight:800;
+    color:white;
+}
+
+.card-header-custom p{
+    margin:6px 0 0;
+    opacity:.8;
+    font-size:14px;
+    color:white;
 }
 
 /* BODY */
-.card-body {
-    padding: 30px;
+
+.card-body-custom{
+    padding:35px;
+}
+
+/* LABELS */
+
+.form-label{
+    font-weight:700;
+    color:#0b1c39;
+    margin-bottom:8px;
 }
 
 /* INPUTS */
-.form-control {
-    border-radius: 10px;
-    padding: 12px;
-    font-size: 15px;
+
+.form-control{
+    border-radius:14px;
+    border:1.5px solid #dbe2ea;
+
+    padding:14px 16px;
+
+    height:auto;
+
+    font-size:15px;
+
+    transition:.25s ease;
+}
+
+.form-control:focus{
+    border-color:#ff5e14;
+    box-shadow:0 0 0 4px rgba(255,94,20,.10);
+}
+
+/* SEARCH DROPDOWN */
+
+.custom-search{
+    position:relative;
+}
+
+.search-results{
+
+    position:absolute;
+
+    width:100%;
+
+    background:white;
+
+    border-radius:14px;
+
+    margin-top:6px;
+
+    max-height:240px;
+
+    overflow-y:auto;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+
+    z-index:9999;
+
+    display:none;
+}
+
+.search-item{
+
+    padding:14px 18px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.search-item:hover{
+
+    background:#ff5e14;
+    color:white;
 }
 
 /* AUTOCOMPLETE */
-.list-group {
-    position: absolute;
-    z-index: 999;
-    width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    border-radius: 10px;
+
+.list-group{
+    position:absolute;
+    z-index:9999;
+
+    width:100%;
+
+    max-height:220px;
+    overflow-y:auto;
+
+    border:none;
+
+    border-radius:14px;
+
+    margin-top:5px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
 }
 
-.list-group-item:hover {
-    background: #000;
-    color: white;
+.list-group-item{
+    border:none;
+    padding:12px 14px;
+    transition:.2s;
+    cursor:pointer;
 }
 
-/* BOTÓN VOLVER */
-.btn-secondary {
-    border-radius: 10px;
-    padding: 10px 18px;
+.list-group-item:hover{
+    background:#ff5e14;
+    color:#fff;
 }
 
-/* 🔥 BOTÓN GUARDAR PRO */
-.btn-success {
-    background: linear-gradient(135deg, #ff5e14, #ff7a18);
-    border: none;
-    border-radius: 12px;
-    padding: 16px;
-    font-size: 17px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
+/* BOTONES */
+
+.btn-pro{
+    background:linear-gradient(135deg,#ff5e14,#ff7a18);
+    border:none;
+
+    color:white;
+
+    padding:20px;
+
+    border-radius:16px;
+
+    font-weight:800;
+    font-size:18px;
+
+    letter-spacing:.7px;
+
+    transition:.25s ease;
+
+    min-height:68px;
+}
+
+.btn-pro:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 32px rgba(255,94,20,.35);
+    color:white;
+}
+
+.btn-back{
+    background:#eef2f7;
+    color:#0b1c39;
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    transition:.2s ease;
+}
+
+.btn-back:hover{
+    background:#dbe2ea;
+    color:#0b1c39;
+}
+
+/* TOP ACTIONS */
+
+.top-actions{
+    margin-bottom:30px;
+}
+
+/* ICON CARD */
+
+.icon-badge{
+    width:62px;
+    height:62px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:28px;
+
+    margin-bottom:18px;
 }
 
 /* ANIMACIÓN */
-.btn-success:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 25px rgba(255,94,20,0.4);
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-/* ESPACIADO */
-.top-actions {
-    margin-bottom: 20px;
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .card-header-custom{
+        padding:24px;
+    }
+
+    .card-body-custom{
+        padding:24px;
+    }
+
+    .card-header-custom h2{
+        font-size:24px;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="card-viaje">
 
-    <div class="card-header">
-        Crear Nuevo Viaje
+    {{-- HEADER --}}
+    <div class="card-header-custom">
+
+        <div class="icon-badge">
+            🚛
+        </div>
+
+        <h2>Crear Nuevo Viaje</h2>
+
+        <p>
+            Registra un nuevo envío y asigna rutas, piloto y estado inicial.
+        </p>
+
     </div>
 
-    <div class="card-body">
+    {{-- BODY --}}
+    <div class="card-body-custom">
 
         <div class="top-actions">
-            <a href="/admin/viajes" class="btn btn-secondary">
-                ⬅ Volver
+
+            <a href="/admin/viajes" class="btn btn-back">
+                ⬅ Volver al panel
             </a>
+
         </div>
 
         <form method="POST" action="/admin/viajes">
-        @csrf
 
-        <div class="form-group mb-3">
-            <label>Cliente</label>
-            <select name="cliente_id" class="form-control">
-                @foreach($clientes as $c)
-                    <option value="{{ $c->id }}">{{ $c->nombre }}</option>
-                @endforeach
-            </select>
-        </div>
-                <div class="form-group mb-3">
-            <label>Piloto</label>
-            <select name="piloto_id" class="form-control">
-                <option value="">Seleccionar piloto</option>
-                @foreach($pilotos as $p)
-                    <option value="{{ $p->id }}">{{ $p->nombre }}</option>
-                @endforeach
-            </select>
-        </div>
+            @csrf
 
-        <div class="form-group mb-3">
-            <label>Origen</label>
-            <input name="origen" id="origen" class="form-control" placeholder="Ej: New York, USA">
-            <div id="origen-list" class="list-group"></div>
-        </div>
+            <div class="row">
 
-        <div class="form-group mb-3">
-            <label>Destino</label>
-            <input name="destino" id="destino" class="form-control" placeholder="Ej: Puerto Barrios Guatemala">
-            <div id="destino-list" class="list-group"></div>
-        </div>
+                {{-- CLIENTE --}}
+                <div class="col-12 mb-4">
 
-        <div class="form-group mb-3">
-            <label>Estado</label>
-            <select name="estado" class="form-control">
-                <option value="pendiente">Pendiente</option>
-                <option value="en_ruta">En ruta</option>
-                <option value="completado">Completado</option>
-            </select>
-        </div>
+                    <label class="form-label">
+                        Cliente
+                    </label>
 
-        <!-- coordenadas -->
-        <input type="hidden" name="lat_origen" id="lat_origen">
-        <input type="hidden" name="lng_origen" id="lng_origen">
-        <input type="hidden" name="lat_destino" id="lat_destino">
-        <input type="hidden" name="lng_destino" id="lng_destino">
+                    <div class="custom-search">
 
-        <button class="btn btn-success w-100">
-            Guardar Viaje
-        </button>
+                        <input
+                            type="text"
+                            id="buscarCliente"
+                            class="form-control"
+                            placeholder="🔍 Buscar cliente..."
+                            autocomplete="off"
+                        >
+
+                        <div id="listaClientes" class="search-results">
+
+                            @foreach($clientes as $c)
+
+                                <div
+                                    class="search-item"
+                                    data-id="{{ $c->id }}"
+                                    data-text="{{ strtolower($c->nombre) }}"
+                                >
+                                    {{ $c->nombre }}
+                                </div>
+
+                            @endforeach
+
+                        </div>
+
+                        <input
+                            type="hidden"
+                            name="cliente_id"
+                            id="cliente_id"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                {{-- PILOTO --}}
+                <div class="col-12 mb-4">
+
+                    <label class="form-label">
+                        Piloto
+                    </label>
+
+                    <div class="custom-search">
+
+                        <input
+                            type="text"
+                            id="buscarPiloto"
+                            class="form-control"
+                            placeholder="🔍 Buscar piloto..."
+                            autocomplete="off"
+                        >
+
+                        <div id="listaPilotos" class="search-results">
+
+                            @foreach($pilotos as $p)
+
+                                <div
+                                    class="search-item"
+                                    data-id="{{ $p->id }}"
+                                    data-text="{{ strtolower($p->nombre) }}"
+                                >
+                                    {{ $p->nombre }}
+                                </div>
+
+                            @endforeach
+
+                        </div>
+
+                        <input
+                            type="hidden"
+                            name="piloto_id"
+                            id="piloto_id"
+                        >
+
+                    </div>
+
+                </div>
+
+                {{-- ORIGEN --}}
+                <div class="col-lg-6 mb-4 position-relative">
+
+                    <label class="form-label">
+                        Origen
+                    </label>
+
+                    <input
+                        type="text"
+                        name="origen"
+                        id="origen"
+                        class="form-control"
+                        placeholder="Ej: Ciudad de Guatemala"
+                        required
+                    >
+
+                    <div id="origen-list" class="list-group"></div>
+
+                </div>
+
+                {{-- DESTINO --}}
+                <div class="col-lg-6 mb-4 position-relative">
+
+                    <label class="form-label">
+                        Destino
+                    </label>
+
+                    <input
+                        type="text"
+                        name="destino"
+                        id="destino"
+                        class="form-control"
+                        placeholder="Ej: Puerto Barrios"
+                        required
+                    >
+
+                    <div id="destino-list" class="list-group"></div>
+
+                </div>
+
+                {{-- ESTADO --}}
+                <div class="col-lg-6 mb-4">
+
+                    <label class="form-label">
+                        Estado
+                    </label>
+
+                    <select name="estado" class="form-control">
+
+                        <option value="pendiente">
+                            Pendiente
+                        </option>
+
+                        <option value="en_ruta">
+                            En ruta
+                        </option>
+
+                        <option value="completado">
+                            Completado
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            {{-- COORDENADAS --}}
+            <input type="hidden" name="lat_origen" id="lat_origen">
+            <input type="hidden" name="lng_origen" id="lng_origen">
+
+            <input type="hidden" name="lat_destino" id="lat_destino">
+            <input type="hidden" name="lng_destino" id="lng_destino">
+
+            {{-- BOTÓN --}}
+            <button class="btn btn-pro w-100 mt-4">
+
+                Guardar Viaje
+
+            </button>
 
         </form>
 
     </div>
+
 </div>
 
-<!-- JS TEMPLATE COMPLETO -->
 <script src="{{ asset('assets/js/vendor/modernizr-3.5.0.min.js') }}"></script>
 <script src="{{ asset('assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
 <script src="{{ asset('assets/js/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.slicknav.min.js') }}"></script>
-<script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('assets/js/slick.min.js') }}"></script>
-<script src="{{ asset('assets/js/wow.min.js') }}"></script>
-<script src="{{ asset('assets/js/animated.headline.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.magnific-popup.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.sticky.js') }}"></script>
-<script src="{{ asset('assets/js/contact.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.form.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
-<script src="{{ asset('assets/js/mail-script.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugins.js') }}"></script>
-<script src="{{ asset('assets/js/main.js') }}"></script>
 
-<!-- AUTOCOMPLETE -->
 <script>
+
 let timeout = null;
 
-async function buscarLugar(query) {
-    if (query.length < 3) return [];
+async function buscarLugar(query){
+
+    if(query.length < 3) return [];
 
     let res = await fetch(`/geocode?q=${encodeURIComponent(query)}`);
+
     let text = await res.text();
 
-    if (!text) return [];
+    if(!text) return [];
 
-    try {
+    try{
         return JSON.parse(text);
-    } catch {
+    }catch{
         return [];
     }
+
 }
 
-function setupAutocomplete(inputId, listId, latId, lngId) {
+function setupAutocomplete(inputId, listId, latId, lngId){
 
     const input = document.getElementById(inputId);
-    const list = document.getElementById(listId);
+    const list  = document.getElementById(listId);
 
     input.addEventListener('input', () => {
 
@@ -242,10 +570,13 @@ function setupAutocomplete(inputId, listId, latId, lngId) {
             resultados.slice(0,5).forEach(lugar => {
 
                 let item = document.createElement('div');
-                item.className = 'list-group-item list-group-item-action';
+
+                item.className =
+                    'list-group-item list-group-item-action';
+
                 item.textContent = lugar.display_name;
 
-                item.addEventListener('click', function () {
+                item.addEventListener('click', function(){
 
                     input.value = lugar.display_name;
 
@@ -253,25 +584,108 @@ function setupAutocomplete(inputId, listId, latId, lngId) {
                     document.getElementById(lngId).value = lugar.lon;
 
                     list.innerHTML = '';
+
                 });
 
                 list.appendChild(item);
+
             });
 
         }, 500);
+
+    });
+
+}
+
+window.onload = function(){
+
+    setupAutocomplete(
+        'origen',
+        'origen-list',
+        'lat_origen',
+        'lng_origen'
+    );
+
+    setupAutocomplete(
+        'destino',
+        'destino-list',
+        'lat_destino',
+        'lng_destino'
+    );
+
+};
+
+// SEARCH DROPDOWN
+function setupSearch(inputId, listId, hiddenId){
+
+    const input  = document.getElementById(inputId);
+    const list   = document.getElementById(listId);
+    const hidden = document.getElementById(hiddenId);
+
+    const items  = list.querySelectorAll('.search-item');
+
+    input.addEventListener('focus', () => {
+
+        list.style.display = 'block';
+
+    });
+
+    input.addEventListener('input', () => {
+
+        let q = input.value.toLowerCase();
+
+        items.forEach(item => {
+
+            let text = item.dataset.text;
+
+            item.style.display =
+                text.includes(q)
+                    ? 'block'
+                    : 'none';
+
+        });
+
+    });
+
+    items.forEach(item => {
+
+        item.addEventListener('click', () => {
+
+            input.value = item.innerText;
+
+            hidden.value = item.dataset.id;
+
+            list.style.display = 'none';
+
+        });
+
     });
 
     document.addEventListener('click', (e) => {
-        if (!input.contains(e.target)) {
-            list.innerHTML = '';
+
+        if(!list.contains(e.target) && e.target !== input){
+
+            list.style.display = 'none';
+
         }
+
     });
+
 }
 
-window.onload = function () {
-    setupAutocomplete('origen', 'origen-list', 'lat_origen', 'lng_origen');
-    setupAutocomplete('destino', 'destino-list', 'lat_destino', 'lng_destino');
-};
+// INICIAR
+setupSearch(
+    'buscarCliente',
+    'listaClientes',
+    'cliente_id'
+);
+
+setupSearch(
+    'buscarPiloto',
+    'listaPilotos',
+    'piloto_id'
+);
+
 </script>
 
 </body>
