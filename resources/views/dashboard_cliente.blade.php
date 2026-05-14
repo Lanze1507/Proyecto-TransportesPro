@@ -719,30 +719,43 @@ body{
     {{-- UBICACIÓN --}}
     <td>
 
-        @if($viaje->lat_destino && $viaje->lng_destino)
+        @if(
+    $viaje->estado == 'completado'
+)
 
-            <button
-    class="btn-map"
-    onclick="mostrarMapa(
-        '{{ $viaje->lat_origen }}',
-        '{{ $viaje->lng_origen }}',
-        '{{ $viaje->lat_destino }}',
-        '{{ $viaje->lng_destino }}',
-        '{{ $viaje->id }}'
-    )"
->
-    Ver seguimiento
-</button>
+    <span class="estado-badge estado-entregado">
 
-        @else
+        Paquete llego al destino
 
-            <span class="text-muted">
+    </span>
 
-                Sin ubicación
+@elseif(
+    $viaje->lat_destino &&
+    $viaje->lng_destino
+)
 
-            </span>
+    <button
+        class="btn-map"
+        onclick="mostrarMapa(
+            '{{ $viaje->lat_origen }}',
+            '{{ $viaje->lng_origen }}',
+            '{{ $viaje->lat_destino }}',
+            '{{ $viaje->lng_destino }}',
+            '{{ $viaje->id }}'
+        )"
+    >
+        Ver seguimiento
+    </button>
 
-        @endif
+@else
+
+    <span class="text-muted">
+
+        Sin ubicación
+
+    </span>
+
+@endif
 
     </td>
 
