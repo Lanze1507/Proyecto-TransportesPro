@@ -23,7 +23,10 @@ class Viaje extends Model
         'lng_origen',
 
         'lat_destino',
-        'lng_destino'
+        'lng_destino',
+        'firma_cliente',
+        'fecha_entrega',
+        'recibido',
 
     ];
 

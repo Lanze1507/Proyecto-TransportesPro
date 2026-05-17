@@ -1000,6 +1000,71 @@ body{
     </div>
 </div>
 
+<!-- MODAL FIRMA -->
+<div class="modal fade" id="firmaModal">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5>
+                    Firma de recepción
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+
+            </div>
+
+            <div class="modal-body text-center">
+
+                <p class="mb-3">
+                    Firma para confirmar la entrega
+                </p>
+
+                <canvas
+                    id="signature-pad"
+                    width="450"
+                    height="220"
+                    style="
+                        border:2px dashed #d1d5db;
+                        border-radius:16px;
+                        width:100%;
+                        background:white;
+                    "
+                ></canvas>
+
+                <div class="mt-4 d-flex gap-2 justify-content-center">
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="limpiarFirma()"
+                    >
+                        Limpiar
+                    </button>
+
+                    <button
+                        class="btn btn-success"
+                        onclick="guardarFirma()"
+                    >
+                        Confirmar firma
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 <!-- JS -->
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
@@ -1207,83 +1272,132 @@ async function mostrarMapa(
 
         }).addTo(map);
 
+       /*
+|--------------------------------------------------------------------------
+| ANIMACIÓN
+|--------------------------------------------------------------------------
+*/
+
+let i = 0;
+
+function mover(){
+
+    /*
+    |--------------------------------------------------------------------------
+    | TERMINÓ RUTA
+    |--------------------------------------------------------------------------
+    */
+
+    if(i >= ruta.length){
+
+        const finalPos =
+            ruta[ruta.length - 1];
+
+        marker.setLatLng(finalPos);
+
+        marker.bindPopup(
+
+            '<b>✅ Entregado</b><br>El envío llegó a destino'
+
+        ).openPopup();
+
         /*
         |--------------------------------------------------------------------------
-        | ANIMACIÓN
+        | ACTUALIZAR ESTADO
         |--------------------------------------------------------------------------
         */
 
-        let i = 0;
+        fetch(
 
-        function mover(){
+            `/viaje/completar/${viajeId}`,
 
-           if(i >= ruta.length){
+            {
 
-    marker.bindPopup(
+                method:'POST',
 
-        '<b>✅ Entregado</b><br>El envío llegó a destino'
+                headers:{
 
-    ).openPopup();
+                    'X-CSRF-TOKEN':
+                        '{{ csrf_token() }}',
 
-    fetch(
+                    'Content-Type':
+                        'application/json'
 
-        `/viaje/completar/${viajeId}`,
-
-        {
-
-            method:'POST',
-
-            headers:{
-
-                'X-CSRF-TOKEN':
-                    '{{ csrf_token() }}',
-
-                'Content-Type':
-                    'application/json'
+                }
 
             }
 
-        }
+        )
+        .then(response => response.json())
 
-    )
-    .then(response => response.json())
+        .then(() => {
 
-    .then(data => {
+            /*
+            |--------------------------------------------------------------------------
+            | CERRAR MODAL MAPA
+            |--------------------------------------------------------------------------
+            */
 
-        // ESPERAR UN POCO
-        setTimeout(() => {
+            const modalMapa =
+                bootstrap.Modal.getInstance(
 
-            location.reload();
+                    document.getElementById('mapModal')
 
-        }, 1800);
+                );
+
+            if(modalMapa){
+
+                modalMapa.hide();
+
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | ABRIR FIRMA
+            |--------------------------------------------------------------------------
+            */
+
+            abrirFirma(viajeId);
+
+        });
+
+        return;
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | MOVER CAMIÓN
+    |--------------------------------------------------------------------------
+    */
+
+    const pos = ruta[i];
+
+    marker.setLatLng(pos);
+
+    trailLine.addLatLng(pos);
+
+    map.panTo(pos, {
+
+        animate:true,
+
+        duration:0.6
 
     });
 
-    return;
+    i++;
+
+    /*
+    |--------------------------------------------------------------------------
+    | VELOCIDAD
+    |--------------------------------------------------------------------------
+    */
+
+    setTimeout(mover, 80);
 
 }
-            const pos = ruta[i];
 
-            marker.setLatLng(pos);
-
-            trailLine.addLatLng(pos);
-
-            map.panTo(pos, {
-
-                animate:true,
-
-                duration:0.6
-
-            });
-
-            i++;
-
-            // VELOCIDAD MÁS LENTA
-            setTimeout(mover, 1);
-
-        }
-
-        mover();
+mover();
 
         /*
         |--------------------------------------------------------------------------
@@ -1336,6 +1450,203 @@ document
     });
 
 });
+
+/*
+|--------------------------------------------------------------------------
+| FIRMA DIGITAL
+|--------------------------------------------------------------------------
+*/
+
+let canvas;
+let ctx;
+
+let dibujando = false;
+
+let viajeFirma = null;
+
+/*
+|--------------------------------------------------------------------------
+| INICIALIZAR CANVAS
+|--------------------------------------------------------------------------
+*/
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    canvas =
+        document.getElementById('signature-pad');
+
+    if(canvas){
+
+        ctx =
+            canvas.getContext('2d');
+
+        /*
+        |--------------------------------------------------------------------------
+        | EVENTOS
+        |--------------------------------------------------------------------------
+        */
+
+        canvas.addEventListener(
+            'mousedown',
+            iniciar
+        );
+
+        canvas.addEventListener(
+            'mouseup',
+            detener
+        );
+
+        canvas.addEventListener(
+            'mousemove',
+            dibujar
+        );
+
+    }
+
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| ABRIR MODAL
+|--------------------------------------------------------------------------
+*/
+
+function abrirFirma(viajeId){
+
+    viajeFirma = viajeId;
+
+    const modal =
+        new bootstrap.Modal(
+
+            document.getElementById(
+                'firmaModal'
+            )
+
+        );
+
+    modal.show();
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| DIBUJAR
+|--------------------------------------------------------------------------
+*/
+
+
+
+function iniciar(e){
+
+    dibujando = true;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+
+        e.offsetX,
+
+        e.offsetY
+
+    );
+
+}
+
+function detener(){
+
+    dibujando = false;
+
+}
+
+function dibujar(e){
+
+    if(!dibujando) return;
+
+    ctx.lineWidth = 2.5;
+
+    ctx.lineCap = 'round';
+
+    ctx.strokeStyle = '#111827';
+
+    ctx.lineTo(
+
+        e.offsetX,
+
+        e.offsetY
+
+    );
+
+    ctx.stroke();
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| LIMPIAR
+|--------------------------------------------------------------------------
+*/
+
+function limpiarFirma(){
+
+    ctx.clearRect(
+
+        0,
+        0,
+        canvas.width,
+        canvas.height
+
+    );
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| GUARDAR
+|--------------------------------------------------------------------------
+*/
+
+function guardarFirma(){
+
+    const firma =
+        canvas.toDataURL('image/png');
+
+    fetch(
+
+        `/viaje/firma/${viajeFirma}`,
+
+        {
+
+            method:'POST',
+
+            headers:{
+
+                'Content-Type':
+                    'application/json',
+
+                'X-CSRF-TOKEN':
+                    '{{ csrf_token() }}'
+
+            },
+
+            body:JSON.stringify({
+
+                firma:firma
+
+            })
+
+        }
+
+    )
+    .then(res => res.json())
+
+    .then(data => {
+
+        location.reload();
+
+    });
+
+}
 
 </script>
 

@@ -135,4 +135,55 @@ Route::middleware(['auth'])->group(function () {
         $viaje->save();
         return response()->json(['success' => true]);
     });
+    Route::post('/viaje/firma/{id}', function (
+    Request $request,
+    $id
+){
+
+    $viaje = Viaje::findOrFail($id);
+
+    $image = $request->firma;
+
+    $image = str_replace(
+        'data:image/png;base64,',
+        '',
+        $image
+    );
+
+    $image = str_replace(
+        ' ',
+        '+',
+        $image
+    );
+
+    $nombre =
+        'firmas/firma_' .
+        time() .
+        '.png';
+
+    \Storage::disk('public')->put(
+
+        $nombre,
+
+        base64_decode($image)
+
+    );
+
+    $viaje->update([
+
+        'firma_cliente' => $nombre,
+
+        'fecha_entrega' => now(),
+
+        'recibido' => true
+
+    ]);
+
+    return response()->json([
+
+        'success' => true
+
+    ]);
+
+});
 });
