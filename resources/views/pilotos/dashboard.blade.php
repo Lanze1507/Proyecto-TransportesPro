@@ -201,7 +201,7 @@ body { background: #f4f7fb; }
     {{-- Header --}}
     <div class="page-header">
         <div>
-            <h1>Bienvenido, {{ $piloto->nombre }} 👋</h1>
+            <h1>Bienvenido, {{ $pilotos->nombre }} 👋</h1>
             <p>Tu panel de viajes · {{ now()->format('d/m/Y H:i') }}</p>
         </div>
     </div>
@@ -278,7 +278,7 @@ body { background: #f4f7fb; }
                 {{-- Mapa si hay coordenadas --}}
                 @if($viaje_activo->lat_origen && $viaje_activo->lng_origen)
                 <div id="mapa-activo"
-                     style="margin-top:20px;border-radius:12px;overflow:hidden;height:200px;"></div>
+                    style="margin-top:20px;border-radius:12px;overflow:hidden;height:200px;"></div>
                 @endif
             </div>
 
@@ -405,18 +405,18 @@ body { background: #f4f7fb; }
             {{-- Perfil --}}
             <div class="perfil-card">
                 <div class="avatar">🧑‍✈️</div>
-                <h4>{{ $piloto->nombre }}</h4>
+                <h4>{{ $pilotos->nombre }}</h4>
                 <p style="font-size:13px;color:rgba(255,255,255,.7);margin:0 0 16px;">
                     {{ auth()->user()->email }}
                 </p>
                 <div class="info-row-p">
-                    Teléfono <strong>{{ $piloto->telefono ?? '—' }}</strong>
+                    Teléfono <strong>{{ $pilotos->telefono ?? '—' }}</strong>
                 </div>
                 <div class="info-row-p">
-                    Licencia <strong>{{ $piloto->licencia ?? '—' }}</strong>
+                    Licencia <strong>{{ $pilotos->licencia ?? '—' }}</strong>
                 </div>
                 <div class="info-row-p">
-                    DPI <strong>{{ $piloto->dpi ?? '—' }}</strong>
+                    DPI <strong>{{ $pilotos->dpi ?? '—' }}</strong>
                 </div>
                 <div class="info-row-p">
                     Estado
