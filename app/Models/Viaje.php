@@ -27,6 +27,7 @@ class Viaje extends Model
         'firma_cliente',
         'fecha_entrega',
         'recibido',
+        'codigo_guia',
 
     ];
 
