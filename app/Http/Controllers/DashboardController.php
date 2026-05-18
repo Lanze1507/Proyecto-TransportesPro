@@ -20,6 +20,10 @@ class DashboardController extends Controller
         if ($user->role === 'operador') {
             return redirect()->route('operador.viajes.index');
         }
+        // Piloto → su dashboard personal
+        if ($user->role === 'piloto') {
+            return redirect()->route('piloto.dashboard');
+        }
 
         // Cliente → su dashboard de viajes
         $cliente = $user->cliente;
