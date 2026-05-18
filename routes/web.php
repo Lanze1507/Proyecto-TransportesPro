@@ -12,8 +12,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\ViajeController;
 use App\Http\Controllers\PilotoController;
 use App\Http\Controllers\Admin\CamionController;
-
 use App\Http\Controllers\Operador\ViajeController as OperadorViajeController;
+use App\Http\Controllers\Operador\DashboardController as OperadorDashboardController;
+use App\Http\Controllers\Piloto\DashboardController as PilotoDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -224,13 +225,12 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
 
+
 Route::middleware(['auth', 'operador'])
     ->prefix('operador')
     ->group(function () {
 
-    Route::get(
-
-        '/viajes',
+    Route::get('/viajes',
 
         [OperadorViajeController::class, 'index']
 
@@ -275,6 +275,18 @@ Route::middleware(['auth', 'operador'])
         [OperadorViajeController::class, 'cancelar']
 
     )->name('operador.viajes.cancelar');
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| PILOTO — Dashboard propio
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'piloto'])->prefix('piloto')->group(function () {
+
+    Route::get('/dashboard', [PilotoDashboardController::class, 'index'])
+        ->name('piloto.dashboard');
 
 });
 
