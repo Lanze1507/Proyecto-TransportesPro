@@ -285,7 +285,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +294,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1),(4,'2026_04_28_033359_add_role_to_users_table',2),(5,'2026_05_14_000922_create_viaje_historials_table',3),(6,'2026_05_17_222312_add_firma_to_viajes_table',4);
+INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1),(4,'2026_04_28_033359_add_role_to_users_table',2),(5,'2026_05_14_000922_create_viaje_historials_table',3),(6,'2026_05_17_222312_add_firma_to_viajes_table',4),(7,'2026_05_18_000411_add_codigo_guia_to_viajes_table',5);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -377,7 +377,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('92K6z5NobdAZR5CD4Z2Y7KKxjYMxlfannLKfkAu6',NULL,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36','eyJfdG9rZW4iOiJocjBVRFJIYW5nNGNVM0g0bE9pY3VHU055c1dmbHQ5YVc4RzFybWw4IiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvdHJhbnNwcm8udGVzdCIsInJvdXRlIjpudWxsfX0=',1779061663),('xSuGLg23DR0EB0xcKLZCwsVJt5DkVBCzKUZiQeJZ',3,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36','eyJfdG9rZW4iOiJWdEpEQlp2UE05Q3U0ZVN5SHBZOVJDalV6ZTl6S00xeXl0NndqYUtRIiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvMTI3LjAuMC4xOjgwMDBcL2Rhc2hib2FyZCIsInJvdXRlIjpudWxsfSwibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiOjN9',1779058091);
+INSERT INTO `sessions` VALUES ('UwUOiVo8835eL9heBKoBidi1lTTwv1PjgzHpgZzy',NULL,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36','eyJfdG9rZW4iOiJQbTVCVDZ4bjRjczJENEVzYW9RUzllMTllOU1abjAwYmU5a1B1UE9SIiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvdHJhbnNwcm8udGVzdFwvc2VndWltaWVudG9cL1RSWC05OTU0NTMiLCJyb3V0ZSI6bnVsbH19',1779067873);
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -430,7 +430,7 @@ CREATE TABLE `viaje_historials` (
   PRIMARY KEY (`id`),
   KEY `viaje_historials_viaje_id_foreign` (`viaje_id`),
   CONSTRAINT `viaje_historials_viaje_id_foreign` FOREIGN KEY (`viaje_id`) REFERENCES `viajes` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -439,7 +439,7 @@ CREATE TABLE `viaje_historials` (
 
 LOCK TABLES `viaje_historials` WRITE;
 /*!40000 ALTER TABLE `viaje_historials` DISABLE KEYS */;
-INSERT INTO `viaje_historials` VALUES (66,66,'en_ruta','? Viaje creado en el sistema','2026-05-16 22:04:35','2026-05-16 22:04:35'),(67,66,'en_ruta','?‍✈️ Piloto asignado: Pedro','2026-05-16 22:04:35','2026-05-16 22:04:35'),(68,66,'en_ruta','? Camión asignado: M190','2026-05-16 22:04:35','2026-05-16 22:04:35'),(69,67,'pendiente','? Viaje creado en el sistema','2026-05-16 22:08:43','2026-05-16 22:08:43'),(70,67,'pendiente','?‍✈️ Piloto asignado: Yerma','2026-05-16 22:08:43','2026-05-16 22:08:43'),(71,67,'pendiente','? Camión asignado: K123','2026-05-16 22:08:43','2026-05-16 22:08:43'),(72,67,'aprobado','✅ Operador aprobó el viaje','2026-05-16 22:09:23','2026-05-16 22:09:23'),(73,67,'en_transito','? Viaje puesto en tránsito','2026-05-16 22:09:54','2026-05-16 22:09:54'),(74,67,'en_transito','?‍✈️ Piloto asignado: Yerma','2026-05-16 22:09:54','2026-05-16 22:09:54'),(75,67,'en_transito','? Camión asignado: K123','2026-05-16 22:09:54','2026-05-16 22:09:54'),(76,68,'pendiente','? Viaje creado en el sistema','2026-05-16 23:02:07','2026-05-16 23:02:07'),(77,68,'pendiente','?‍✈️ Piloto asignado: Pedro','2026-05-16 23:02:07','2026-05-16 23:02:07'),(78,68,'pendiente','? Camión asignado: K123','2026-05-16 23:02:07','2026-05-16 23:02:07'),(88,67,'completado','? Estado actualizado de \"en_transito\" a \"completado\"','2026-05-18 04:57:00','2026-05-18 04:57:00'),(90,72,'en_ruta','? Viaje creado en el sistema','2026-05-18 04:59:17','2026-05-18 04:59:17'),(91,72,'en_ruta','?‍✈️ Piloto asignado: Yerma','2026-05-18 04:59:17','2026-05-18 04:59:17'),(92,72,'en_ruta','? Camión asignado: K123','2026-05-18 04:59:17','2026-05-18 04:59:17');
+INSERT INTO `viaje_historials` VALUES (66,66,'en_ruta','? Viaje creado en el sistema','2026-05-16 22:04:35','2026-05-16 22:04:35'),(67,66,'en_ruta','?‍✈️ Piloto asignado: Pedro','2026-05-16 22:04:35','2026-05-16 22:04:35'),(68,66,'en_ruta','? Camión asignado: M190','2026-05-16 22:04:35','2026-05-16 22:04:35'),(69,67,'pendiente','? Viaje creado en el sistema','2026-05-16 22:08:43','2026-05-16 22:08:43'),(70,67,'pendiente','?‍✈️ Piloto asignado: Yerma','2026-05-16 22:08:43','2026-05-16 22:08:43'),(71,67,'pendiente','? Camión asignado: K123','2026-05-16 22:08:43','2026-05-16 22:08:43'),(72,67,'aprobado','✅ Operador aprobó el viaje','2026-05-16 22:09:23','2026-05-16 22:09:23'),(73,67,'en_transito','? Viaje puesto en tránsito','2026-05-16 22:09:54','2026-05-16 22:09:54'),(74,67,'en_transito','?‍✈️ Piloto asignado: Yerma','2026-05-16 22:09:54','2026-05-16 22:09:54'),(75,67,'en_transito','? Camión asignado: K123','2026-05-16 22:09:54','2026-05-16 22:09:54'),(76,68,'pendiente','? Viaje creado en el sistema','2026-05-16 23:02:07','2026-05-16 23:02:07'),(77,68,'pendiente','?‍✈️ Piloto asignado: Pedro','2026-05-16 23:02:07','2026-05-16 23:02:07'),(78,68,'pendiente','? Camión asignado: K123','2026-05-16 23:02:07','2026-05-16 23:02:07'),(88,67,'completado','? Estado actualizado de \"en_transito\" a \"completado\"','2026-05-18 04:57:00','2026-05-18 04:57:00'),(90,72,'en_ruta','? Viaje creado en el sistema','2026-05-18 04:59:17','2026-05-18 04:59:17'),(91,72,'en_ruta','?‍✈️ Piloto asignado: Yerma','2026-05-18 04:59:17','2026-05-18 04:59:17'),(92,72,'en_ruta','? Camión asignado: K123','2026-05-18 04:59:17','2026-05-18 04:59:17'),(93,73,'en_ruta','? Viaje creado en el sistema','2026-05-18 07:21:13','2026-05-18 07:21:13'),(94,73,'en_ruta','?‍✈️ Piloto asignado: Yerma','2026-05-18 07:21:13','2026-05-18 07:21:13'),(95,73,'en_ruta','? Camión asignado: M190','2026-05-18 07:21:13','2026-05-18 07:21:13');
 /*!40000 ALTER TABLE `viaje_historials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -452,6 +452,7 @@ DROP TABLE IF EXISTS `viajes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `viajes` (
   `id` bigint NOT NULL AUTO_INCREMENT,
+  `codigo_guia` varchar(255) DEFAULT NULL,
   `cliente_id` bigint DEFAULT NULL,
   `piloto_id` bigint DEFAULT NULL,
   `camion_id` bigint DEFAULT NULL,
@@ -472,13 +473,14 @@ CREATE TABLE `viajes` (
   `fecha_entrega` timestamp NULL DEFAULT NULL,
   `recibido` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `viajes_codigo_guia_unique` (`codigo_guia`),
   KEY `cliente_id` (`cliente_id`),
   KEY `piloto_id` (`piloto_id`),
   KEY `camion_id` (`camion_id`),
   CONSTRAINT `viajes_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE SET NULL,
   CONSTRAINT `viajes_ibfk_2` FOREIGN KEY (`piloto_id`) REFERENCES `pilotos` (`id`) ON DELETE SET NULL,
   CONSTRAINT `viajes_ibfk_3` FOREIGN KEY (`camion_id`) REFERENCES `camiones` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -487,7 +489,7 @@ CREATE TABLE `viajes` (
 
 LOCK TABLES `viajes` WRITE;
 /*!40000 ALTER TABLE `viajes` DISABLE KEYS */;
-INSERT INTO `viajes` VALUES (66,10,2,2,'Morales, Izabal, 18004, Guatemala','Puerto Barrios, Izabal, Guatemala',NULL,NULL,'completado','2026-05-16 22:04:35','2026-05-16 22:06:21',NULL,NULL,15.47116000,-88.84263250,15.72751540,-88.59525060,NULL,NULL,0),(67,10,NULL,NULL,'Ciudad de México, México','Ciudad de Guatemala, Zona 2, Departamento de Guatemala, Guatemala',NULL,NULL,'completado','2026-05-16 22:08:43','2026-05-18 04:57:00',NULL,NULL,19.43262960,-99.13317850,14.62973880,-90.51129980,NULL,NULL,0),(68,10,2,1,'Quiché, Guatemala','India',NULL,NULL,'pendiente','2026-05-16 23:02:07','2026-05-16 23:02:07',NULL,NULL,15.43817860,-91.00751860,22.35111480,78.66774280,NULL,NULL,0),(72,10,1,1,'Morales, Izabal, 18004, Guatemala','Puerto Barrios, Izabal, Guatemala',NULL,NULL,'completado','2026-05-18 04:59:17','2026-05-18 05:02:08',NULL,NULL,15.47116000,-88.84263250,15.72751540,-88.59525060,'firmas/firma_1779058928.png','2026-05-18 05:02:08',1);
+INSERT INTO `viajes` VALUES (66,NULL,10,2,2,'Morales, Izabal, 18004, Guatemala','Puerto Barrios, Izabal, Guatemala',NULL,NULL,'completado','2026-05-16 22:04:35','2026-05-16 22:06:21',NULL,NULL,15.47116000,-88.84263250,15.72751540,-88.59525060,NULL,NULL,0),(67,NULL,10,NULL,NULL,'Ciudad de México, México','Ciudad de Guatemala, Zona 2, Departamento de Guatemala, Guatemala',NULL,NULL,'completado','2026-05-16 22:08:43','2026-05-18 04:57:00',NULL,NULL,19.43262960,-99.13317850,14.62973880,-90.51129980,NULL,NULL,0),(68,NULL,10,2,1,'Quiché, Guatemala','India',NULL,NULL,'pendiente','2026-05-16 23:02:07','2026-05-16 23:02:07',NULL,NULL,15.43817860,-91.00751860,22.35111480,78.66774280,NULL,NULL,0),(72,NULL,10,1,1,'Morales, Izabal, 18004, Guatemala','Puerto Barrios, Izabal, Guatemala',NULL,NULL,'completado','2026-05-18 04:59:17','2026-05-18 05:02:08',NULL,NULL,15.47116000,-88.84263250,15.72751540,-88.59525060,'firmas/firma_1779058928.png','2026-05-18 05:02:08',1),(73,'TRX-995453',10,1,2,'Petén, Guatemala','Puerto Barrios, Izabal, Guatemala',NULL,NULL,'en_ruta','2026-05-18 07:21:13','2026-05-18 07:21:13',NULL,NULL,16.83179060,-90.04506370,15.72751540,-88.59525060,NULL,NULL,0);
 /*!40000 ALTER TABLE `viajes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -500,4 +502,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-17 18:10:44
+-- Dump completed on 2026-05-17 19:47:32
