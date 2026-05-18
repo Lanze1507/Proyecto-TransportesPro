@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.4.3, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
 --
 -- Host: localhost    Database: transpro
 -- ------------------------------------------------------
--- Server version	8.4.3
+-- Server version	8.0.45
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,8 +23,8 @@ DROP TABLE IF EXISTS `cache`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cache` (
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` bigint NOT NULL,
   PRIMARY KEY (`key`),
   KEY `cache_expiration_index` (`expiration`)
@@ -48,8 +48,8 @@ DROP TABLE IF EXISTS `cache_locks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cache_locks` (
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` bigint NOT NULL,
   PRIMARY KEY (`key`),
   KEY `cache_locks_expiration_index` (`expiration`)
@@ -193,11 +193,11 @@ DROP TABLE IF EXISTS `failed_jobs`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `failed_jobs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
@@ -221,13 +221,13 @@ DROP TABLE IF EXISTS `job_batches`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `job_batches` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `total_jobs` int NOT NULL,
   `pending_jobs` int NOT NULL,
   `failed_jobs` int NOT NULL,
-  `failed_job_ids` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `options` mediumtext COLLATE utf8mb4_unicode_ci,
+  `failed_job_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `options` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `cancelled_at` int DEFAULT NULL,
   `created_at` int NOT NULL,
   `finished_at` int DEFAULT NULL,
@@ -253,8 +253,8 @@ DROP TABLE IF EXISTS `jobs`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `jobs` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `queue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `attempts` smallint unsigned NOT NULL,
   `reserved_at` int unsigned DEFAULT NULL,
   `available_at` int unsigned NOT NULL,
@@ -282,10 +282,10 @@ DROP TABLE IF EXISTS `migrations`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `migrations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +294,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1),(4,'2026_04_28_033359_add_role_to_users_table',2),(5,'2026_05_14_000922_create_viaje_historials_table',3);
+INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1),(4,'2026_04_28_033359_add_role_to_users_table',2),(5,'2026_05_14_000922_create_viaje_historials_table',3),(6,'2026_05_17_222312_add_firma_to_viajes_table',4);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -306,8 +306,8 @@ DROP TABLE IF EXISTS `password_reset_tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -359,11 +359,11 @@ DROP TABLE IF EXISTS `sessions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint unsigned DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_activity` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `sessions_user_id_index` (`user_id`),
@@ -377,7 +377,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('beCLUBFD0vzw5gTXCcBno3tjFYPGCZPiBXI4POAf',NULL,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 OPR/130.0.0.0','eyJfdG9rZW4iOiIzbnR2NFk2ekYxbno2QW9BTkJNb3cxR1Y5ZGZoUlJHZkQ3TVByT2wwIiwiX3ByZXZpb3VzIjp7InVybCI6Imh0dHA6XC9cL3RyYW5zcHJvLnRlc3QiLCJyb3V0ZSI6bnVsbH0sIl9mbGFzaCI6eyJvbGQiOltdLCJuZXciOltdfX0=',1777339937),('C1uYMIpxIpM2AHV69pTtKKD1fjJW8bSG1NmvcdqL',NULL,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 OPR/130.0.0.0','eyJfdG9rZW4iOiJla2JnTlg3Nno4U3pZQkJNUTdLc0lXODU5WjBMb2tyOFZrQU1GTDRRIiwiX3ByZXZpb3VzIjp7InVybCI6Imh0dHA6XC9cLzEyNy4wLjAuMTo4MDAwIiwicm91dGUiOm51bGx9LCJfZmxhc2giOnsib2xkIjpbXSwibmV3IjpbXX19',1777339759);
+INSERT INTO `sessions` VALUES ('92K6z5NobdAZR5CD4Z2Y7KKxjYMxlfannLKfkAu6',NULL,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36','eyJfdG9rZW4iOiJocjBVRFJIYW5nNGNVM0g0bE9pY3VHU055c1dmbHQ5YVc4RzFybWw4IiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvdHJhbnNwcm8udGVzdCIsInJvdXRlIjpudWxsfX0=',1779061663),('xSuGLg23DR0EB0xcKLZCwsVJt5DkVBCzKUZiQeJZ',3,'127.0.0.1','Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36','eyJfdG9rZW4iOiJWdEpEQlp2UE05Q3U0ZVN5SHBZOVJDalV6ZTl6S00xeXl0NndqYUtRIiwiX2ZsYXNoIjp7Im9sZCI6W10sIm5ldyI6W119LCJfcHJldmlvdXMiOnsidXJsIjoiaHR0cDpcL1wvMTI3LjAuMC4xOjgwMDBcL2Rhc2hib2FyZCIsInJvdXRlIjpudWxsfSwibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiOjN9',1779058091);
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -390,17 +390,17 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'cliente',
+  `role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'cliente',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -409,7 +409,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Test User','test@example.com','2026-04-28 07:35:12','$2y$12$hIOKJKlQmEmuNZlnk1DNX.pNYAI.qRL8eDUQ50/sGZr3VP0dWNQhi','i2ZST2fABX','2026-04-28 07:35:13','2026-04-28 07:35:13','admin'),(2,'Cris','cristophercast70@gmail.com',NULL,'$2y$12$1cARc0srHTzxvgaYHgUBD./y0.Mcut.eTEWKhoU5A3jPaUDijg0tO',NULL,'2026-04-28 09:07:40','2026-04-28 09:07:40','admin'),(3,'Cris123','cris@gmail.com',NULL,'$2y$12$5pAnfY6ZyX0ja.pPh0j.sOK4bmuemCHQKrOVMm25BHHmYP3MSck4K',NULL,'2026-04-28 09:49:25','2026-04-28 09:49:25','cliente');
+INSERT INTO `users` VALUES (1,'Test User','test@example.com','2026-04-28 07:35:12','$2y$12$hIOKJKlQmEmuNZlnk1DNX.pNYAI.qRL8eDUQ50/sGZr3VP0dWNQhi','i2ZST2fABX','2026-04-28 07:35:13','2026-04-28 07:35:13','admin'),(2,'Cris','cristophercast70@gmail.com',NULL,'$2y$12$1cARc0srHTzxvgaYHgUBD./y0.Mcut.eTEWKhoU5A3jPaUDijg0tO',NULL,'2026-04-28 09:07:40','2026-04-28 09:07:40','admin'),(3,'Cris123','cris@gmail.com',NULL,'$2y$12$5pAnfY6ZyX0ja.pPh0j.sOK4bmuemCHQKrOVMm25BHHmYP3MSck4K',NULL,'2026-04-28 09:49:25','2026-04-28 09:49:25','cliente'),(9,'cristal','cristi@gmail.com',NULL,'$2y$12$LWTW1yWwlWc.0yISy/0/qeaR6fByeoD1Wbhk5vWiTePjfIQRQpWJ2',NULL,'2026-05-16 22:46:24','2026-05-16 22:46:24','cliente');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,14 +423,14 @@ DROP TABLE IF EXISTS `viaje_historials`;
 CREATE TABLE `viaje_historials` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `viaje_id` bigint NOT NULL,
-  `estado` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `viaje_historials_viaje_id_foreign` (`viaje_id`),
   CONSTRAINT `viaje_historials_viaje_id_foreign` FOREIGN KEY (`viaje_id`) REFERENCES `viajes` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -439,7 +439,7 @@ CREATE TABLE `viaje_historials` (
 
 LOCK TABLES `viaje_historials` WRITE;
 /*!40000 ALTER TABLE `viaje_historials` DISABLE KEYS */;
-INSERT INTO `viaje_historials` VALUES (53,63,'pendiente','📦 Viaje creado en el sistema','2026-05-16 07:38:33','2026-05-16 07:38:33'),(54,63,'pendiente','👨‍✈️ Piloto asignado: Pedro','2026-05-16 07:38:33','2026-05-16 07:38:33'),(55,63,'pendiente','🚛 Camión asignado: K123','2026-05-16 07:38:33','2026-05-16 07:38:33'),(56,63,'aprobado','✅ Operador aprobó el viaje','2026-05-16 07:38:41','2026-05-16 07:38:41'),(57,63,'en_transito','🚚 Viaje puesto en tránsito','2026-05-16 07:38:48','2026-05-16 07:38:48'),(58,63,'en_transito','👨‍✈️ Piloto asignado: Pedro','2026-05-16 07:38:48','2026-05-16 07:38:48'),(59,63,'en_transito','🚛 Camión asignado: K123','2026-05-16 07:38:48','2026-05-16 07:38:48'),(60,64,'en_ruta','📦 Viaje creado en el sistema','2026-05-16 07:39:21','2026-05-16 07:39:21'),(61,64,'en_ruta','👨‍✈️ Piloto asignado: Pedro','2026-05-16 07:39:21','2026-05-16 07:39:21'),(62,64,'en_ruta','🚛 Camión asignado: M190','2026-05-16 07:39:21','2026-05-16 07:39:21');
+INSERT INTO `viaje_historials` VALUES (66,66,'en_ruta','? Viaje creado en el sistema','2026-05-16 22:04:35','2026-05-16 22:04:35'),(67,66,'en_ruta','?‍✈️ Piloto asignado: Pedro','2026-05-16 22:04:35','2026-05-16 22:04:35'),(68,66,'en_ruta','? Camión asignado: M190','2026-05-16 22:04:35','2026-05-16 22:04:35'),(69,67,'pendiente','? Viaje creado en el sistema','2026-05-16 22:08:43','2026-05-16 22:08:43'),(70,67,'pendiente','?‍✈️ Piloto asignado: Yerma','2026-05-16 22:08:43','2026-05-16 22:08:43'),(71,67,'pendiente','? Camión asignado: K123','2026-05-16 22:08:43','2026-05-16 22:08:43'),(72,67,'aprobado','✅ Operador aprobó el viaje','2026-05-16 22:09:23','2026-05-16 22:09:23'),(73,67,'en_transito','? Viaje puesto en tránsito','2026-05-16 22:09:54','2026-05-16 22:09:54'),(74,67,'en_transito','?‍✈️ Piloto asignado: Yerma','2026-05-16 22:09:54','2026-05-16 22:09:54'),(75,67,'en_transito','? Camión asignado: K123','2026-05-16 22:09:54','2026-05-16 22:09:54'),(76,68,'pendiente','? Viaje creado en el sistema','2026-05-16 23:02:07','2026-05-16 23:02:07'),(77,68,'pendiente','?‍✈️ Piloto asignado: Pedro','2026-05-16 23:02:07','2026-05-16 23:02:07'),(78,68,'pendiente','? Camión asignado: K123','2026-05-16 23:02:07','2026-05-16 23:02:07'),(88,67,'completado','? Estado actualizado de \"en_transito\" a \"completado\"','2026-05-18 04:57:00','2026-05-18 04:57:00'),(90,72,'en_ruta','? Viaje creado en el sistema','2026-05-18 04:59:17','2026-05-18 04:59:17'),(91,72,'en_ruta','?‍✈️ Piloto asignado: Yerma','2026-05-18 04:59:17','2026-05-18 04:59:17'),(92,72,'en_ruta','? Camión asignado: K123','2026-05-18 04:59:17','2026-05-18 04:59:17');
 /*!40000 ALTER TABLE `viaje_historials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -468,6 +468,9 @@ CREATE TABLE `viajes` (
   `lng_origen` decimal(11,8) DEFAULT NULL,
   `lat_destino` decimal(10,8) DEFAULT NULL,
   `lng_destino` decimal(11,8) DEFAULT NULL,
+  `firma_cliente` varchar(255) DEFAULT NULL,
+  `fecha_entrega` timestamp NULL DEFAULT NULL,
+  `recibido` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `cliente_id` (`cliente_id`),
   KEY `piloto_id` (`piloto_id`),
@@ -475,7 +478,7 @@ CREATE TABLE `viajes` (
   CONSTRAINT `viajes_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE SET NULL,
   CONSTRAINT `viajes_ibfk_2` FOREIGN KEY (`piloto_id`) REFERENCES `pilotos` (`id`) ON DELETE SET NULL,
   CONSTRAINT `viajes_ibfk_3` FOREIGN KEY (`camion_id`) REFERENCES `camiones` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -484,7 +487,7 @@ CREATE TABLE `viajes` (
 
 LOCK TABLES `viajes` WRITE;
 /*!40000 ALTER TABLE `viajes` DISABLE KEYS */;
-INSERT INTO `viajes` VALUES (63,10,2,1,'Petén, Guatemala','Ciudad de Guatemala, Departamento de Guatemala, Guatemala',NULL,NULL,'completado','2026-05-16 07:38:33','2026-05-16 07:40:44',NULL,NULL,16.83179060,-90.04506370,14.64161420,-90.51328360),(64,10,2,2,'Cobán, Alta Verapaz, Guatemala','Ciudad de Guatemala, Departamento de Guatemala, Guatemala',NULL,NULL,'en_ruta','2026-05-16 07:39:21','2026-05-16 07:39:21',NULL,NULL,15.47020010,-90.37350650,14.64161420,-90.51328360);
+INSERT INTO `viajes` VALUES (66,10,2,2,'Morales, Izabal, 18004, Guatemala','Puerto Barrios, Izabal, Guatemala',NULL,NULL,'completado','2026-05-16 22:04:35','2026-05-16 22:06:21',NULL,NULL,15.47116000,-88.84263250,15.72751540,-88.59525060,NULL,NULL,0),(67,10,NULL,NULL,'Ciudad de México, México','Ciudad de Guatemala, Zona 2, Departamento de Guatemala, Guatemala',NULL,NULL,'completado','2026-05-16 22:08:43','2026-05-18 04:57:00',NULL,NULL,19.43262960,-99.13317850,14.62973880,-90.51129980,NULL,NULL,0),(68,10,2,1,'Quiché, Guatemala','India',NULL,NULL,'pendiente','2026-05-16 23:02:07','2026-05-16 23:02:07',NULL,NULL,15.43817860,-91.00751860,22.35111480,78.66774280,NULL,NULL,0),(72,10,1,1,'Morales, Izabal, 18004, Guatemala','Puerto Barrios, Izabal, Guatemala',NULL,NULL,'completado','2026-05-18 04:59:17','2026-05-18 05:02:08',NULL,NULL,15.47116000,-88.84263250,15.72751540,-88.59525060,'firmas/firma_1779058928.png','2026-05-18 05:02:08',1);
 /*!40000 ALTER TABLE `viajes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -497,4 +500,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-15 19:47:39
+-- Dump completed on 2026-05-17 18:10:44
