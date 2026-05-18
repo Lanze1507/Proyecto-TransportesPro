@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 </head>
 
-[!-- Custom styles para este formulario -->
+[!-- Custom styles para este formulario --]
 <style>
     .custom-input {
     height: 55px;

@@ -16,73 +16,478 @@
 <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-
+<link
+rel="stylesheet"
+href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css"/>
 <style>
-body {
-    background: #f4f6f9;
+
+body{
+
+    background:#f8fafc;
 }
 
-/* Cards */
-.card {
-    border: none;
-    border-radius: 12px;
-    transition: 0.3s;
-}
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+/* HERO */
+
+.dashboard-hero{
+
+    background:#ffffff;
+
+    border-radius:22px;
+
+    padding:38px;
+
+    margin-bottom:35px;
+
+    border:1px solid rgba(15,23,42,.06);
+
+    box-shadow:
+        0 10px 35px rgba(15,23,42,.06);
+
+    animation:fadeUp .55s ease;
 }
 
-/* Tabla */
-.table tbody tr:hover {
-    background: #f1f1f1;
+.dashboard-hero::before{
+
+    content:'';
+
+    position:absolute;
+
+    width:260px;
+    height:260px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.04);
+
+    right:-80px;
+    top:-80px;
 }
 
-/* Animación */
-.fade-in {
-    animation: fadeIn 0.8s ease;
-}
-@keyframes fadeIn {
-    from {opacity:0; transform:translateY(10px);}
-    to {opacity:1; transform:translateY(0);}
+.dashboard-hero h2{
+
+    color:#0f172a;
+
+    font-size:34px;
+
+    font-weight:800;
+
+    margin-bottom:8px;
+
+    letter-spacing:-1px;
 }
 
-/* Header */
-.header-box {
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 20px;
+.dashboard-hero p{
+
+    color:#64748b;
+
+    margin:0;
+
+    font-size:15px;
+
+    max-width:700px;
+
+    line-height:1.7;
 }
 
-/* Mapa */
-#map {
-    border-radius: 18px;
-    overflow: hidden;
-    min-height: 420px;
-    border: 1px solid rgba(13, 110, 253, 0.12);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+/* KPI */
+
+.kpi-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:26px;
+
+    transition:.25s ease;
+
+    border:1px solid rgba(15,23,42,.06);
+
+    box-shadow:
+        0 6px 20px rgba(15,23,42,.05);
+
+    position:relative;
+
+    overflow:hidden;
 }
 
-.modal-content {
-    border-radius: 22px;
-    overflow: hidden;
-    border: none;
-    box-shadow: 0 28px 80px rgba(15, 23, 42, 0.18);
+.kpi-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 18px 35px rgba(15,23,42,.08);
 }
 
-.modal-header {
-    border-bottom: none;
+.kpi-card::before{
+
+    content:'';
+
+    position:absolute;
+
+    width:90px;
+    height:90px;
+
+    border-radius:50%;
+
+    background:rgba(15,23,42,.03);
+
+    top:-30px;
+    right:-30px;
 }
 
-.leaflet-popup-content-wrapper {
-    border-radius: 16px;
-    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.18);
+.kpi-total{
+    border-left:5px solid #0f172a;
 }
 
-.leaflet-popup-tip {
-    background: white;
+.kpi-ruta{
+    border-left:5px solid #2563eb;
 }
+
+.kpi-pendiente{
+    border-left:5px solid #f59e0b;
+}
+
+.kpi-entregado{
+    border-left:5px solid #10b981;
+}
+
+.kpi-icon{
+
+    font-size:34px;
+
+    margin-bottom:14px;
+}
+
+.kpi-label{
+
+    font-size:14px;
+
+    color:#64748b;
+
+    margin-bottom:6px;
+}
+.kpi-number{
+
+    font-size:36px;
+
+    font-weight:800;
+
+    line-height:1;
+
+    color:#0f172a;
+}
+
+/* PANEL */
+
+.panel-card{
+
+    background:white;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(15,23,42,.06);
+
+    box-shadow:
+        0 10px 35px rgba(15,23,42,.06);
+
+    animation:fadeUp .7s ease;
+}
+
+.panel-header{
+
+    background:white;
+
+    border-bottom:1px solid #eef2f7;
+
+    padding:24px 30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.panel-header h5{
+
+    margin:0;
+
+    font-weight:700;
+
+    font-size:22px;
+
+    color:#0f172a;
+}
+
+.panel-body{
+
+    padding:30px;
+}
+
+/* BUSCADOR */
+
+.search-box{
+
+    width:320px;
+
+    max-width:100%;
+}
+
+.search-input{
+
+    border:none;
+
+    border-radius:16px;
+
+    padding:14px 18px;
+
+    background:#f1f5f9;
+
+    transition:.25s ease;
+}
+
+.search-input:focus{
+
+    background:white;
+
+    box-shadow:
+        0 0 0 4px rgba(255,94,20,.12);
+
+    border-color:#ff5e14;
+}
+
+/* TABLA */
+
+.table{
+
+    border-collapse:separate;
+
+    border-spacing:0 14px;
+}
+
+.table thead th{
+
+    border:none;
+
+    color:#64748b;
+
+    font-size:13px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.7px;
+}
+
+.table tbody tr{
+
+    background:#fff;
+
+    transition:.25s ease;
+
+    box-shadow:
+        0 8px 22px rgba(0,0,0,.05);
+}
+
+.table tbody tr:hover{
+
+    transform:scale(1.01);
+
+    box-shadow:
+        0 14px 28px rgba(0,0,0,.08);
+}
+
+.table tbody td{
+
+    vertical-align:middle;
+
+    border-top:none;
+    border-bottom:none;
+
+    padding:20px 18px;
+}
+
+/* BADGES */
+
+.estado-badge{
+
+    padding:9px 16px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+}
+
+.estado-pendiente{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.estado-ruta{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+.estado-entregado{
+    background:#d1fae5;
+    color:#065f46;
+}
+
+/* INFO EXTRA */
+
+.extra-info{
+
+    font-size:13px;
+
+    color:#64748b;
+
+    margin-top:6px;
+
+    line-height:1.6;
+}
+
+/* TIMELINE */
+
+.timeline-box{
+
+    margin-top:18px;
+
+    padding-top:18px;
+
+    border-top:1px dashed #e2e8f0;
+}
+
+.timeline-item{
+
+    position:relative;
+
+    padding-left:28px;
+
+    margin-bottom:14px;
+}
+
+.timeline-item:last-child{
+
+    margin-bottom:0;
+}
+
+.timeline-dot{
+
+    position:absolute;
+
+    left:0;
+    top:4px;
+
+    width:12px;
+    height:12px;
+
+    border-radius:50%;
+
+    background:#ff5e14;
+
+    box-shadow:
+        0 0 0 4px rgba(255,94,20,.12);
+}
+
+.timeline-content{
+
+    font-size:13px;
+
+    color:#475569;
+
+    line-height:1.5;
+}
+
+.timeline-date{
+
+    display:block;
+
+    margin-top:4px;
+
+    font-size:11px;
+
+    color:#94a3b8;
+}
+
+/* BOTÓN MAPA */
+
+.btn-map{
+
+    background:
+        linear-gradient(135deg,#ff5e14,#ff7a18);
+
+    color:white;
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:10px 18px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    transition:.25s ease;
+}
+
+.btn-map:hover{
+
+    transform:
+        translateY(-2px)
+        scale(1.03);
+
+    color:white;
+
+    box-shadow:
+        0 10px 24px rgba(255,94,20,.28);
+}
+
+/* MAPA */
+
+#map{
+    border-radius:18px;
+    overflow:hidden;
+    min-height:420px;
+}
+
+.modal-content{
+
+    border:none;
+
+    border-radius:24px;
+
+    overflow:hidden;
+}
+
+/* ANIMACIÓN */
+
+.fade-in{
+    animation:fadeUp .6s ease;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+
+</style>
 </style>
 
 </head>
@@ -181,7 +586,18 @@ body {
 </header>
 <main>
 
-<div class="container mt-4 fade-in section-padding30">
+<div class="container section-padding30 fade-in">
+    <div class="dashboard-hero">
+
+    <h2>
+        Bienvenido, {{ auth()->user()->name }}
+    </h2>
+
+    <p>
+        Supervisa el estado de tus envíos, consulta rutas y monitorea entregas en tiempo real.
+    </p>
+
+</div>
 
     <!-- RESUMEN -->
     @php
@@ -191,47 +607,65 @@ body {
         $entregados = $viajes->where('estado','completado')->count();
     @endphp
 
-    <div class="row text-center mb-4">
+   <div class="row mb-5">
 
-        <div class="col-md-3">
-            <div class="single-info mb-30 p-4">
-                <h6 class="mb-2">📦 Total</h6>
-                <h2>{{ $total }}</h2>
-            </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="kpi-card kpi-total">
+            <div class="kpi-icon">📦</div>
+            <div class="kpi-label">Total de envíos</div>
+            <div class="kpi-number">{{ $total }}</div>
         </div>
+    </div>
 
-        <div class="col-md-3">
-            <div class="single-info mb-30 p-4">
-                <h6 class="mb-2">🚚 En ruta</h6>
-                <h2 class="text-primary">{{ $enRuta }}</h2>
-            </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="kpi-card kpi-ruta">
+            <div class="kpi-icon">🚚</div>
+            <div class="kpi-label">En ruta</div>
+            <div class="kpi-number">{{ $enRuta }}</div>
         </div>
+    </div>
 
-        <div class="col-md-3">
-            <div class="single-info mb-30 p-4">
-                <h6 class="mb-2">⏳ Pendientes</h6>
-                <h2 class="text-warning">{{ $pendientes }}</h2>
-            </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="kpi-card kpi-pendiente">
+            <div class="kpi-icon">⏳</div>
+            <div class="kpi-label">Pendientes</div>
+            <div class="kpi-number">{{ $pendientes }}</div>
         </div>
+    </div>
 
-        <div class="col-md-3">
-            <div class="single-info mb-30 p-4">
-                <h6 class="mb-2">✅ Entregados</h6>
-                <h2 class="text-success">{{ $entregados }}</h2>
-            </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="kpi-card kpi-entregado">
+            <div class="kpi-icon">✅</div>
+            <div class="kpi-label">Entregados</div>
+            <div class="kpi-number">{{ $entregados }}</div>
         </div>
+    </div>
+
+</div>
+
+    <!-- TABLA -->
+    <div class="panel-card">
+
+        <div class="panel-header">
+
+    <h5>
+        📍 Mis Envíos
+    </h5>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="buscadorEnvios"
+            class="form-control search-input"
+            placeholder="🔍 Buscar envío..."
+        >
 
     </div>
 
-    <!-- TABLA -->
-    <div class="single-info p-4">
+</div>
 
-        <div class="d-flex justify-content-between mb-3 align-items-center">
-            <div>
-                <h5>📍 Mis Envíos</h5>
-                <span class="section-tittle-line"></span>
-            </div>
-        </div>
+<div class="panel-body">
 
         <table class="table align-middle table-hover">
             <thead class="table-light">
@@ -244,43 +678,180 @@ body {
                 </tr>
             </thead>
 
-            <tbody>
-            @forelse($viajes as $viaje)
-                <tr>
-                    <td>{{ $viaje->origen }}</td>
-                    <td>{{ $viaje->destino }}</td>
+           <tbody>
 
-                    <td>
-                        @if($viaje->lat_destino && $viaje->lng_destino)
-    <button class="btn btn-sm btn-info"
-        onclick="mostrarMapa('{{ $viaje->lat_destino }}','{{ $viaje->lng_destino }}', '{{ $viaje->id }}')">
-        Ver mapa
+@forelse($viajes as $viaje)
+
+<tr>
+
+    {{-- ORIGEN --}}
+    <td>
+
+        <strong>
+            {{ $viaje->origen }}
+        </strong>
+
+        <div class="extra-info">
+
+            🚛
+            {{ $viaje->camion->placa ?? 'Sin camión' }}
+
+        </div>
+
+    </td>
+
+    {{-- DESTINO --}}
+    <td>
+
+        <strong>
+            {{ $viaje->destino }}
+        </strong>
+
+        <div class="extra-info">
+
+            👨‍✈️
+            {{ $viaje->piloto->nombre ?? 'Sin piloto asignado' }}
+
+        </div>
+
+    </td>
+
+    {{-- UBICACIÓN --}}
+    <td>
+
+        @if(
+    $viaje->estado == 'completado'
+)
+
+    <span class="estado-badge estado-entregado">
+
+        Entregado
+
+    </span>
+
+@elseif(
+    $viaje->lat_destino &&
+    $viaje->lng_destino
+)
+
+    <button
+        class="btn-map"
+        onclick="mostrarMapa(
+            '{{ $viaje->lat_origen }}',
+            '{{ $viaje->lng_origen }}',
+            '{{ $viaje->lat_destino }}',
+            '{{ $viaje->lng_destino }}',
+            '{{ $viaje->id }}'
+        )"
+    >
+        Ver seguimiento
     </button>
+
 @else
-    <span class="text-muted">Sin ubicación</span>
+
+    <span class="text-muted">
+
+        Sin ubicación
+
+    </span>
+
 @endif
-                    </td>
 
-                    <td>{{ $viaje->fecha_salida }}</td>
+    </td>
 
-                    <td>
-                        @if($viaje->estado == 'pendiente')
-                            <span class="badge bg-warning text-dark">Pendiente</span>
-                        @elseif($viaje->estado == 'en_ruta')
-                            <span class="badge bg-primary">En ruta</span>
-                        @else
-                            <span class="badge bg-success">Entregado</span>
-                        @endif
-                    </td>
-                </tr>
+    {{-- FECHA --}}
+    <td>
+
+        {{ $viaje->created_at
+            ? $viaje->created_at->format('d/m/Y')
+            : '—'
+        }}
+
+    </td>
+
+    {{-- ESTADO --}}
+    <td>
+
+        @if($viaje->estado == 'pendiente')
+
+            <span class="estado-badge estado-pendiente">
+
+                Pendiente
+
+            </span>
+
+        @elseif($viaje->estado == 'en_ruta')
+
+            <span class="estado-badge estado-ruta">
+
+                En ruta
+
+            </span>
+
+        @else
+
+            <span class="estado-badge estado-entregado">
+
+                Entregado
+
+            </span>
+
+        @endif
+
+        {{-- TIMELINE --}}
+        <div class="timeline-box">
+
+            @forelse($viaje->historial as $evento)
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-content">
+
+                        {{ $evento->descripcion }}
+
+                        <span class="timeline-date">
+
+                            {{ $evento->created_at->format('d/m/Y H:i') }}
+
+                        </span>
+
+                    </div>
+
+                </div>
+
             @empty
-                <tr>
-                    <td colspan="5" class="text-center text-muted">
-                        No tienes envíos registrados
-                    </td>
-                </tr>
+
+                <small class="text-muted">
+
+                    Sin historial disponible
+
+                </small>
+
             @endforelse
-            </tbody>
+
+        </div>
+
+    </td>
+
+</tr>
+
+@empty
+
+<tr>
+
+    <td colspan="5" class="text-center text-muted">
+
+        No tienes envíos registrados
+
+    </td>
+
+</tr>
+
+@endforelse
+
+</tbody>
         </table>
 
     </div>
@@ -402,182 +973,681 @@ body {
 
 <!-- MODAL MAPA -->
 <div class="modal fade" id="mapModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5>Ubicación del envío</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
 
-      <div class="modal-body">
-        <div id="map" style="height:400px;"></div>
-      </div>
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    🚚 Seguimiento del envío
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body p-0">
+
+                <div id="map" style="height:650px;width:100%;"></div>
+
+            </div>
+
+        </div>
     </div>
-  </div>
+</div>
+
+<!-- MODAL FIRMA -->
+<div class="modal fade" id="firmaModal">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5>
+                    Firma de recepción
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+
+            </div>
+
+            <div class="modal-body text-center">
+
+                <p class="mb-3">
+                    Firma para confirmar la entrega
+                </p>
+
+                <canvas
+                    id="signature-pad"
+                    width="450"
+                    height="220"
+                    style="
+                        border:2px dashed #d1d5db;
+                        border-radius:16px;
+                        width:100%;
+                        background:white;
+                    "
+                ></canvas>
+
+                <div class="mt-4 d-flex gap-2 justify-content-center">
+
+                    <button
+                        class="btn btn-secondary"
+                        onclick="limpiarFirma()"
+                    >
+                        Limpiar
+                    </button>
+
+                    <button
+                        class="btn btn-success"
+                        onclick="guardarFirma()"
+                    >
+                        Confirmar firma
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
 <!-- JS -->
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+
 <script>
-window.addEventListener('load', function() {
-    const preloader = document.getElementById('preloader-active');
-    if (preloader) {
-        preloader.style.transition = 'opacity 0.5s ease';
+
+window.addEventListener('load', function(){
+
+    const preloader =
+        document.getElementById('preloader-active');
+
+    if(preloader){
+
+        preloader.style.transition =
+            'opacity .5s ease';
+
         preloader.style.opacity = '0';
+
         setTimeout(() => {
+
             preloader.style.display = 'none';
+
         }, 500);
+
     }
+
 });
 
 let map;
 let marker;
 let trailLine;
-let pulseCircle;
-let animationFrame;
 
-// Ruta
-const ruta = [
-    [14.6349, -90.5069],
-    [14.9, -90.2],
-    [15.0, -90.0],
-    [15.1, -89.9],
-    [15.2, -89.8],
-    [15.5, -89.2],
-    [15.7276, -88.5944]
-];
-
-// Icono camión
+// ICONO CAMIÓN
 const camionIcon = L.icon({
-    iconUrl: 'https://cdn-icons-png.flaticon.com/512/1995/1995470.png',
-    iconSize: [42, 42],
-    iconAnchor: [21, 42],
-    popupAnchor: [0, -38]
+
+    iconUrl:
+        'https://cdn-icons-png.flaticon.com/512/1995/1995470.png',
+
+    iconSize:[42,42],
+
+    iconAnchor:[21,42]
+
 });
 
-function mostrarMapa(lat, lng, viajeId) {
+// MAPA
+async function mostrarMapa(
+    latOrigen,
+    lngOrigen,
+    latDestino,
+    lngDestino,
+    viajeId
+){
 
-    const modal = new bootstrap.Modal(document.getElementById('mapModal'));
+    const modal =
+        new bootstrap.Modal(
+            document.getElementById('mapModal')
+        );
+
     modal.show();
 
-    setTimeout(() => {
+    setTimeout(async () => {
 
-        if (map) {
+        // LIMPIAR
+        if(map){
+
             map.remove();
-            cancelAnimationFrame(animationFrame);
+
         }
 
-        map = L.map('map', {
-            zoomControl: false,
-            scrollWheelZoom: false
-        });
+        // MAPA
+        map = L.map('map');
 
-        // Mapa más limpio
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap & CartoDB'
-        }).addTo(map);
+        // TILES
+        L.tileLayer(
+            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                attribution:
+                    '&copy; OpenStreetMap'
+            }
+        ).addTo(map);
 
-        // Ruta base (gris)
-        const routeLine = L.polyline(ruta, {
-            color: '#dee2e6',
-            weight: 4,
-            opacity: 0.6
-        }).addTo(map);
+        // COORDENADAS
+        const origen = [
 
-        // Ruta recorrida (verde)
-        trailLine = L.polyline([ruta[0]], {
-            color: '#20c997',
-            weight: 5,
-            opacity: 1
-        }).addTo(map);
+            parseFloat(latOrigen),
 
-        // Efecto pulso
-        pulseCircle = L.circleMarker(ruta[0], {
-            radius: 10,
-            fillColor: '#0dcaf0',
-            fillOpacity: 0.2,
-            stroke: false
-        }).addTo(map);
+            parseFloat(lngOrigen)
 
-        map.fitBounds(routeLine.getBounds(), { padding: [50, 50] });
+        ];
 
-        // Marcador
-        marker = L.marker(ruta[0], { icon: camionIcon }).addTo(map)
-            .bindPopup("<b>🚚 En camino</b><br>Tu envío está en ruta")
-            .openPopup();
+        const destino = [
 
-        // 🔥 MOVIMIENTO SUAVE REAL
-        let segment = 0;
-        let progress = 0;
+            parseFloat(latDestino),
 
-        function animar() {
+            parseFloat(lngDestino)
 
-            if (segment >= ruta.length - 1) {
+        ];
 
-    // 🔥 FORZAR POSICIÓN EXACTA FINAL
-    const finalPos = ruta[ruta.length - 1];
+        /*
+        |--------------------------------------------------------------------------
+        | RUTA REAL
+        |--------------------------------------------------------------------------
+        */
 
-    marker.setLatLng(finalPos);
-    pulseCircle.setLatLng(finalPos);
-    trailLine.addLatLng(finalPos);
+        const url =
+            `https://router.project-osrm.org/route/v1/driving/` +
+            `${lngOrigen},${latOrigen};` +
+            `${lngDestino},${latDestino}` +
+            `?overview=full&geometries=geojson`;
 
-    map.panTo(finalPos, {
-        animate: true,
-        duration: 0.5
-    });
+        const response =
+            await fetch(url);
 
-    marker.bindPopup("<b>✅ Entregado</b><br>Entrega completada").openPopup();
+        const data =
+            await response.json();
 
-    // actualizar BD
-    fetch(`/viaje/completar/${viajeId}`, {
-        method: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}',
-            'Content-Type': 'application/json'
+        if(!data.routes || !data.routes.length){
+
+            alert('No se pudo generar la ruta');
+
+            return;
+
         }
-    })
-    .then(res => res.json())
-    .then(() => {
-        setTimeout(() => location.reload(), 1200);
-    });
 
-    return;
-}
+        const coords =
+            data.routes[0]
+            .geometry
+            .coordinates;
 
-            let start = ruta[segment];
-            let end = ruta[segment + 1];
+        // [lng,lat] -> [lat,lng]
+        const ruta =
+            coords.map(c => [
 
-            progress += 0.005; // velocidad suave
+                c[1],
 
-            if (progress >= 1) {
-                progress = 0;
-                segment++;
+                c[0]
+
+            ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | DIBUJAR RUTA
+        |--------------------------------------------------------------------------
+        */
+
+        const routeLine = L.polyline(
+
+            ruta,
+
+            {
+
+                color:'#2563eb',
+
+                weight:6,
+
+                opacity:.75
+
             }
 
-            let lat = start[0] + (end[0] - start[0]) * progress;
-            let lng = start[1] + (end[1] - start[1]) * progress;
+        ).addTo(map);
 
-            const pos = [lat, lng];
+        map.fitBounds(
 
-            marker.setLatLng(pos);
-            trailLine.addLatLng(pos);
-            pulseCircle.setLatLng(pos);
+            routeLine.getBounds(),
 
-            // movimiento suave sin zoom brusco
-            map.panTo(pos, {
-                animate: true,
-                duration: 0.3
-            });
+            {
 
-            animationFrame = requestAnimationFrame(animar);
-        }
+                padding:[40,40]
 
-        animar();
+            }
+
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | CAMIÓN
+        |--------------------------------------------------------------------------
+        */
+
+        marker = L.marker(
+
+            ruta[0],
+
+            {
+
+                icon: camionIcon
+
+            }
+
+        ).addTo(map);
+
+        /*
+        |--------------------------------------------------------------------------
+        | LÍNEA RECORRIDA
+        |--------------------------------------------------------------------------
+        */
+
+        trailLine = L.polyline([], {
+
+            color:'#10b981',
+
+            weight:6
+
+        }).addTo(map);
+
+       /*
+|--------------------------------------------------------------------------
+| ANIMACIÓN
+|--------------------------------------------------------------------------
+*/
+
+let i = 0;
+
+function mover(){
+
+    /*
+    |--------------------------------------------------------------------------
+    | TERMINÓ RUTA
+    |--------------------------------------------------------------------------
+    */
+
+    if(i >= ruta.length){
+
+        const finalPos =
+            ruta[ruta.length - 1];
+
+        marker.setLatLng(finalPos);
+
+        marker.bindPopup(
+
+            '<b>✅ Entregado</b><br>El envío llegó a destino'
+
+        ).openPopup();
+
+        /*
+        |--------------------------------------------------------------------------
+        | ACTUALIZAR ESTADO
+        |--------------------------------------------------------------------------
+        */
+
+        fetch(
+
+            `/viaje/completar/${viajeId}`,
+
+            {
+
+                method:'POST',
+
+                headers:{
+
+                    'X-CSRF-TOKEN':
+                        '{{ csrf_token() }}',
+
+                    'Content-Type':
+                        'application/json'
+
+                }
+
+            }
+
+        )
+        .then(response => response.json())
+
+        .then(() => {
+
+            /*
+            |--------------------------------------------------------------------------
+            | CERRAR MODAL MAPA
+            |--------------------------------------------------------------------------
+            */
+
+            const modalMapa =
+                bootstrap.Modal.getInstance(
+
+                    document.getElementById('mapModal')
+
+                );
+
+            if(modalMapa){
+
+                modalMapa.hide();
+
+            }
+
+            /*
+            |--------------------------------------------------------------------------
+            | ABRIR FIRMA
+            |--------------------------------------------------------------------------
+            */
+
+            abrirFirma(viajeId);
+
+        });
+
+        return;
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | MOVER CAMIÓN
+    |--------------------------------------------------------------------------
+    */
+
+    const pos = ruta[i];
+
+    marker.setLatLng(pos);
+
+    trailLine.addLatLng(pos);
+
+    map.panTo(pos, {
+
+        animate:true,
+
+        duration:0.6
+
+    });
+
+    i++;
+
+    /*
+    |--------------------------------------------------------------------------
+    | VELOCIDAD
+    |--------------------------------------------------------------------------
+    */
+
+    setTimeout(mover, 80);
+
+}
+
+mover();
+
+        /*
+        |--------------------------------------------------------------------------
+        | FIX MAPA
+        |--------------------------------------------------------------------------
+        */
+
+        setTimeout(() => {
+
+            map.invalidateSize();
+
+        }, 500);
 
     }, 300);
+
 }
+
+/*
+|--------------------------------------------------------------------------
+| BUSCADOR
+|--------------------------------------------------------------------------
+*/
+
+document
+.getElementById('buscadorEnvios')
+
+.addEventListener('input', function(){
+
+    let filtro =
+        this.value.toLowerCase();
+
+    let filas =
+        document.querySelectorAll(
+            'table tbody tr'
+        );
+
+    filas.forEach(fila => {
+
+        let texto =
+            fila.innerText.toLowerCase();
+
+        fila.style.display =
+
+            texto.includes(filtro)
+
+                ? ''
+
+                : 'none';
+
+    });
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| FIRMA DIGITAL
+|--------------------------------------------------------------------------
+*/
+
+let canvas;
+let ctx;
+
+let dibujando = false;
+
+let viajeFirma = null;
+
+/*
+|--------------------------------------------------------------------------
+| INICIALIZAR CANVAS
+|--------------------------------------------------------------------------
+*/
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    canvas =
+        document.getElementById('signature-pad');
+
+    if(canvas){
+
+        ctx =
+            canvas.getContext('2d');
+
+        /*
+        |--------------------------------------------------------------------------
+        | EVENTOS
+        |--------------------------------------------------------------------------
+        */
+
+        canvas.addEventListener(
+            'mousedown',
+            iniciar
+        );
+
+        canvas.addEventListener(
+            'mouseup',
+            detener
+        );
+
+        canvas.addEventListener(
+            'mousemove',
+            dibujar
+        );
+
+    }
+
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| ABRIR MODAL
+|--------------------------------------------------------------------------
+*/
+
+function abrirFirma(viajeId){
+
+    viajeFirma = viajeId;
+
+    const modal =
+        new bootstrap.Modal(
+
+            document.getElementById(
+                'firmaModal'
+            )
+
+        );
+
+    modal.show();
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| DIBUJAR
+|--------------------------------------------------------------------------
+*/
+
+
+
+function iniciar(e){
+
+    dibujando = true;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+
+        e.offsetX,
+
+        e.offsetY
+
+    );
+
+}
+
+function detener(){
+
+    dibujando = false;
+
+}
+
+function dibujar(e){
+
+    if(!dibujando) return;
+
+    ctx.lineWidth = 2.5;
+
+    ctx.lineCap = 'round';
+
+    ctx.strokeStyle = '#111827';
+
+    ctx.lineTo(
+
+        e.offsetX,
+
+        e.offsetY
+
+    );
+
+    ctx.stroke();
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| LIMPIAR
+|--------------------------------------------------------------------------
+*/
+
+function limpiarFirma(){
+
+    ctx.clearRect(
+
+        0,
+        0,
+        canvas.width,
+        canvas.height
+
+    );
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| GUARDAR
+|--------------------------------------------------------------------------
+*/
+
+function guardarFirma(){
+
+    const firma =
+        canvas.toDataURL('image/png');
+
+    fetch(
+
+        `/viaje/firma/${viajeFirma}`,
+
+        {
+
+            method:'POST',
+
+            headers:{
+
+                'Content-Type':
+                    'application/json',
+
+                'X-CSRF-TOKEN':
+                    '{{ csrf_token() }}'
+
+            },
+
+            body:JSON.stringify({
+
+                firma:firma
+
+            })
+
+        }
+
+    )
+    .then(res => res.json())
+
+    .then(data => {
+
+        location.reload();
+
+    });
+
+}
+
 </script>
 
 </body>

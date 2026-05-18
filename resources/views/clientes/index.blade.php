@@ -11,6 +11,27 @@
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
 <style>
+    .buscador-pro{
+
+    border-radius:14px;
+
+    border:1.5px solid #dbe2ea;
+
+    padding:14px 18px;
+
+    transition:.3s ease;
+
+    width:100%;
+}
+
+.buscador-pro:focus{
+
+    border-color:#ff5e14;
+
+    box-shadow:0 0 0 4px rgba(255,94,20,.12);
+
+    transform:scale(1.015);
+}
     .animated-button {
         transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
@@ -77,6 +98,16 @@
 <div class="container section-padding30">
 
 <h2 class="mb-4">Listado de Clientes</h2>
+<div class="mb-4" style="max-width: 450px;">
+
+    <input
+        type="text"
+        id="buscadorClientes"
+        class="form-control buscador-pro"
+        placeholder="🔍 Buscar cliente por nombre, email o teléfono..."
+    >
+
+</div>
 
 <div style="margin-bottom: 20px;">
     <a href="/admin/viajes" class="btn btn-danger animated-button">
@@ -86,7 +117,7 @@
 
 <a href="/clientes/create" class="btn btn-success mb-3 animated-button">Nuevo Cliente</a>
 
-<table class="table table-striped">
+<table class="table table-striped" id="tablaClientes">
     <thead>
         <tr>
             <th>Nombre</th>
@@ -125,6 +156,36 @@
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.slicknav.min.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
+<script>
+
+document
+.getElementById('buscadorClientes')
+
+.addEventListener('input', function(){
+
+    let filtro =
+        this.value.toLowerCase();
+
+    let filas =
+        document.querySelectorAll(
+            '#tablaClientes tbody tr'
+        );
+
+    filas.forEach(fila => {
+
+        let texto =
+            fila.innerText.toLowerCase();
+
+        fila.style.display =
+            texto.includes(filtro)
+                ? ''
+                : 'none';
+
+    });
+
+});
+
+</script>
 
 </body>
 </html>

@@ -143,14 +143,28 @@
                                 <h1 >Servicios de <span>Logistica</span> segura y confiable</h1>
                             </div>
                             <!--Hero form -->
-                            <form action="#" class="search-box">
-                                <div class="input-form">
-                                    <input type="text" placeholder="Tu ID de seguimiento">
-                                </div>
-                                <div class="search-form">
-                                    <a href="#">Track & Trace</a>
-                                </div>	
-                            </form>	
+                            <form id="trackingForm">
+
+    <div class="tracking-box d-flex">
+
+        <input
+            type="text"
+            id="codigoTracking"
+            class="form-control"
+            placeholder="Ingresa tu código de guía"
+            required
+        >
+
+        <button
+            type="submit"
+            class="btn header-btn ml-2"
+        >
+            Rastrear
+        </button>
+
+    </div>
+
+</form>
                             <!-- Hero Pera -->
                             <div class="hero-pera">
                                 <p>Para consulta del estado del pedido</p>
@@ -813,6 +827,31 @@
     
     <!-- Jquery Plugins, main Jquery -->	
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
-    <script src="{{ asset('assets/js/main.js') }}"></script>    
+    <script src="{{ asset('assets/js/main.js') }}"></script> 
+    <script>
+
+document
+.getElementById('trackingForm')
+
+.addEventListener('submit', function(e){
+
+    e.preventDefault();
+
+    let codigo =
+
+        document
+        .getElementById('codigoTracking')
+        .value
+        .trim();
+
+    if(!codigo) return;
+
+    window.location.href =
+
+        '/seguimiento/' + codigo;
+
+});
+
+</script>   
 </body>
 </html>

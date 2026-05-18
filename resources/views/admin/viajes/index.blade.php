@@ -138,6 +138,7 @@
                                                 <li><a href="/clientes">Clientes</a></li>
                                                 <li><a href="/admin/pilotos">Pilotos</a></li>
                                                 <li><a href="/admin/camiones">Camiones</a></li>
+                                                <li><a href="/operador/viajes">Operador</a></li>
                                                 @guest
                                                     <li class="ml-3">
                                                         <a href="{{ route('login') }}" class="btn header-btn btn-sm" style="padding: .95rem .95rem; font-size: .92rem;">Login</a>
