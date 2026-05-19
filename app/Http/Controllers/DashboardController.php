@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Viaje;
+
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -16,6 +17,7 @@ class DashboardController extends Controller
         | ADMIN
         |--------------------------------------------------------------------------
         */
+
         if ($user->role === 'admin') {
 
             return redirect('/admin/viajes');
@@ -27,15 +29,25 @@ class DashboardController extends Controller
         | OPERADOR
         |--------------------------------------------------------------------------
         */
+
         if ($user->role === 'operador') {
 
             return redirect()
                 ->route('operador.viajes.index');
 
         }
-        // Piloto → su dashboard personal
+
+        /*
+        |--------------------------------------------------------------------------
+        | PILOTO
+        |--------------------------------------------------------------------------
+        */
+
         if ($user->role === 'piloto') {
-            return redirect()->route('piloto.dashboard');
+
+            return redirect()
+                ->route('piloto.dashboard');
+
         }
 
         /*
@@ -59,7 +71,7 @@ class DashboardController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | CARGAR TODO EL SISTEMA
+        | VIAJES CLIENTE
         |--------------------------------------------------------------------------
         */
 
@@ -71,13 +83,19 @@ class DashboardController extends Controller
             'historial'
 
         ])
-        ->where('cliente_id', $cliente->id)
+        ->where(
+            'cliente_id',
+            $cliente->id
+        )
         ->latest()
         ->get();
 
         return view(
+
             'dashboard_cliente',
+
             compact('viajes')
+
         );
     }
 }

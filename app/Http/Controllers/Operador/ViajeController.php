@@ -177,7 +177,7 @@ class ViajeController extends Controller
 
             'camion_id' => $request->camion_id,
 
-            'estado' => 'en_transito',
+            'estado' => 'en_ruta',
 
         ]);
 
@@ -191,7 +191,7 @@ class ViajeController extends Controller
 
             'viaje_id' => $viaje->id,
 
-            'estado' => 'en_transito',
+            'estado' => 'en_ruta',
 
             'descripcion' =>
                 '🚚 Viaje puesto en tránsito'
@@ -202,7 +202,7 @@ class ViajeController extends Controller
 
             'viaje_id' => $viaje->id,
 
-            'estado' => 'en_transito',
+            'estado' => 'en_ruta',
 
             'descripcion' =>
                 '👨‍✈️ Piloto asignado: '
@@ -214,7 +214,7 @@ class ViajeController extends Controller
 
             'viaje_id' => $viaje->id,
 
-            'estado' => 'en_transito',
+            'estado' => 'en_ruta',
 
             'descripcion' =>
                 '🚛 Camión asignado: '

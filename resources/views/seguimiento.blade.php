@@ -190,42 +190,124 @@ body{
     padding:10px;
 }
 
+.tracking-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:14px 24px;
+
+    border-radius:16px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    font-size:15px;
+
+    background:white;
+
+    color:#0f172a;
+
+    border:1px solid #e2e8f0;
+
+    transition:.25s ease;
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.05);
+}
+
+.tracking-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 14px 28px rgba(0,0,0,.08);
+
+    text-decoration:none;
+
+    color:#0f172a;
+}
+
+.home-btn{
+
+    background:#ff5e14;
+
+    color:white;
+
+    border:none;
+}
+
+.home-btn:hover{
+
+    color:white;
+}
+
 </style>
 
 </head>
 
 <body>
+    
 
 <div class="container tracking-container">
 
     <div class="tracking-card">
-        <div class="mb-4">
+        
+        <div
+    class="mb-4"
+    style="
+        display:flex;
+        gap:14px;
+        flex-wrap:wrap;
+    "
+>
+
+    @auth
+
+<a
+
+    href="/dashboard"
+
+    class="tracking-btn"
+
+>
+
+    <span>
+
+        ←
+
+    </span>
+
+    Volver al panel
+
+</a>
+
+@endauth
 
     <a
+
         href="/"
-        class="btn btn-light"
-        style="
-            border-radius:14px;
-            padding:12px 20px;
-            font-weight:700;
-            border:1px solid #e2e8f0;
-            transition:.25s ease;
-        "
-        onmouseover="
-            this.style.transform='translateY(-2px)';
-            this.style.boxShadow='0 8px 18px rgba(0,0,0,.08)';
-        "
-        onmouseout="
-            this.style.transform='translateY(0)';
-            this.style.boxShadow='none';
-        "
+
+        class="tracking-btn home-btn"
+
     >
 
-        ← Volver al inicio
+        <span>
+
+            🏠
+
+        </span>
+
+        Volver al inicio
 
     </a>
 
 </div>
+
 
         <div class="guia-label">
 

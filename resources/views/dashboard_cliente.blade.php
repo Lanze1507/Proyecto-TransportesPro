@@ -723,11 +723,37 @@ body{
     $viaje->estado == 'completado'
 )
 
-    <span class="estado-badge estado-entregado">
+    <div
+    style="
+        display:flex;
+        justify-content:center;
+    "
+>
 
-        Entregado
+    <span
+
+        class="estado-badge"
+
+        style="
+            background:#dbeafe;
+            color:#1d4ed8;
+            padding:14px 22px;
+            border-radius:18px;
+            font-size:14px;
+            font-weight:700;
+            white-space:nowrap;
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+        "
+
+    >
+
+        📍 Destino alcanzado
 
     </span>
+
+</div>
 
 @elseif(
     $viaje->lat_destino &&
@@ -744,7 +770,7 @@ body{
             '{{ $viaje->id }}'
         )"
     >
-        Ver seguimiento
+        Ver ubicacion actual
     </button>
 
 @else
@@ -798,40 +824,26 @@ body{
 
         @endif
 
-        {{-- TIMELINE --}}
-        <div class="timeline-box">
+        <div class="mt-3">
 
-            @forelse($viaje->historial as $evento)
+    <a
 
-                <div class="timeline-item">
+        href="/seguimiento/{{ $viaje->codigo_guia }}"
 
-                    <div class="timeline-dot"></div>
+        class="btn-map"
 
-                    <div class="timeline-content">
+        style="
+            display:inline-block;
+            text-decoration:none;
+        "
 
-                        {{ $evento->descripcion }}
+    >
 
-                        <span class="timeline-date">
+        🔍 Ver seguimiento
 
-                            {{ $evento->created_at->format('d/m/Y H:i') }}
+    </a>
 
-                        </span>
-
-                    </div>
-
-                </div>
-
-            @empty
-
-                <small class="text-muted">
-
-                    Sin historial disponible
-
-                </small>
-
-            @endforelse
-
-        </div>
+</div>
 
     </td>
 
@@ -1393,7 +1405,7 @@ function mover(){
     |--------------------------------------------------------------------------
     */
 
-    setTimeout(mover, 80);
+    setTimeout(mover, 1);
 
 }
 
