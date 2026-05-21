@@ -13,9 +13,9 @@ use App\Http\Controllers\Admin\ViajeController;
 use App\Http\Controllers\PilotoController;
 use App\Http\Controllers\Admin\CamionController;
 use App\Http\Controllers\Operador\ViajeController as OperadorViajeController;
-use App\Http\Controllers\Operador\DashboardController as OperadorDashboardController;
 use App\Http\Controllers\Piloto\DashboardController as PilotoDashboardController;
 use App\Http\Controllers\ReporteController;
+use App\Http\Controllers\Operador\DashboardController as OperadorDashboardController;
 
 
 /*|--------------------------------------------------------------------------
@@ -244,6 +244,13 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'operador'])
     ->prefix('operador')
     ->group(function () {
+        Route::get(
+
+    '/dashboard',
+
+    [OperadorDashboardController::class, 'index']
+
+)->name('operador.dashboard');
 
     Route::get('/viajes',
 

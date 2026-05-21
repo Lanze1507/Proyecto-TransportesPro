@@ -32,10 +32,10 @@ class DashboardController extends Controller
 
         if ($user->role === 'operador') {
 
-            return redirect()
-                ->route('operador.viajes.index');
+    return redirect()
+        ->route('operador.dashboard');
 
-        }
+}
 
         /*
         |--------------------------------------------------------------------------

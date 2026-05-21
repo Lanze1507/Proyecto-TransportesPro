@@ -437,17 +437,39 @@ body{
                                     </li>
 
                                     <li>
-                                        <span style="
-                                            background:#ff5e14;
-                                            color:#fff;
-                                            padding:5px 14px;
-                                            border-radius:999px;
-                                            font-size:11px;
-                                            font-weight:700;
-                                        ">
-                                            OPERADOR
-                                        </span>
-                                    </li>
+
+    <span
+        style="
+            background:#ff5e14;
+            color:#fff;
+            padding:5px 14px;
+            border-radius:999px;
+            font-size:11px;
+            font-weight:700;
+        "
+    >
+
+        @if(auth()->user()->role === 'admin')
+
+            ADMIN
+
+        @elseif(auth()->user()->role === 'operador')
+
+            OPERADOR
+
+        @elseif(auth()->user()->role === 'piloto')
+
+            PILOTO
+
+        @else
+
+            CLIENTE
+
+        @endif
+
+    </span>
+
+</li>
 
                                 </ul>
                             </div>
@@ -480,33 +502,77 @@ body{
 
                                         <ul id="navigation" class="d-flex align-items-center">
 
-                                            <li><a href="/">Inicio</a></li>
-
                                             <li>
-                                                <a href="/admin/viajes">
-                                                    Panel Admin
-                                                </a>
-                                            </li>
 
-                                            <li>
-                                                <a href="/clientes">
-                                                    Clientes
-                                                </a>
-                                            </li>
+    <a href="/">
 
-                                            <li>
-                                                <a href="/admin/pilotos">
-                                                    Pilotos
-                                                </a>
-                                            </li>
+        Inicio
 
-                                            <li>
-                                                <a href="/admin/camiones">
-                                                    Camiones
-                                                </a>
-                                            </li>
+    </a>
 
-                                            <li>
+</li>
+
+@auth
+
+    @if(auth()->user()->role === 'admin')
+
+        <li>
+
+            <a href="/admin/viajes">
+
+                Panel Admin
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="/clientes">
+
+                Clientes
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="/admin/pilotos">
+
+                Pilotos
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="/admin/camiones">
+
+                Camiones
+
+            </a>
+
+        </li>
+
+    @endif
+
+    @if(auth()->user()->role === 'operador')
+
+        <li>
+
+            <a href="/operador/viajes">
+
+                Gestión Viajes
+
+            </a>
+
+        </li>
+
+    @endif
+
+@endauth
                                                 <form method="POST"
                                                       action="{{ route('logout') }}"
                                                       style="display:inline;">

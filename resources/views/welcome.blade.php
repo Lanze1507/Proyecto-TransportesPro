@@ -94,21 +94,69 @@
                                         @endguest
 
                                         @auth
-                                            @if(auth()->user()->role === 'admin')
-                                                <li><a href="/admin/viajes">Panel Admin</a></li>
-                                            @else
-                                                <li><a href="/dashboard">Mi Panel</a></li>
-                                            @endif
+
+                                        @if(auth()->user()->role === 'admin')
 
                                             <li>
-                                                <form method="POST" action="{{ route('logout') }}">
-                                                    @csrf
-                                                    <button style="background:none;border:none;color:white;cursor:pointer;">
-                                                        Cerrar sesión
-                                                    </button>
-                                                </form>
+
+                                                <a href="/admin/viajes">
+
+                                                    Panel Admin
+
+                                                </a>
+
                                             </li>
-                                        @endauth
+
+                                        @elseif(auth()->user()->role === 'operador')
+
+                                            <li>
+
+                                                <a href="/operador/viajes">
+
+                                                    Operaciones
+
+                                                </a>
+
+                                            </li>
+
+                                        @else
+
+                                            <li>
+
+                                                <a href="/dashboard">
+
+                                                    Mi Panel
+
+                                                </a>
+
+                                            </li>
+
+                                        @endif
+
+                                        <li>
+
+                                            <form method="POST" action="{{ route('logout') }}">
+
+                                                @csrf
+
+                                                <button
+                                                    style="
+                                                        background:none;
+                                                        border:none;
+                                                        color:white;
+                                                        cursor:pointer;
+                                                    "
+                                                >
+
+                                                    Cerrar sesión
+
+                                                </button>
+
+                                            </form>
+
+                                        </li>
+
+                                    @endauth
 
                                         </ul>
                                         </nav>
