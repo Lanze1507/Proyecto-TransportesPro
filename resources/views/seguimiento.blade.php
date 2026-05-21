@@ -286,6 +286,18 @@ body{
 
 </a>
 
+<a
+
+    href="/reporte/viaje/{{ $viaje->id }}"
+
+    class="tracking-btn"
+
+>
+
+    📄 Descargar Guia
+
+</a>
+
 @endauth
 
     <a

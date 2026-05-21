@@ -15,6 +15,21 @@ use App\Http\Controllers\Admin\CamionController;
 use App\Http\Controllers\Operador\ViajeController as OperadorViajeController;
 use App\Http\Controllers\Operador\DashboardController as OperadorDashboardController;
 use App\Http\Controllers\Piloto\DashboardController as PilotoDashboardController;
+use App\Http\Controllers\ReporteController;
+
+
+/*|--------------------------------------------------------------------------
+| RUTAS DE REPORTES
+|--------------------------------------------------------------------------*/
+
+Route::get(
+
+    '/reporte/viaje/{id}',
+
+    [ReporteController::class, 'viaje']
+
+);
+
 
 /*
 |--------------------------------------------------------------------------
