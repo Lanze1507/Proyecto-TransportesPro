@@ -800,29 +800,83 @@ body{
 
         @if($viaje->estado == 'pendiente')
 
-            <span class="estado-badge estado-pendiente">
+    <span
+        class="estado-badge"
+        style="
+            background:#fef3c7;
+            color:#92400e;
+        "
+    >
 
-                Pendiente
+        ⏳ Pendiente
 
-            </span>
+    </span>
 
-        @elseif($viaje->estado == 'en_ruta')
+@elseif($viaje->estado == 'aprobado')
 
-            <span class="estado-badge estado-ruta">
+    <span
+        class="estado-badge"
+        style="
+            background:#dbeafe;
+            color:#1d4ed8;
+        "
+    >
 
-                En ruta
+        ✅ Aprobado
 
-            </span>
+    </span>
 
-        @else
+@elseif($viaje->estado == 'en_ruta')
 
-            <span class="estado-badge estado-entregado">
+    <span
+        class="estado-badge"
+        style="
+            background:#ede9fe;
+            color:#6d28d9;
+        "
+    >
 
-                Entregado
+        🚚 En ruta
 
-            </span>
+    </span>
 
-        @endif
+@elseif($viaje->estado == 'cancelado')
+
+    <span
+        class="estado-badge"
+        style="
+            background:#fee2e2;
+            color:#b91c1c;
+        "
+    >
+
+        ❌ Cancelado
+
+    </span>
+
+@elseif($viaje->estado == 'completado')
+
+    <span
+        class="estado-badge"
+        style="
+            background:#d1fae5;
+            color:#065f46;
+        "
+    >
+
+        📦 Entregado
+
+    </span>
+
+@else
+
+    <span class="estado-badge">
+
+        {{ ucfirst($viaje->estado) }}
+
+    </span>
+
+@endif
 
         <div class="mt-3">
 

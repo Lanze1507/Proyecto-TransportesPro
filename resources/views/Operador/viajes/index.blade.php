@@ -82,7 +82,7 @@ body{
 .kpi-card{
     background:#fff;
     border-radius:22px;
-    padding:28px;
+    padding:22px;
     position:relative;
     overflow:hidden;
     transition:.35s ease;
@@ -119,9 +119,14 @@ body{
     background:#7c3aed;
 }
 
-.kpi-entregado::before{
+.kpi-completado::before{
     background:#10b981;
 }
+
+.kpi-rechazado::before{
+    background:#dc2626;
+}
+
 
 .kpi-icon{
     width:70px;
@@ -146,12 +151,16 @@ body{
     background:rgba(124,58,237,.12);
 }
 
-.kpi-entregado .kpi-icon{
+.kpi-completado .kpi-icon{
     background:rgba(16,185,129,.12);
 }
 
+.kpi-rechazado .kpi-icon{
+    background:rgba(220,38,38,.12);
+}
+
 .kpi-num{
-    font-size:42px;
+    font-size:34px;
     font-weight:800;
     color:#0b1c39;
     line-height:1;
@@ -320,12 +329,12 @@ body{
     color:#2563eb;
 }
 
-.estado-en_transito{
+.estado-en_ruta{
     background:#efe7ff;
     color:#7c3aed;
 }
 
-.estado-entregado{
+.estado-completado{
     background:#dcfce7;
     color:#059669;
 }
@@ -643,7 +652,7 @@ body{
 
     <div class="row mb-4">
 
-        <div class="col-lg-3 col-md-6 mb-4">
+        <div class="col-xl-2 col-lg-4 col-md-6 mb-4">
             <div class="kpi-card kpi-pendiente">
                 <div class="kpi-icon">⏳</div>
 
@@ -659,7 +668,7 @@ body{
             </div>
         </div>
 
-        <div class="col-lg-3 col-md-6 mb-4">
+        <div class="col-xl-2 col-lg-4 col-md-6 mb-4">
             <div class="kpi-card kpi-aprobado">
                 <div class="kpi-icon">✅</div>
 
@@ -675,37 +684,54 @@ body{
             </div>
         </div>
 
-        <div class="col-lg-3 col-md-6 mb-4">
+        <div class="col-xl-2 col-lg-4 col-md-6 mb-4">
             <div class="kpi-card kpi-transito">
                 <div class="kpi-icon">🚛</div>
 
                 <div>
                     <div class="kpi-num">
-                        {{ $viajes->where('estado','en_transito')->count() }}
+                        {{ $viajes->where('estado','en_ruta')->count() }}
                     </div>
 
                     <div class="kpi-lbl">
-                        En tránsito
+                        En ruta
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-3 col-md-6 mb-4">
-            <div class="kpi-card kpi-entregado">
+        <div class="col-xl-2 col-lg-4 col-md-6 mb-4">
+            <div class="kpi-card kpi-completado">
                 <div class="kpi-icon">📦</div>
 
                 <div>
                     <div class="kpi-num">
-                        {{ $viajes->where('estado','entregado')->count() }}
+                        {{ $viajes->where('estado','completado')->count() }}
                     </div>
 
                     <div class="kpi-lbl">
-                        Entregados
+                        Completados
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="col-xl-2 col-lg-4 col-md-6 mb-4">
+            <div class="kpi-card kpi-rechazado">
+                <div class="kpi-icon">❌</div>
+
+                <div>
+                    <div class="kpi-num">
+                        {{ $viajes->where('estado','rechazado')->count() }}
+                    </div>
+
+                    <div class="kpi-lbl">
+                        Rechazados
+                    </div>
+                </div>
+            </div>
+        </div>
+    
 
     </div>
 
@@ -740,16 +766,20 @@ body{
                     ✅ Aprobados
                 </button>
 
-                <button class="btn-filtro" data-estado="en_transito">
-                    🚛 En tránsito
+                <button class="btn-filtro" data-estado="en_ruta">
+                    🚛 En ruta
                 </button>
 
-                <button class="btn-filtro" data-estado="entregado">
-                    📦 Entregados
+                <button class="btn-filtro" data-estado="completado">
+                    📦 Completados
                 </button>
 
                 <button class="btn-filtro" data-estado="cancelado">
                     ❌ Cancelados
+                </button>
+                
+                <button class="btn-filtro" data-estado="rechazado">
+                    ⛔ Rechazados
                 </button>
 
             </div>

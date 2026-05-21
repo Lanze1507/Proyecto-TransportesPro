@@ -59,7 +59,7 @@
         }
         .estado-pendiente  { background:#fef3c7; color:#92400e; }
         .estado-aprobado   { background:#dbeafe; color:#1e40af; }
-        .estado-en_transito{ background:#ede9fe; color:#5b21b6; }
+        .estado-en_ruta    { background:#ede9fe; color:#5b21b6; }
         .estado-entregado  { background:#d1fae5; color:#065f46; }
         .estado-rechazado  { background:#fee2e2; color:#991b1b; }
         .estado-cancelado  { background:#f3f4f6; color:#374151; }
@@ -220,7 +220,7 @@
         <div class="card-head dark">🗺️ Estado del viaje</div>
         <div class="card-body-inner">
             @php
-                $estados = ['pendiente','aprobado','en_transito','entregado'];
+                $estados = ['pendiente','aprobado','en_ruta','completado'];
                 $iconos  = ['⏳','✅','🚛','📦'];
                 $actual  = $viaje->estado;
                 $idx     = array_search($actual, $estados);
@@ -441,7 +441,7 @@
                         </form>
                     @endif
 
-                    @if(!in_array($viaje->estado, ['pendiente','aprobado','en_transito']))
+                    @if(!in_array($viaje->estado, ['pendiente','aprobado','en_ruta']))
                         <p style="text-align:center;color:#9ca3af;font-size:13px;padding:10px 0;">
                             Este viaje ya no puede modificarse.
                         </p>
