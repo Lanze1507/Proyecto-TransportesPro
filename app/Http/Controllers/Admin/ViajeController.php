@@ -16,18 +16,74 @@ class ViajeController extends Controller
 {
     public function index()
     {
-        $viajes = Viaje::with(
+        $search = request('search');
+        $viajes = Viaje::with([
 
-            'cliente',
-            'piloto',
-            'camion'
+    'cliente',
+    'piloto',
+    'camion'
 
-        )->get();
+])
+
+->when($search, function ($query) use ($search) {
+
+    $query->where(function ($q) use ($search) {
+
+        $q->where('origen', 'like', "%{$search}%")
+
+        ->orWhere('destino', 'like', "%{$search}%")
+
+        ->orWhere('estado', 'like', "%{$search}%")
+
+        ->orWhereHas('cliente', function ($cliente) use ($search) {
+
+            $cliente->where(
+                'nombre',
+                'like',
+                "%{$search}%"
+            );
+
+        });
+
+    });
+
+})
+
+->latest()
+
+->paginate(10)
+
+->withQueryString();
+        $totalViajes = Viaje::count();
+
+$enRuta = Viaje::where(
+    'estado',
+    'en_ruta'
+)->count();
+
+$pendientes = Viaje::where(
+    'estado',
+    'pendiente'
+)->count();
+
+$completados = Viaje::where(
+    'estado',
+    'completado'
+)->count();
+
+
+
 
         return view(
-            'admin.viajes.index',
-            compact('viajes')
-        );
+    'admin.viajes.index',
+    compact(
+        'viajes',
+        'totalViajes',
+        'enRuta',
+        'pendientes',
+        'completados'
+    )
+);
     }
 
     public function create()

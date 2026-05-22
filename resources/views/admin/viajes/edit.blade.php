@@ -1,8 +1,18 @@
 <!DOCTYPE html>
+
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
+
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+
 <title>Editar Viaje - TransportesPro</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
 
 <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
@@ -19,146 +29,331 @@
 <style>
 
 body{
+
     margin:0;
+
     min-height:100vh;
 
     background:
-        linear-gradient(rgba(7,15,30,.75), rgba(7,15,30,.78)),
+        linear-gradient(rgba(7,15,30,.80), rgba(7,15,30,.85)),
         url('{{ asset("assets/img/gallery/footer_bg.jpg") }}')
         no-repeat center center;
 
     background-size:cover;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
     padding:40px 20px;
 }
 
-/* CARD */
+/* =========================
+CARD
+========================= */
 
 .card-viaje{
+
     width:100%;
-    max-width:1400px;
+
+    max-width:1450px;
+
+    margin:auto;
 
     border:none;
-    border-radius:22px;
+
+    border-radius:30px;
 
     overflow:hidden;
 
-    background:rgba(255,255,255,.96);
+    background:rgba(255,255,255,.97);
 
     box-shadow:
-        0 25px 60px rgba(0,0,0,.28);
+        0 25px 70px rgba(0,0,0,.30);
 
     animation:fadeUp .5s ease;
 }
 
-/* HEADER */
+/* =========================
+HEADER
+========================= */
 
 .card-header-custom{
+
     background:
         linear-gradient(135deg,#07152c,#0b1c39);
 
-    padding:28px 35px;
-
-    color:white;
+    padding:40px;
 
     position:relative;
+
+    overflow:hidden;
 }
 
 .card-header-custom::before{
+
     content:'';
 
     position:absolute;
 
-    width:180px;
-    height:180px;
+    width:220px;
 
-    background:rgba(255,255,255,.05);
+    height:220px;
 
     border-radius:50%;
 
-    right:-60px;
-    top:-60px;
+    background:rgba(255,255,255,.05);
+
+    right:-80px;
+
+    top:-80px;
 }
 
 .card-header-custom h2{
+
     margin:0;
-    font-size:30px;
+
+    color:#fff;
+
+    font-size:34px;
+
     font-weight:800;
-    color:white;
 }
 
 .card-header-custom p{
-    margin:6px 0 0;
-    opacity:.8;
-    font-size:14px;
-    color:white;
-}
 
-/* BODY */
+    margin-top:10px;
 
-.card-body-custom{
-    padding:35px;
-}
-
-/* LABELS */
-
-.form-label{
-    font-weight:700;
-    color:#0b1c39;
-    margin-bottom:8px;
-}
-
-/* INPUTS */
-
-.form-control{
-    border-radius:14px;
-    border:1.5px solid #dbe2ea;
-
-    padding:14px 16px;
-
-    height:auto;
+    color:rgba(255,255,255,.75);
 
     font-size:15px;
+}
+
+.icon-badge{
+
+    width:72px;
+
+    height:72px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.08);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:34px;
+
+    color:#0b1c22;
+
+    margin-bottom:20px;
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.15);
+}
+
+/* =========================
+BODY
+========================= */
+
+.card-body-custom{
+
+    padding:45px;
+}
+
+/* =========================
+TOP ACTIONS
+========================= */
+
+.top-actions{
+
+    margin-bottom:35px;
+}
+
+.btn-back{
+
+    background:#eef2f7;
+
+    color:#0b1c39;
+
+    border:none;
+
+    padding:13px 22px;
+
+    border-radius:14px;
+
+    font-weight:700;
 
     transition:.25s ease;
 }
 
-.form-control:focus{
-    border-color:#ff5e14;
-    box-shadow:0 0 0 4px rgba(255,94,20,.10);
+.btn-back:hover{
+
+    background:#dbe2ea;
+
+    transform:translateY(-2px);
+
+    color:#0b1c39;
 }
 
-/* SEARCH DROPDOWN */
+/* =========================
+SECTION TITLE
+========================= */
+
+.section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-bottom:28px;
+    color:#0b1c39;
+    
+}
+
+.section-icon{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(42deg, #ff6318, #ffba00);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    
+
+    font-size:20px;
+
+    box-shadow:
+        0 10px 25px rgba(255,94,20,.22);
+}
+
+.section-title h5{
+
+    margin:0;
+
+    font-size:22px;
+
+    font-weight:800;
+
+    color:#0b1c39;
+}
+
+/* =========================
+INPUT WRAP
+========================= */
+
+.input-wrap{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:22px;
+
+    border:1px solid #eef2f7;
+
+    transition:.25s ease;
+
+    height:100%;
+}
+
+.input-wrap:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.05);
+}
+
+/* =========================
+LABELS
+========================= */
+
+.form-label{
+
+    font-weight:700;
+
+    color:#0b1c39;
+
+    margin-bottom:10px;
+
+    font-size:14px;
+}
+
+/* =========================
+INPUTS
+========================= */
+
+.form-control{
+
+    border-radius:16px;
+
+    border:1.5px solid #dbe2ea;
+
+    padding:15px 18px;
+
+    height:auto;
+
+    font-size:14px;
+
+    transition:.25s ease;
+
+    background:#f8fafc;
+}
+
+.form-control:focus{
+
+    border-color:#ff5e14;
+
+    background:#fff;
+
+    box-shadow:
+        0 0 0 4px rgba(255,94,20,.10);
+}
+
+/* =========================
+SEARCH DROPDOWN
+========================= */
 
 .custom-search{
+
     position:relative;
+
+    width:100%;
 }
 
 .search-results{
 
-    position:absolute;
+    position:relative;
 
     width:100%;
 
-    background:white;
+    background:#fff;
 
-    border-radius:14px;
+    border-radius:18px;
 
-    margin-top:6px;
+    margin-top:12px;
 
-    max-height:240px;
+    max-height:220px;
 
     overflow-y:auto;
 
-    box-shadow:0 12px 30px rgba(0,0,0,.12);
-
-    z-index:9999;
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.08);
 
     display:none;
+
+    border:1px solid #eef2f7;
 }
 
 .search-item{
@@ -168,179 +363,201 @@ body{
     cursor:pointer;
 
     transition:.2s;
+
+    border-bottom:1px solid #f3f4f6;
+}
+
+.search-item:last-child{
+
+    border-bottom:none;
 }
 
 .search-item:hover{
 
     background:#ff5e14;
-    color:white;
+
+    color:#fff;
 }
 
-/* AUTOCOMPLETE */
+/* =========================
+AUTOCOMPLETE
+========================= */
 
 .list-group{
-    position:absolute;
-    z-index:9999;
+
+    position:relative;
 
     width:100%;
 
     max-height:220px;
+
     overflow-y:auto;
 
     border:none;
 
-    border-radius:14px;
+    border-radius:16px;
 
-    margin-top:5px;
+    margin-top:12px;
 
-    box-shadow:0 12px 30px rgba(0,0,0,.12);
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.08);
+
+    border:1px solid #eef2f7;
+
+    background:#fff;
 }
 
 .list-group-item{
+
     border:none;
-    padding:12px 14px;
+
+    padding:14px 18px;
+
     transition:.2s;
+
     cursor:pointer;
 }
 
 .list-group-item:hover{
+
     background:#ff5e14;
+
     color:#fff;
 }
 
-/* BOTONES */
+/* =========================
+BUTTONS
+========================= */
 
 .btn-pro{
-    background:linear-gradient(135deg,#ff5e14,#ff7a18);
+
+    background:
+        linear-gradient(135deg,#ff5e14,#ff7a18);
+
     border:none;
 
-    color:white;
+    color:#fff;
 
     padding:20px;
 
-    border-radius:16px;
+    border-radius:18px;
 
     font-weight:800;
-    font-size:18px;
 
-    letter-spacing:.7px;
+    font-size:17px;
 
     transition:.25s ease;
 
     min-height:68px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    letter-spacing:.5px;
+
+    box-shadow:
+        0 15px 35px rgba(255,94,20,.25);
 }
 
 .btn-pro:hover{
+
     transform:translateY(-3px);
-    box-shadow:0 15px 32px rgba(255,94,20,.35);
-    color:white;
+
+    box-shadow:
+        0 20px 45px rgba(255,94,20,.35);
+
+    color:#fff;
 }
 
-.btn-back{
-    background:#eef2f7;
-    color:#0b1c39;
-
-    border:none;
-
-    padding:12px 20px;
-
-    border-radius:12px;
-
-    font-weight:600;
-
-    transition:.2s ease;
-}
-
-.btn-back:hover{
-    background:#dbe2ea;
-    color:#0b1c39;
-}
-
-/* TOP ACTIONS */
-
-.top-actions{
-    margin-bottom:30px;
-}
-
-/* ICON CARD */
-
-.icon-badge{
-    width:62px;
-    height:62px;
-
-    background:rgba(255,255,255,.08);
-
-    border-radius:18px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:28px;
-
-    margin-bottom:18px;
-}
-
-/* ANIMACIÓN */
+/* =========================
+ANIMATION
+========================= */
 
 @keyframes fadeUp{
+
     from{
+
         opacity:0;
+
         transform:translateY(25px);
     }
+
     to{
+
         opacity:1;
+
         transform:translateY(0);
     }
 }
 
-/* RESPONSIVE */
+/* =========================
+RESPONSIVE
+========================= */
 
 @media(max-width:768px){
 
     .card-header-custom{
-        padding:24px;
+
+        padding:28px;
     }
 
     .card-body-custom{
-        padding:24px;
+
+        padding:25px;
     }
 
     .card-header-custom h2{
-        font-size:24px;
+
+        font-size:26px;
     }
 
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="card-viaje">
 
-    {{-- HEADER --}}
+    <!-- HEADER -->
     <div class="card-header-custom">
 
         <div class="icon-badge">
-            ✏️
+
+            📦
+
         </div>
 
-        <h2>Editar Viaje</h2>
+        <h2>
+
+            Editar Viaje
+
+        </h2>
 
         <p>
+
             Actualiza información del viaje, estado y rutas asignadas.
+
         </p>
 
     </div>
 
-    {{-- BODY --}}
+    <!-- BODY -->
     <div class="card-body-custom">
 
         <div class="top-actions">
 
             <a href="/admin/viajes" class="btn btn-back">
+
                 ⬅ Volver al panel
+
             </a>
 
         </div>
@@ -350,134 +567,188 @@ body{
             @method('PUT')
             @csrf
 
+            <div class="section-title">
+
+                <div class="section-icon">
+
+                    📝
+
+                </div>
+
+                <h5>
+
+                    Información del viaje
+
+                </h5>
+
+            </div>
+
             <div class="row">
 
-                {{-- CLIENTE --}}
+                <!-- CLIENTE -->
                 <div class="col-12 mb-4">
 
-                    <label class="form-label">
-                        Cliente
-                    </label>
+                    <div class="input-wrap">
 
-                    <div class="custom-search">
+                        <label class="form-label">
 
-                        <input
-                            type="text"
-                            id="buscarCliente"
-                            class="form-control"
-                            autocomplete="off"
-                            value="{{ $viaje->cliente->nombre ?? '' }}"
-                        >
+                            Cliente
 
-                        <div id="listaClientes" class="search-results">
+                        </label>
 
-                            @foreach($clientes as $c)
+                        <div class="custom-search">
+
+                            <input
+                                type="text"
+                                id="buscarCliente"
+                                class="form-control"
+                                autocomplete="off"
+                                value="{{ $viaje->cliente->nombre ?? '' }}"
+                            >
+
+                            <div id="listaClientes" class="search-results">
+
+                                @foreach($clientes as $c)
 
                                 <div
                                     class="search-item"
                                     data-id="{{ $c->id }}"
                                     data-text="{{ strtolower($c->nombre) }}"
                                 >
+
                                     {{ $c->nombre }}
+
                                 </div>
 
-                            @endforeach
+                                @endforeach
+
+                            </div>
+
+                            <input
+                                type="hidden"
+                                name="cliente_id"
+                                id="cliente_id"
+                                value="{{ $viaje->cliente_id }}"
+                                required
+                            >
 
                         </div>
-
-                        <input
-                            type="hidden"
-                            name="cliente_id"
-                            id="cliente_id"
-                            value="{{ $viaje->cliente_id }}"
-                            required
-                        >
 
                     </div>
 
                 </div>
 
-                {{-- ORIGEN --}}
-                <div class="col-lg-6 mb-4 position-relative">
-
-                    <label class="form-label">
-                        Origen
-                    </label>
-
-                    <input
-                        type="text"
-                        name="origen"
-                        id="origen"
-                        class="form-control"
-                        value="{{ $viaje->origen }}"
-                        required
-                    >
-
-                    <div id="origen-list" class="list-group"></div>
-
-                </div>
-
-                {{-- DESTINO --}}
-                <div class="col-lg-6 mb-4 position-relative">
-
-                    <label class="form-label">
-                        Destino
-                    </label>
-
-                    <input
-                        type="text"
-                        name="destino"
-                        id="destino"
-                        class="form-control"
-                        value="{{ $viaje->destino }}"
-                        required
-                    >
-
-                    <div id="destino-list" class="list-group"></div>
-
-                </div>
-
-                {{-- ESTADO --}}
+                <!-- ORIGEN -->
                 <div class="col-lg-6 mb-4">
 
-                    <label class="form-label">
-                        Estado
-                    </label>
+                    <div class="input-wrap">
 
-                    <select name="estado" class="form-control">
+                        <label class="form-label">
 
-                        <option value="pendiente"
-                            {{ $viaje->estado == 'pendiente' ? 'selected' : '' }}>
-                            Pendiente
-                        </option>
+                            Origen
 
-                        <option value="en_ruta"
-                            {{ $viaje->estado == 'en_ruta' ? 'selected' : '' }}>
-                            En ruta
-                        </option>
+                        </label>
 
-                        <option value="completado"
-                            {{ $viaje->estado == 'completado' ? 'selected' : '' }}>
-                            Completado
-                        </option>
+                        <input
+                            type="text"
+                            name="origen"
+                            id="origen"
+                            class="form-control"
+                            value="{{ $viaje->origen }}"
+                            required
+                        >
 
-                    </select>
+                        <div id="origen-list" class="list-group"></div>
+
+                    </div>
+
+                </div>
+
+                <!-- DESTINO -->
+                <div class="col-lg-6 mb-4">
+
+                    <div class="input-wrap">
+
+                        <label class="form-label">
+
+                            Destino
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="destino"
+                            id="destino"
+                            class="form-control"
+                            value="{{ $viaje->destino }}"
+                            required
+                        >
+
+                        <div id="destino-list" class="list-group"></div>
+
+                    </div>
+
+                </div>
+
+                <!-- ESTADO -->
+                <div class="col-lg-6 mb-4">
+
+                    <div class="input-wrap">
+
+                        <label class="form-label">
+
+                            Estado
+
+                        </label>
+
+                        <select name="estado" class="form-control">
+
+                            <option
+                                value="pendiente"
+                                {{ $viaje->estado == 'pendiente' ? 'selected' : '' }}
+                            >
+
+                                Pendiente
+
+                            </option>
+
+                            <option
+                                value="en_ruta"
+                                {{ $viaje->estado == 'en_ruta' ? 'selected' : '' }}
+                            >
+
+                                En ruta
+
+                            </option>
+
+                            <option
+                                value="completado"
+                                {{ $viaje->estado == 'completado' ? 'selected' : '' }}
+                            >
+
+                                Completado
+
+                            </option>
+
+                        </select>
+
+                    </div>
 
                 </div>
 
             </div>
 
-            {{-- COORDENADAS --}}
+            <!-- COORDS -->
             <input type="hidden" name="lat_origen" id="lat_origen">
             <input type="hidden" name="lng_origen" id="lng_origen">
 
             <input type="hidden" name="lat_destino" id="lat_destino">
             <input type="hidden" name="lng_destino" id="lng_destino">
 
-            {{-- BOTÓN --}}
+            <!-- BUTTON -->
             <button class="btn btn-pro w-100 mt-4">
 
-                Guardar Cambios
+                💾 Guardar Cambios
 
             </button>
 
@@ -506,9 +777,13 @@ async function buscarLugar(query){
     if(!text) return [];
 
     try{
+
         return JSON.parse(text);
+
     }catch{
+
         return [];
+
     }
 
 }
@@ -576,7 +851,6 @@ window.onload = function(){
 
 };
 
-// SEARCH CLIENTE
 function setupSearch(inputId, listId, hiddenId){
 
     const input  = document.getElementById(inputId);
@@ -643,4 +917,5 @@ setupSearch(
 </script>
 
 </body>
+
 </html>

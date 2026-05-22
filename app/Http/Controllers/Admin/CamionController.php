@@ -10,7 +10,7 @@ class CamionController extends Controller
 {
     public function index()
     {
-        $camiones = Camion::all();
+        $camiones = Camion::latest()->paginate(10);
         return view('admin.camiones.index', compact('camiones'));
     }
 

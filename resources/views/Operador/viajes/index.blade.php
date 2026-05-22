@@ -924,15 +924,28 @@ body{
 
                     </tbody>
 
-                </table>
-
-            </div>
-
-        </div>
-
-    </div>
+</table>
 
 </div>
+
+<div
+    style="
+        margin-top:30px;
+        display:flex;
+        justify-content:center;
+    "
+>
+
+    {{ $viajes->links() }}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+                    
 
 </main>
 

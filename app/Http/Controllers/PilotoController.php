@@ -9,7 +9,7 @@ class PilotoController extends Controller
 {
     public function index()
     {
-        $pilotos = Piloto::all();
+        $pilotos = Piloto::latest()->paginate(10);
         return view('pilotos.index', compact('pilotos'));
     }
 

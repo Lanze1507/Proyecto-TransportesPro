@@ -8,6 +8,160 @@
 <!-- CSS -->
 <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+<style>
+
+body{
+
+    background:#f4f7fb;
+}
+
+/* =========================
+PAGE
+========================= */
+
+.page-wrap{
+
+    padding:70px 0;
+}
+
+/* =========================
+CARD
+========================= */
+
+.form-card{
+
+    background:#fff;
+
+    border-radius:28px;
+
+    padding:45px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.06);
+
+    max-width:760px;
+
+    margin:auto;
+}
+
+/* =========================
+TITLE
+========================= */
+
+.page-title{
+
+    font-size:42px;
+
+    font-weight:800;
+
+    color:#0b1c39;
+
+    margin-bottom:10px;
+}
+
+.page-subtitle{
+
+    color:#6b7280;
+
+    font-size:15px;
+
+    margin-bottom:35px;
+}
+
+/* =========================
+INPUTS
+========================= */
+
+.form-label{
+
+    font-size:13px;
+
+    font-weight:700;
+
+    color:#374151;
+
+    margin-bottom:8px;
+}
+
+.form-control{
+
+    border:none !important;
+
+    background:#f8fafc !important;
+
+    border-radius:16px !important;
+
+    height:58px;
+
+    padding:0 18px !important;
+
+    font-size:14px;
+
+    box-shadow:
+        inset 0 0 0 1px #e5e7eb;
+
+    transition:.25s ease;
+}
+
+.form-control:focus{
+
+    background:#fff !important;
+
+    box-shadow:
+        0 0 0 4px rgba(255,94,20,.12),
+        inset 0 0 0 1px #ff5e14 !important;
+}
+
+/* =========================
+BUTTONS
+========================= */
+
+.action-btn{
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:14px 22px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    transition:.25s ease;
+
+    text-decoration:none !important;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+}
+
+.action-btn:hover{
+
+    transform:translateY(-3px);
+}
+
+.btn-orange{
+
+    background:#ff5e14;
+
+    color:#fff;
+
+    box-shadow:
+        0 10px 25px rgba(255,94,20,.25);
+}
+
+.btn-dark-pro{
+
+    background:#0b1c39;
+
+    color:#fff;
+}
+
+</style>
 
 </head>
 
@@ -62,47 +216,133 @@
 <!-- CONTENIDO -->
 
 <main>
-<div class="container section-padding30 mt-5">
+<div class="container page-wrap">
 
-<h2 class="mb-4">Editar Cliente</h2>
+    <div class="form-card">
+
+<h1 class="page-title">
+
+    Editar Cliente
+
+</h1>
+
+<p class="page-subtitle">
+
+    Actualiza la información del cliente dentro del sistema.
+
+</p>
 
 <form method="POST" action="/clientes/{{ $cliente->id }}">
+
     @csrf
     @method('PUT')
 
-    <div class="mb-3">
-        <label>Nombre</label>
-        <input type="text" name="nombre" value="{{ $cliente->nombre }}" class="form-control">
+    <div class="row">
+
+        <div class="col-md-6 mb-4">
+
+            <label class="form-label">
+
+                Nombre completo
+
+            </label>
+
+            <input
+                type="text"
+                name="nombre"
+                value="{{ $cliente->nombre }}"
+                class="form-control"
+            >
+
+        </div>
+
+        <div class="col-md-6 mb-4">
+
+            <label class="form-label">
+
+                Correo electrónico
+
+            </label>
+
+            <input
+                type="email"
+                name="email"
+                value="{{ $cliente->email }}"
+                class="form-control"
+            >
+
+        </div>
+
+        <div class="col-md-6 mb-4">
+
+            <label class="form-label">
+
+                Teléfono
+
+            </label>
+
+            <input
+                type="text"
+                name="telefono"
+                value="{{ $cliente->telefono }}"
+                class="form-control"
+            >
+
+        </div>
+
+        <div class="col-md-6 mb-4">
+
+            <label class="form-label">
+
+                Dirección
+
+            </label>
+
+            <input
+                type="text"
+                name="direccion"
+                value="{{ $cliente->direccion }}"
+                class="form-control"
+            >
+
+        </div>
+
     </div>
 
-    <div class="mb-3">
-        <label>Email</label>
-        <input type="email" name="email" value="{{ $cliente->email }}" class="form-control">
+    <div
+        style="
+            display:flex;
+            gap:14px;
+            flex-wrap:wrap;
+            margin-top:12px;
+        "
+    >
+
+        <button
+            class="action-btn btn-orange"
+        >
+
+            Actualizar Cliente
+
+        </button>
+
+        <a
+            href="/clientes"
+            class="action-btn btn-dark-pro"
+        >
+
+            ⬅ Volver
+
+        </a>
+
     </div>
-
-    <div class="mb-3">
-        <label>Teléfono</label>
-        <input type="text" name="telefono" value="{{ $cliente->telefono }}" class="form-control">
-    </div>
-
-    <div class="mb-3">
-        <label>Dirección</label>
-        <input type="text" name="direccion" value="{{ $cliente->direccion }}" class="form-control">
-    </div>
-
-    <button class="btn btn-primary">Actualizar</button>
-    <a href="/clientes" class="btn btn-secondary">Volver</a>
-
 </form>
 
 </div>
+</div>
 </main>
 
-<!-- FOOTER SIMPLE -->
 
-<footer class="text-center mt-5">
-    <p>© {{ date('Y') }} TransportesPro</p>
-</footer>
 
 <script src="{{ asset('assets/js/jquery-1.12.4.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>

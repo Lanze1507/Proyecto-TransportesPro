@@ -465,6 +465,50 @@ body{
 
 }
 
+/* =========================
+FILTROS
+========================= */
+
+.filtro-btn{
+
+    border:none;
+
+    background:#f3f6fa;
+
+    color:#6b7280;
+
+    border-radius:999px;
+
+    padding:12px 18px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    transition:.25s ease;
+
+    cursor:pointer;
+}
+
+.filtro-btn:hover{
+
+    background:#fff2eb;
+
+    color:#ff5e14;
+
+    transform:translateY(-2px);
+}
+
+.filtro-btn.active{
+
+    background:#ff5e14;
+
+    color:#fff;
+
+    box-shadow:
+        0 10px 25px rgba(255,94,20,.25);
+}
+
 </style>
 
 </head>
@@ -616,7 +660,7 @@ body{
 
             <div class="kpi-num">
 
-                {{ $viajes->count() }}
+                {{ $totalViajes }}
 
             </div>
 
@@ -642,7 +686,7 @@ body{
 
             <div class="kpi-num">
 
-                {{ $viajes->where('estado','en_ruta')->count() }}
+                {{ $enRuta }}
 
             </div>
 
@@ -668,7 +712,7 @@ body{
 
             <div class="kpi-num">
 
-                {{ $viajes->where('estado','pendiente')->count() }}
+                {{ $pendientes }}
 
             </div>
 
@@ -694,7 +738,7 @@ body{
 
             <div class="kpi-num">
 
-                {{ $viajes->where('estado','completado')->count() }}
+                {{ $completados }}
 
             </div>
 
@@ -711,9 +755,79 @@ body{
 </div>
             <div class="container">
                 <h2 class="mb-4">Viajes</h2>
+                <div
+    style="
+        display:flex;
+        gap:12px;
+        flex-wrap:wrap;
+        align-items:center;
+        margin-bottom:28px;
+    "
+>
+
+    <form method="GET">
+
+    <input
+        type="text"
+        name="search"
+        value="{{ request('search') }}"
+        placeholder="🔍 Buscar viaje..."
+        style="
+            height:48px;
+            border:none;
+            background:#f7f9fc;
+            border-radius:14px;
+            padding:0 18px;
+            min-width:260px;
+            font-size:14px;
+            box-shadow:
+                inset 0 0 0 1px #e5e7eb;
+        "
+    >
+
+</form>
+
+    <button
+        class="filtro-btn active"
+        data-estado="todos"
+    >
+
+        Todos
+
+    </button>
+
+    <button
+        class="filtro-btn"
+        data-estado="pendiente"
+    >
+
+        ⏳ Pendientes
+
+    </button>
+
+    <button
+        class="filtro-btn"
+        data-estado="en_ruta"
+    >
+
+        🚛 En ruta
+
+    </button>
+
+    <button
+        class="filtro-btn"
+        data-estado="completado"
+    >
+
+        ✅ Completados
+
+    </button>
+
+</div>
 
                 <div
     style="
+        margin-top:10px;
         margin-bottom:30px;
         display:flex;
         gap:14px;
@@ -737,44 +851,120 @@ body{
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach($viajes as $viaje)
-                                <tr>
-                                    <td>{{ $viaje->cliente->nombre ?? 'N/A' }}</td>
-                                    <td>{{ $viaje->origen }}</td>
-                                    <td>{{ $viaje->destino }}</td>
-                                    <td>
+                       <tbody>
 
-    <span
-        class="estado-badge estado-{{ $viaje->estado }}"
+@forelse($viajes as $viaje)
+
+<tr data-estado="{{ $viaje->estado }}">
+
+    <td>
+
+        {{ $viaje->cliente->nombre ?? 'N/A' }}
+
+    </td>
+
+    <td>
+
+        {{ $viaje->origen }}
+
+    </td>
+
+    <td>
+
+        {{ $viaje->destino }}
+
+    </td>
+
+    <td>
+
+        <span
+            class="estado-badge estado-{{ $viaje->estado }}"
+        >
+
+            {{ ucfirst(str_replace('_',' ',$viaje->estado)) }}
+
+        </span>
+
+    </td>
+
+    <td>
+
+        <div
+            style="
+                display:flex;
+                gap:10px;
+                align-items:center;
+            "
+        >
+
+            <a
+                href="/admin/viajes/{{ $viaje->id }}/edit"
+                class="btn-table btn-edit"
+            >
+
+                ✏️ Editar
+
+            </a>
+
+            <form
+                method="POST"
+                action="/admin/viajes/{{ $viaje->id }}"
+                style="margin:0;"
+            >
+
+                @csrf
+                @method('DELETE')
+
+                <button class="btn-table btn-delete">
+
+                    🗑 Eliminar
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </td>
+
+</tr>
+
+@empty
+
+<tr>
+
+    <td
+        colspan="5"
+        style="
+            text-align:center;
+            padding:50px;
+            color:#9ca3af;
+        "
     >
 
-        {{ ucfirst(str_replace('_',' ',$viaje->estado)) }}
+        No hay viajes registrados aún.
 
-    </span>
+    </td>
 
-</td>
-                                    <td>
-                                    <div style="display:flex; gap:10px; align-items:center;">
-                                        
-                                        <a href="/admin/viajes/{{ $viaje->id }}/edit" class="btn-table btn-edit">
-                                        ✏️ Editar
-                                    </a>
-                                        <form method="POST" action="/admin/viajes/{{ $viaje->id }}" style="margin:0;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn-table btn-delete">
-                                            🗑 Eliminar
-                                        </button>
-                                    </form>
+</tr>
 
-                                    </div>
-                                </td>
-                                </tr>
-                            @endforeach
+@endforelse
+
+</tbody>
                         </tbody>
                     </table>
                 </div>
+                <div
+    style="
+        margin-top:30px;
+        display:flex;
+        justify-content:center;
+    "
+>
+
+    {{ $viajes->links() }}
+
+</div>
             </div>
         </div>
     </main>
@@ -799,5 +989,49 @@ body{
     <script src="{{ asset('assets/js/jquery.ajaxchimp.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script>
+
+/* =========================
+FILTROS
+========================= */
+
+document.querySelectorAll('.filtro-btn')
+.forEach(btn => {
+
+    btn.addEventListener('click', function () {
+
+        document.querySelectorAll('.filtro-btn')
+        .forEach(b => b.classList.remove('active'));
+
+        this.classList.add('active');
+
+        const estado = this.dataset.estado;
+
+        document.querySelectorAll('tbody tr')
+        .forEach(row => {
+
+            if(
+                estado === 'todos'
+                ||
+                row.dataset.estado === estado
+            ){
+
+                row.style.display = '';
+
+            }else{
+
+                row.style.display = 'none';
+
+            }
+
+        });
+
+    });
+
+});
+
+
+
+</script>
 </body>
 </html>

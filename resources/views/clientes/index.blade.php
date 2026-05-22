@@ -11,34 +11,290 @@
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
 <style>
-    .buscador-pro{
 
-    border-radius:14px;
+body{
 
-    border:1.5px solid #dbe2ea;
+    background:#f4f7fb;
+}
 
-    padding:14px 18px;
+/* =========================
+HEADER TITLE
+========================= */
+
+.page-title{
+
+    font-size:42px;
+
+    font-weight:800;
+
+    color:#0b1c39;
+
+    margin-bottom:8px;
+}
+
+.page-subtitle{
+
+    color:#6b7280;
+
+    font-size:15px;
+
+    margin-bottom:40px;
+}
+
+/* =========================
+SEARCH
+========================= */
+
+.buscador-pro{
+
+    border-radius:16px;
+
+    border:none;
+
+    background:#fff;
+
+    padding:16px 20px;
 
     transition:.3s ease;
 
     width:100%;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.05);
+
+    font-size:14px;
 }
 
 .buscador-pro:focus{
 
-    border-color:#ff5e14;
+    outline:none;
 
-    box-shadow:0 0 0 4px rgba(255,94,20,.12);
+    box-shadow:
+        0 0 0 4px rgba(255,94,20,.12);
 
-    transform:scale(1.015);
+    transform:translateY(-2px);
 }
-    .animated-button {
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .animated-button:hover {
-        transform: translateX(-3px) scale(1.02);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
-    }
+
+/* =========================
+BUTTONS
+========================= */
+
+.action-btn{
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:13px 18px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    transition:.25s ease;
+
+    text-decoration:none !important;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+}
+
+.action-btn:hover{
+
+    transform:translateY(-3px);
+
+    color:#fff;
+}
+
+.btn-orange{
+
+    background:#ff5e14;
+
+    color:#fff;
+
+    box-shadow:
+        0 10px 25px rgba(255,94,20,.25);
+}
+
+.btn-dark-pro{
+
+    background:#0b1c39;
+
+    color:#fff;
+}
+
+.btn-green{
+
+    background:#10b981;
+
+    color:#fff;
+}
+
+/* =========================
+TABLE CARD
+========================= */
+
+.table-card{
+
+    background:#fff;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.06);
+
+    margin-top:25px;
+}
+
+.table-header{
+
+    padding:28px 30px;
+
+    border-bottom:1px solid #eef2f7;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+}
+
+.table-header h4{
+
+    margin:0;
+
+    font-size:24px;
+
+    font-weight:800;
+
+    color:#0b1c39;
+}
+
+/* =========================
+TABLE
+========================= */
+
+.table{
+
+    margin-bottom:0;
+}
+
+.table thead th{
+
+    background:#f8fafc;
+
+    border:none;
+
+    padding:18px;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    color:#6b7280;
+
+    letter-spacing:.6px;
+}
+
+.table tbody td{
+
+    padding:22px 18px;
+
+    vertical-align:middle;
+
+    border-top:1px solid #f1f5f9;
+
+    font-size:14px;
+
+    color:#374151;
+}
+
+.table tbody tr{
+
+    transition:.25s ease;
+}
+
+.table tbody tr:hover{
+
+    background:#fafcff;
+}
+
+/* =========================
+CLIENT BADGE
+========================= */
+
+.client-avatar{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    background:#ffefe8;
+
+    color:#ff5e14;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-weight:800;
+
+    font-size:16px;
+}
+
+/* =========================
+TABLE BUTTONS
+========================= */
+
+.btn-table{
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:10px 14px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    transition:.25s ease;
+}
+
+.btn-table:hover{
+
+    transform:translateY(-2px);
+}
+
+.btn-edit{
+
+    background:#fff4df;
+
+    color:#c27c00;
+}
+
+.btn-delete{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+}
+
 </style>
 
 </head>
@@ -97,27 +353,78 @@
 <main>
 <div class="container section-padding30">
 
-<h2 class="mb-4">Listado de Clientes</h2>
-<div class="mb-4" style="max-width: 450px;">
+<div class="mb-5">
 
-    <input
-        type="text"
-        id="buscadorClientes"
-        class="form-control buscador-pro"
-        placeholder="🔍 Buscar cliente por nombre, email o teléfono..."
-    >
+    <h1 class="page-title">
+
+        Clientes
+
+    </h1>
+
+    <p class="page-subtitle">
+
+        Gestión completa de clientes registrados en TransportesPro.
+
+    </p>
 
 </div>
+<div class="table-card">
 
-<div style="margin-bottom: 20px;">
-    <a href="/admin/viajes" class="btn btn-danger animated-button">
-        ⬅ Volver al panel de viajes
-    </a>
-</div>
+    <div class="table-header">
 
-<a href="/clientes/create" class="btn btn-success mb-3 animated-button">Nuevo Cliente</a>
+        <div>
 
-<table class="table table-striped" id="tablaClientes">
+            <h4>
+
+                👥 Lista de clientes
+
+            </h4>
+
+        </div>
+
+        <div
+            style="
+                display:flex;
+                gap:12px;
+                flex-wrap:wrap;
+                align-items:center;
+            "
+        >
+
+            <div style="min-width:320px;">
+
+                <input
+                    type="text"
+                    id="buscadorClientes"
+                    class="buscador-pro"
+                    placeholder="🔍 Buscar cliente..."
+                >
+
+            </div>
+
+            <a
+                href="/clientes/create"
+                class="action-btn btn-green"
+            >
+
+                ➕ Nuevo Cliente
+
+            </a>
+
+            <a
+                href="/admin/viajes"
+                class="action-btn btn-dark-pro"
+            >
+
+                ⬅ Volver
+
+            </a>
+
+        </div>
+
+    </div>
+
+<table class="table" id="tablaClientes">
     <thead>
         <tr>
             <th>Nombre</th>
@@ -130,7 +437,46 @@
     <tbody>
         @foreach($clientes as $cliente)
         <tr>
-            <td>{{ $cliente->nombre }}</td>
+            <td>
+
+    <div
+        style="
+            display:flex;
+            align-items:center;
+            gap:14px;
+        "
+    >
+
+        <div class="client-avatar">
+
+            {{ strtoupper(substr($cliente->nombre,0,1)) }}
+
+        </div>
+
+        <div>
+
+            <div
+                style="
+                    font-weight:700;
+                    color:#0b1c39;
+                "
+            >
+
+                {{ $cliente->nombre }}
+
+            </div>
+
+            <small style="color:#9ca3af;">
+
+                Cliente registrado
+
+            </small>
+
+        </div>
+
+    </div>
+
+</td>
             <td>{{ $cliente->email }}</td>
             <td>{{ $cliente->telefono }}</td>
             <td>
@@ -146,7 +492,17 @@
         @endforeach
     </tbody>
 </table>
+<div
+    style="
+        margin-top:30px;
+        display:flex;
+        justify-content:center;
+    "
+>
 
+    {{ $clientes->links() }}
+
+</div>
 </div>
 </main>
 

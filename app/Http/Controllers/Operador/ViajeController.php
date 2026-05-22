@@ -28,7 +28,7 @@ class ViajeController extends Controller
             'camion',
             'historial'
 
-        ])->get();
+        ])->latest()->paginate(10);
 
         return view(
             'operador.viajes.index',
