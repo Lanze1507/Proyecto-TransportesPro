@@ -25,57 +25,447 @@
     <style>
 
         
-        /* Botón Editar en amarillo (warning) con mejor contraste */
-        .btn-warning.btn-sm {
-            background-color: #ffc107;
-            border-color: #e0a800;
-            color: #ffffff;
-        }
-        .btn-warning.btn-sm:hover {
-            background-color: #e0a800;
-            border-color: #d39e00;
-            color: #fff;
-        }
 
-        /* Compactar el hero ("Administración de Viajes") y su imagen de fondo */
-        .slider-area .single-slider.slider-height {
-            min-height: 320px !important;
-            height: 320px !important;
-            padding: 40px 0;
-        }
-        .hero__caption h1 {
-            font-size: 38px;
-            line-height: 1.2;
-        }
-        .hero-pera p {
-            font-size: 16px;
-            margin-top: 8px;
-        }
+/* =========================
+   GLOBAL
+========================= */
 
-        /* Ajustes responsivos */
-        @media (max-width: 991.98px) {
-            .slider-area .single-slider.slider-height {
-                min-height: 260px !important;
-                height: 260px !important;
-                padding: 30px 0;
-            }
-            .hero__caption h1 {
-                font-size: 30px;
-            }
-        }
-        .hero__caption h1 {
-        font-size: 38px;
-        line-height: 1.2;
-        color: #ffffff !important;
+body{
+
+    background:#f4f7fb;
+
+    background-image:
+        radial-gradient(circle at top right, rgba(255,94,20,.05), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(11,28,57,.05), transparent 30%);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.slider-area .single-slider.slider-height{
+
+    min-height:320px !important;
+
+    height:320px !important;
+
+    padding:40px 0;
+
+    position:relative;
+}
+
+.hero__caption h1{
+
+    font-size:48px;
+
+    font-weight:800;
+
+    color:#fff !important;
+
+    margin-bottom:12px;
+}
+
+.hero-pera p{
+
+    font-size:17px;
+
+    color:#e5e7eb !important;
+
+    max-width:650px;
+}
+
+/* =========================
+   KPI CARDS
+========================= */
+
+.kpi-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:20px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.3s ease;
+
+    box-shadow:0 15px 45px rgba(0,0,0,.06);
+
+    height:100%;
+}
+
+.kpi-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 25px 60px rgba(0,0,0,.12);
+}
+
+.kpi-card::before{
+
+    content:'';
+
+    position:absolute;
+
+    width:140px;
+
+    height:140px;
+
+    border-radius:50%;
+
+    top:-40px;
+
+    right:-40px;
+
+    opacity:.08;
+}
+
+.kpi-orange::before{ background:#ff5e14; }
+.kpi-blue::before{ background:#2563eb; }
+.kpi-purple::before{ background:#7c3aed; }
+.kpi-green::before{ background:#10b981; }
+
+.kpi-icon{
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:30px;
+
+    margin-bottom:18px;
+}
+
+.kpi-orange .kpi-icon{
+    background:rgba(255,94,20,.12);
+}
+
+.kpi-blue .kpi-icon{
+    background:rgba(37,99,235,.12);
+}
+
+.kpi-purple .kpi-icon{
+    background:rgba(124,58,237,.12);
+}
+
+.kpi-green .kpi-icon{
+    background:rgba(16,185,129,.12);
+}
+
+.kpi-num{
+
+    font-size:32px;
+
+    font-weight:800;
+
+    color:#0b1c39;
+
+    line-height:1;
+}
+
+.kpi-label{
+
+    margin-top:10px;
+
+    color:#6b7280;
+
+    font-size:14px;
+
+    font-weight:600;
+}
+
+/* =========================
+   PANEL
+========================= */
+
+.admin-panel{
+
+    background:#fff;
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.06);
+}
+
+.panel-header{
+
+    padding:28px 32px;
+
+    border-bottom:1px solid #eef2f7;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:14px;
+}
+
+.panel-header h2{
+
+    margin:0;
+
+    font-size:28px;
+
+    font-weight:800;
+
+    color:#0b1c39;
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+.action-btn{
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:13px 20px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    transition:.25s ease;
+
+    text-decoration:none;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+}
+
+.action-btn:hover{
+
+    transform:translateY(-3px);
+
+    text-decoration:none;
+}
+
+.btn-orange{
+
+    background:#ff5e14;
+
+    color:#fff;
+}
+
+.btn-orange:hover{
+
+    background:#ff6f2f;
+
+    color:#fff;
+}
+
+.btn-darkpro{
+
+    background:#0b1c39;
+
+    color:#fff;
+}
+
+.btn-darkpro:hover{
+
+    background:#13284d;
+
+    color:#fff;
+}
+
+.btn-soft{
+
+    background:#f3f6fa;
+
+    color:#374151;
+}
+
+.btn-soft:hover{
+
+    background:#e8edf5;
+
+    color:#111827;
+}
+
+/* =========================
+   TABLA
+========================= */
+
+.table-responsive{
+
+    padding:28px;
+}
+
+.table{
+
+    margin-bottom:0;
+}
+
+.table thead th{
+
+    border:none;
+
+    background:#f7f9fc;
+
+    padding:18px 16px;
+
+    font-size:12px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.8px;
+
+    font-weight:800;
+
+    color:#6b7280;
+}
+
+.table tbody td{
+
+    padding:22px 16px;
+
+    vertical-align:middle;
+
+    border-top:1px solid #f1f5f9;
+
+    font-size:14px;
+
+    color:#374151;
+}
+
+.table tbody tr{
+
+    transition:.2s ease;
+}
+
+.table tbody tr:hover{
+
+    background:#fafcff;
+}
+
+/* =========================
+   BADGES
+========================= */
+
+.estado-badge{
+
+    padding:8px 15px;
+
+    border-radius:999px;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    letter-spacing:.5px;
+}
+
+.estado-pendiente{
+    background:#fff4df;
+    color:#c27c00;
+}
+
+.estado-aprobado{
+    background:#e7f0ff;
+    color:#2563eb;
+}
+
+.estado-en_ruta{
+    background:#efe7ff;
+    color:#7c3aed;
+}
+
+.estado-completado{
+    background:#dcfce7;
+    color:#059669;
+}
+
+.estado-cancelado{
+    background:#fee2e2;
+    color:#dc2626;
+}
+
+/* =========================
+   ACCIONES
+========================= */
+
+.btn-table{
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:10px 14px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    transition:.25s ease;
+}
+
+.btn-edit{
+
+    background:#fff4df;
+
+    color:#c27c00;
+}
+
+.btn-edit:hover{
+
+    background:#ffe7b3;
+}
+
+.btn-delete{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+}
+
+.btn-delete:hover{
+
+    background:#fecaca;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    .hero__caption h1{
+
+        font-size:34px;
     }
-    .hero-pera p {
-        font-size: 16px;
-        margin-top: 8px;
-        color: #ffffff !important;
+
+    .panel-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
     }
 
-        
-    </style>
+}
+
+</style>
 
 </head>
 <body>
@@ -206,18 +596,138 @@
 
 
         <div class="our-info-area pt-70 pb-40">
+            <div
+    class="row mb-3 justify-content-center"
+    style="
+        max-width:1200px;
+        margin:auto;
+    "
+>
+
+    <div class="col-xl-2 col-lg-3 col-md-5 mb-3">
+
+        <div class="kpi-card kpi-orange">
+
+            <div class="kpi-icon">
+
+                📦
+
+            </div>
+
+            <div class="kpi-num">
+
+                {{ $viajes->count() }}
+
+            </div>
+
+            <div class="kpi-label">
+
+                Total viajes
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-2 col-lg-3 col-md-5 mb-3">
+
+        <div class="kpi-card kpi-blue">
+
+            <div class="kpi-icon">
+
+                🚛
+
+            </div>
+
+            <div class="kpi-num">
+
+                {{ $viajes->where('estado','en_ruta')->count() }}
+
+            </div>
+
+            <div class="kpi-label">
+
+                En ruta
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-2 col-lg-3 col-md-5 mb-3">
+
+        <div class="kpi-card kpi-purple">
+
+            <div class="kpi-icon">
+
+                ⏳
+
+            </div>
+
+            <div class="kpi-num">
+
+                {{ $viajes->where('estado','pendiente')->count() }}
+
+            </div>
+
+            <div class="kpi-label">
+
+                Pendientes
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xl-2 col-lg-3 col-md-5 mb-3">
+
+        <div class="kpi-card kpi-green">
+
+            <div class="kpi-icon">
+
+                ✅
+
+            </div>
+
+            <div class="kpi-num">
+
+                {{ $viajes->where('estado','completado')->count() }}
+
+            </div>
+
+            <div class="kpi-label">
+
+                Completados
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
             <div class="container">
                 <h2 class="mb-4">Viajes</h2>
 
-                <div style="margin-bottom:20px; display:flex; gap:10px; flex-wrap: wrap;">
-                    <a href="/admin/viajes/create" class="btn btn-primary">➕ Nuevo Viaje</a>
+                <div
+    style="
+        margin-bottom:30px;
+        display:flex;
+        gap:14px;
+        flex-wrap:wrap;
+    "
+>
+                    <a href="/admin/viajes/create" class="action-btn btn-orange">➕ Nuevo Viaje</a>
                     <a href="/clientes" class="btn btn-secondary">👥 Gestionar Clientes</a>
                     <a href="/admin/pilotos" class="btn btn-info"> Gestionar Pilotos</a>
                     <a href="/admin/camiones" class="btn btn-info"> Gestionar Camiones</a>
                     <a href="/" class="btn btn-dark">🏠 Inicio</a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-hover align-middle">
                         <thead>
                             <tr>
                                 <th>Cliente</th>
@@ -233,17 +743,27 @@
                                     <td>{{ $viaje->cliente->nombre ?? 'N/A' }}</td>
                                     <td>{{ $viaje->origen }}</td>
                                     <td>{{ $viaje->destino }}</td>
-                                    <td>{{ $viaje->estado }}</td>
+                                    <td>
+
+    <span
+        class="estado-badge estado-{{ $viaje->estado }}"
+    >
+
+        {{ ucfirst(str_replace('_',' ',$viaje->estado)) }}
+
+    </span>
+
+</td>
                                     <td>
                                     <div style="display:flex; gap:10px; align-items:center;">
                                         
-                                        <a href="/admin/viajes/{{ $viaje->id }}/edit" class="btn btn-warning btn-sm text-dark">
+                                        <a href="/admin/viajes/{{ $viaje->id }}/edit" class="btn-table btn-edit">
                                         ✏️ Editar
                                     </a>
                                         <form method="POST" action="/admin/viajes/{{ $viaje->id }}" style="margin:0;">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger btn-sm">
+                                        <button class="btn-table btn-delete">
                                             🗑 Eliminar
                                         </button>
                                     </form>
