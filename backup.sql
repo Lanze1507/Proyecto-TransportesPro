@@ -82,7 +82,7 @@ CREATE TABLE `camiones` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `placa` (`placa`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,7 @@ CREATE TABLE `camiones` (
 
 LOCK TABLES `camiones` WRITE;
 /*!40000 ALTER TABLE `camiones` DISABLE KEYS */;
-INSERT INTO `camiones` VALUES (1,'K123','NIG123',2000.00,'disponible','2026-05-06 07:38:45','2026-05-06 07:38:45'),(2,'M190','GHR-312',1500.00,'disponible','2026-05-06 07:39:07','2026-05-06 07:39:07'),(3,'ZXC1234','XTZ5000',2500.00,'disponible','2026-05-06 07:39:24','2026-05-06 07:39:24');
+INSERT INTO `camiones` VALUES (1,'K123','NIG123',2000.00,'disponible','2026-05-06 07:38:45','2026-05-06 07:38:45'),(2,'M190','GHR-312',1500.00,'disponible','2026-05-06 07:39:07','2026-05-06 07:39:07'),(3,'ZXC1234','XTZ5000',2500.00,'disponible','2026-05-06 07:39:24','2026-05-06 07:39:24'),(4,'F1233','SMASHER123',10000.00,'disponible','2026-05-22 10:38:58','2026-05-22 10:38:58');
 /*!40000 ALTER TABLE `camiones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,7 +338,7 @@ CREATE TABLE `pilotos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -347,7 +347,7 @@ CREATE TABLE `pilotos` (
 
 LOCK TABLES `pilotos` WRITE;
 /*!40000 ALTER TABLE `pilotos` DISABLE KEYS */;
-INSERT INTO `pilotos` VALUES (1,'Yerma','1A','123123123','activo','2026-05-06 07:40:01','2026-05-06 07:40:01'),(2,'Pedro','2A','123123','activo','2026-05-14 05:10:38','2026-05-14 05:10:38'),(3,'Kendrick','1B','123123','activo','2026-05-14 05:10:59','2026-05-14 05:10:59');
+INSERT INTO `pilotos` VALUES (1,'Yerma','1A','123123123','activo','2026-05-06 07:40:01','2026-05-06 07:40:01'),(2,'Pedro','2A','123123','activo','2026-05-14 05:10:38','2026-05-14 05:10:38'),(3,'Kendrick','1B','123123','activo','2026-05-14 05:10:59','2026-05-14 05:10:59'),(4,'Lenny','1A','123123','activo','2026-05-22 10:12:51','2026-05-22 10:12:51'),(5,'Scott','2A','123123','activo','2026-05-22 10:13:06','2026-05-22 10:13:06'),(6,'Benny','1A','123123','activo','2026-05-22 10:13:27','2026-05-22 10:13:27');
 /*!40000 ALTER TABLE `pilotos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -430,7 +430,7 @@ CREATE TABLE `viaje_historials` (
   PRIMARY KEY (`id`),
   KEY `viaje_historials_viaje_id_foreign` (`viaje_id`),
   CONSTRAINT `viaje_historials_viaje_id_foreign` FOREIGN KEY (`viaje_id`) REFERENCES `viajes` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=155 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -439,7 +439,7 @@ CREATE TABLE `viaje_historials` (
 
 LOCK TABLES `viaje_historials` WRITE;
 /*!40000 ALTER TABLE `viaje_historials` DISABLE KEYS */;
-INSERT INTO `viaje_historials` VALUES (142,84,'en_ruta','? Viaje creado en el sistema','2026-05-21 07:41:06','2026-05-21 07:41:06'),(143,84,'en_ruta','?‍✈️ Piloto asignado: Yerma','2026-05-21 07:41:06','2026-05-21 07:41:06'),(144,84,'en_ruta','? Camión asignado: K123','2026-05-21 07:41:06','2026-05-21 07:41:06'),(145,85,'pendiente','? Viaje creado en el sistema','2026-05-21 07:41:28','2026-05-21 07:41:28'),(146,85,'pendiente','?‍✈️ Piloto asignado: Yerma','2026-05-21 07:41:28','2026-05-21 07:41:28'),(147,85,'pendiente','? Camión asignado: M190','2026-05-21 07:41:28','2026-05-21 07:41:28'),(148,85,'aprobado','✅ Operador aprobó el viaje','2026-05-21 08:54:53','2026-05-21 08:54:53'),(149,85,'en_ruta','? Viaje puesto en tránsito','2026-05-21 09:00:17','2026-05-21 09:00:17'),(150,85,'en_ruta','?‍✈️ Piloto asignado: Yerma','2026-05-21 09:00:17','2026-05-21 09:00:17'),(151,85,'en_ruta','? Camión asignado: M190','2026-05-21 09:00:17','2026-05-21 09:00:17'),(152,86,'en_ruta','? Viaje creado en el sistema','2026-05-21 09:18:20','2026-05-21 09:18:20'),(153,87,'pendiente','? Viaje creado en el sistema','2026-05-21 09:24:33','2026-05-21 09:24:33'),(154,87,'rechazado','❌ Operador rechazó el viaje','2026-05-21 09:24:42','2026-05-21 09:24:42');
+INSERT INTO `viaje_historials` VALUES (142,84,'en_ruta','? Viaje creado en el sistema','2026-05-21 07:41:06','2026-05-21 07:41:06'),(143,84,'en_ruta','?‍✈️ Piloto asignado: Yerma','2026-05-21 07:41:06','2026-05-21 07:41:06'),(144,84,'en_ruta','? Camión asignado: K123','2026-05-21 07:41:06','2026-05-21 07:41:06'),(145,85,'pendiente','? Viaje creado en el sistema','2026-05-21 07:41:28','2026-05-21 07:41:28'),(146,85,'pendiente','?‍✈️ Piloto asignado: Yerma','2026-05-21 07:41:28','2026-05-21 07:41:28'),(147,85,'pendiente','? Camión asignado: M190','2026-05-21 07:41:28','2026-05-21 07:41:28'),(148,85,'aprobado','✅ Operador aprobó el viaje','2026-05-21 08:54:53','2026-05-21 08:54:53'),(149,85,'en_ruta','? Viaje puesto en tránsito','2026-05-21 09:00:17','2026-05-21 09:00:17'),(150,85,'en_ruta','?‍✈️ Piloto asignado: Yerma','2026-05-21 09:00:17','2026-05-21 09:00:17'),(151,85,'en_ruta','? Camión asignado: M190','2026-05-21 09:00:17','2026-05-21 09:00:17'),(152,86,'en_ruta','? Viaje creado en el sistema','2026-05-21 09:18:20','2026-05-21 09:18:20'),(153,87,'pendiente','? Viaje creado en el sistema','2026-05-21 09:24:33','2026-05-21 09:24:33'),(154,87,'rechazado','❌ Operador rechazó el viaje','2026-05-21 09:24:42','2026-05-21 09:24:42'),(155,84,'pendiente','? Estado actualizado de \"completado\" a \"pendiente\"','2026-05-21 09:49:01','2026-05-21 09:49:01'),(156,84,'cancelado','? Viaje cancelado por operador','2026-05-21 09:49:10','2026-05-21 09:49:10'),(157,88,'pendiente','? Viaje creado en el sistema','2026-05-22 09:46:07','2026-05-22 09:46:07'),(158,88,'pendiente','?‍✈️ Piloto asignado: Yerma','2026-05-22 09:46:07','2026-05-22 09:46:07'),(159,88,'pendiente','? Camión asignado: K123','2026-05-22 09:46:07','2026-05-22 09:46:07'),(160,84,'pendiente','? Estado actualizado de \"cancelado\" a \"pendiente\"','2026-05-22 09:46:22','2026-05-22 09:46:22'),(161,84,'pendiente','✏️ Información del viaje actualizada','2026-05-22 09:46:26','2026-05-22 09:46:26'),(162,89,'pendiente','? Viaje creado en el sistema','2026-05-22 09:53:52','2026-05-22 09:53:52'),(163,90,'pendiente','? Viaje creado en el sistema','2026-05-22 11:45:49','2026-05-22 11:45:49'),(164,90,'pendiente','✏️ Información del viaje actualizada','2026-05-22 11:46:05','2026-05-22 11:46:05'),(165,90,'rechazado','❌ Operador rechazó el viaje','2026-05-22 11:56:51','2026-05-22 11:56:51');
 /*!40000 ALTER TABLE `viaje_historials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -480,7 +480,7 @@ CREATE TABLE `viajes` (
   CONSTRAINT `viajes_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE SET NULL,
   CONSTRAINT `viajes_ibfk_2` FOREIGN KEY (`piloto_id`) REFERENCES `pilotos` (`id`) ON DELETE SET NULL,
   CONSTRAINT `viajes_ibfk_3` FOREIGN KEY (`camion_id`) REFERENCES `camiones` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -489,7 +489,7 @@ CREATE TABLE `viajes` (
 
 LOCK TABLES `viajes` WRITE;
 /*!40000 ALTER TABLE `viajes` DISABLE KEYS */;
-INSERT INTO `viajes` VALUES (84,'TRX-289FA7',10,1,1,'Cobán, Alta Verapaz, Guatemala','Puerto Barrios, Izabal, Guatemala',NULL,NULL,'completado','2026-05-21 07:41:06','2026-05-21 07:42:41',NULL,NULL,15.47020010,-90.37350650,15.72751540,-88.59525060,'firmas/firma_1779327761.png','2026-05-21 07:42:41',1),(85,'TRX-83F781',10,1,2,'Cobán, Alta Verapaz, Guatemala','Ciudad de Guatemala, Departamento de Guatemala, Guatemala',NULL,NULL,'completado','2026-05-21 07:41:28','2026-05-21 09:13:18',NULL,NULL,15.47020010,-90.37350650,14.64161420,-90.51328360,'firmas/firma_1779333198.png','2026-05-21 09:13:18',1),(86,'TRX-C43085',10,NULL,NULL,'Petén, Guatemala','Barrio Santa Cruz, Melchor de Mencos, Petén, Guatemala',NULL,NULL,'en_ruta','2026-05-21 09:18:20','2026-05-21 09:18:20',NULL,NULL,16.83179060,-90.04506370,17.05028670,-89.17005480,NULL,NULL,0),(87,'TRX-195B9A',10,NULL,NULL,'Petén, Guatemala','Finca El Paraiso -Custodios de la Selva-, Puente de Cuerda, Melchor de Mencos, Petén, Guatemala',NULL,NULL,'rechazado','2026-05-21 09:24:33','2026-05-21 09:24:42',NULL,NULL,16.83179060,-90.04506370,17.00260120,-89.17843420,NULL,NULL,0);
+INSERT INTO `viajes` VALUES (84,'TRX-289FA7',10,NULL,NULL,'Cobán, Alta Verapaz, Guatemala','Puerto Barrios, Izabal, Guatemala',NULL,NULL,'pendiente','2026-05-21 07:41:06','2026-05-22 09:46:26',NULL,NULL,15.47020010,-90.37350650,15.72751540,-88.59525060,'firmas/firma_1779327761.png','2026-05-21 07:42:41',1),(85,'TRX-83F781',10,1,2,'Cobán, Alta Verapaz, Guatemala','Ciudad de Guatemala, Departamento de Guatemala, Guatemala',NULL,NULL,'completado','2026-05-21 07:41:28','2026-05-21 09:13:18',NULL,NULL,15.47020010,-90.37350650,14.64161420,-90.51328360,'firmas/firma_1779333198.png','2026-05-21 09:13:18',1),(86,'TRX-C43085',10,NULL,NULL,'Petén, Guatemala','Barrio Santa Cruz, Melchor de Mencos, Petén, Guatemala',NULL,NULL,'en_ruta','2026-05-21 09:18:20','2026-05-21 09:18:20',NULL,NULL,16.83179060,-90.04506370,17.05028670,-89.17005480,NULL,NULL,0),(87,'TRX-195B9A',10,NULL,NULL,'Petén, Guatemala','Finca El Paraiso -Custodios de la Selva-, Puente de Cuerda, Melchor de Mencos, Petén, Guatemala',NULL,NULL,'completado','2026-05-21 09:24:33','2026-05-21 09:48:08',NULL,NULL,16.83179060,-90.04506370,17.00260120,-89.17843420,'firmas/firma_1779335288.png','2026-05-21 09:48:08',1),(88,'TRX-F2BAB7',10,1,1,'Petén, Guatemala','Puerto, Santa Catalina-Canteras, Las Palmas de Gran Canaria, Las Palmas, Canarias, 35007, España',NULL,NULL,'pendiente','2026-05-22 09:46:07','2026-05-22 09:46:07',NULL,NULL,16.83179060,-90.04506370,28.14169420,-15.43181720,NULL,NULL,0),(89,'TRX-0193D3',10,NULL,NULL,'Guatemala','Puerto Barrios, Izabal, Guatemala',NULL,NULL,'pendiente','2026-05-22 09:53:52','2026-05-22 09:53:52',NULL,NULL,15.58555450,-90.34575900,15.72751540,-88.59525060,NULL,NULL,0),(90,'TRX-D67FB8',10,NULL,NULL,'Ciudad de Guatemala, Departamento de Guatemala, Guatemala','Zona 11, Ciudad de Guatemala, Departamento de Guatemala, 01011, Guatemala',NULL,NULL,'rechazado','2026-05-22 11:45:49','2026-05-22 11:56:51',NULL,NULL,14.64161420,-90.51328360,14.61005680,-90.55111140,NULL,NULL,0);
 /*!40000 ALTER TABLE `viajes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -502,4 +502,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-20 21:44:42
+-- Dump completed on 2026-05-22  0:06:42
