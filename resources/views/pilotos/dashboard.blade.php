@@ -275,6 +275,21 @@ body { background: #f4f7fb; }
                     </div>
                 </div>
 
+                {{-- ══ BOTÓN SUBIR EVIDENCIAS ══ --}}
+                <div style="margin-top:20px;">
+                    <a href="{{ route('piloto.evidencias.create', $viaje_activo->id) }}"
+                       style="display:inline-flex;align-items:center;gap:8px;
+                              background:#ff5e14;color:#fff;
+                              padding:10px 22px;border-radius:10px;
+                              font-weight:700;font-size:13px;
+                              text-decoration:none;
+                              transition:opacity .2s;"
+                       onmouseover="this.style.opacity='.85'"
+                       onmouseout="this.style.opacity='1'">
+                        📷 Subir evidencias de entrega
+                    </a>
+                </div>
+
                 {{-- Mapa si hay coordenadas --}}
                 @if($viaje_activo->lat_origen && $viaje_activo->lng_origen)
                 <div id="mapa-activo"
