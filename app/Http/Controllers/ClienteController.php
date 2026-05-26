@@ -8,11 +8,29 @@ use App\Models\Cliente;
 class ClienteController extends Controller
 {
     // Mostrar todos los clientes
-    public function index()
-    {
-        $clientes = Cliente::latest()->paginate(10);
-        return view('clientes.index', compact('clientes'));
-    }
+    public function index(Request $request)
+{
+    $buscar = $request->buscar;
+
+    $clientes = Cliente::query()
+
+        ->when($buscar, function ($query) use ($buscar) {
+
+            $query->where('nombre', 'like', "%{$buscar}%")
+                  ->orWhere('email', 'like', "%{$buscar}%")
+                  ->orWhere('telefono', 'like', "%{$buscar}%");
+
+        })
+
+        ->paginate(20)
+
+        ->withQueryString();
+
+    return view(
+        'clientes.index',
+        compact('clientes')
+    );
+}
 
     // Mostrar formulario de creación
     public function create()

@@ -393,13 +393,19 @@ TABLE BUTTONS
 
             <div style="min-width:320px;">
 
-                <input
-                    type="text"
-                    id="buscadorClientes"
-                    class="buscador-pro"
-                    placeholder="🔍 Buscar cliente..."
-                >
+                <form method="GET" action="" class="d-flex">
 
+    <input
+        type="text"
+        name="buscar"
+        value="{{ request('buscar') }}"
+        class="form-control buscador-pro"
+        placeholder="🔍 Buscar cliente..."
+    >
+
+   
+
+</form>
             </div>
 
             <a
@@ -514,29 +520,17 @@ TABLE BUTTONS
 <script src="{{ asset('assets/js/main.js') }}"></script>
 <script>
 
-document
-.getElementById('buscadorClientes')
+$(document).ready(function() {
 
-.addEventListener('input', function(){
-
-    let filtro =
-        this.value.toLowerCase();
-
-    let filas =
-        document.querySelectorAll(
-            '#tablaClientes tbody tr'
-        );
-
-    filas.forEach(fila => {
-
-        let texto =
-            fila.innerText.toLowerCase();
-
-        fila.style.display =
-            texto.includes(filtro)
-                ? ''
-                : 'none';
-
+    $('#tablaClientes').DataTable({
+        "language": {
+            "search": "Buscar:",
+            "lengthMenu": "Mostrar _MENU_ clientes por página",
+            "zeroRecords": "No se encontraron clientes",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay clientes disponibles",
+            "infoFiltered": "(filtrado de _MAX_ clientes totales)"
+        }
     });
 
 });

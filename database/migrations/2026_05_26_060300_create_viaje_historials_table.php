@@ -15,7 +15,7 @@ return new class extends Migration
 
     $table->id();
 
-    $table->bigInteger('viaje_id');
+    $table->unsignedBigInteger('viaje_id');
 
     $table->string('estado');
 

@@ -424,16 +424,19 @@ LICENSE BADGE
                     "
                 >
 
-                    <div style="min-width:320px;">
+                    <form method="GET" action="" class="d-flex">
 
-                        <input
-                            type="text"
-                            id="buscadorPilotos"
-                            class="buscador-pro"
-                            placeholder="🔍 Buscar piloto..."
-                        >
+    <input
+        type="text"
+        name="buscar"
+        value="{{ request('buscar') }}"
+        class="form-control buscador-pro"
+        placeholder="🔍 Buscar piloto..."
+    >
 
-                    </div>
+   
+
+</form>
 
                     <div
     style="
@@ -485,6 +488,8 @@ LICENSE BADGE
                             <th>Teléfono</th>
 
                             <th>Licencia</th>
+
+                            <th>DPI</th>
 
                         </tr>
 
@@ -553,6 +558,12 @@ LICENSE BADGE
 
                             </td>
 
+                            <td>
+
+                                {{ $p->dpi }}
+
+                            </td>
+
                         </tr>
 
                         @empty
@@ -617,37 +628,6 @@ LICENSE BADGE
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.slicknav.min.js') }}"></script>
 <script src="{{ asset('assets/js/main.js') }}"></script>
-
-<script>
-
-document
-.getElementById('buscadorPilotos')
-
-.addEventListener('input', function(){
-
-    let filtro =
-        this.value.toLowerCase();
-
-    let filas =
-        document.querySelectorAll(
-            '#tablaPilotos tbody tr'
-        );
-
-    filas.forEach(fila => {
-
-        let texto =
-            fila.innerText.toLowerCase();
-
-        fila.style.display =
-            texto.includes(filtro)
-                ? ''
-                : 'none';
-
-    });
-
-});
-
-</script>
 
 </body>
 

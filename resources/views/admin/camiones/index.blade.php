@@ -20,7 +20,6 @@
 <style>
 
 body{
-
     background:#f4f7fb;
 }
 
@@ -29,22 +28,15 @@ PAGE TITLE
 ========================= */
 
 .page-title{
-
     font-size:42px;
-
     font-weight:800;
-
     color:#0b1c39;
-
     margin-bottom:8px;
 }
 
 .page-subtitle{
-
     color:#6b7280;
-
     font-size:15px;
-
     margin-bottom:45px;
 }
 
@@ -53,19 +45,12 @@ SEARCH
 ========================= */
 
 .buscador-pro{
-
     border:none;
-
     background:#fff;
-
     border-radius:16px;
-
     padding:16px 20px;
-
     transition:.3s ease;
-
-    width:100%;
-
+    width:280px;
     font-size:14px;
 
     box-shadow:
@@ -73,7 +58,6 @@ SEARCH
 }
 
 .buscador-pro:focus{
-
     outline:none;
 
     box-shadow:
@@ -87,11 +71,8 @@ TABLE CARD
 ========================= */
 
 .table-card{
-
     background:#fff;
-
     border-radius:24px;
-
     overflow:hidden;
 
     box-shadow:
@@ -99,15 +80,12 @@ TABLE CARD
 }
 
 .table-header{
-
     padding:28px 30px;
 
     border-bottom:1px solid #eef2f7;
 
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 
     flex-wrap:wrap;
@@ -116,7 +94,6 @@ TABLE CARD
 }
 
 .table-header h4{
-
     margin:0;
 
     font-size:24px;
@@ -131,7 +108,6 @@ BUTTONS
 ========================= */
 
 .action-btn{
-
     border:none;
 
     border-radius:14px;
@@ -154,16 +130,12 @@ BUTTONS
 }
 
 .action-btn:hover{
-
     transform:translateY(-3px);
-
     color:#fff;
 }
 
 .btn-orange{
-
     background:#ff5e14;
-
     color:#fff;
 
     box-shadow:
@@ -171,9 +143,7 @@ BUTTONS
 }
 
 .btn-dark-pro{
-
     background:#0b1c39;
-
     color:#fff;
 }
 
@@ -182,12 +152,10 @@ TABLE
 ========================= */
 
 .table{
-
     margin-bottom:0;
 }
 
 .table thead th{
-
     background:#f8fafc;
 
     border:none;
@@ -206,7 +174,6 @@ TABLE
 }
 
 .table tbody td{
-
     padding:22px 18px;
 
     border-top:1px solid #f1f5f9;
@@ -217,12 +184,10 @@ TABLE
 }
 
 .table tbody tr{
-
     transition:.25s ease;
 }
 
 .table tbody tr:hover{
-
     background:#fafcff;
 }
 
@@ -231,17 +196,13 @@ TRUCK ICON
 ========================= */
 
 .truck-avatar{
-
     width:52px;
-
     height:52px;
 
     border-radius:16px;
 
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
     font-size:20px;
@@ -258,54 +219,44 @@ TRUCK ICON
         0 10px 25px rgba(0,0,0,.10);
 }
 
-/* Variantes dinámicas */
+/* Variantes */
 
 .truck-red{
-
     background:
         linear-gradient(135deg,#ef4444,#dc2626);
 }
 
 .truck-blue{
-
     background:
         linear-gradient(135deg,#3b82f6,#2563eb);
 }
 
 .truck-green{
-
     background:
         linear-gradient(135deg,#10b981,#059669);
 }
 
 .truck-orange{
-
     background:
         linear-gradient(135deg,#ff7a18,#ff5e14);
 }
 
 .truck-purple{
-
     background:
         linear-gradient(135deg,#8b5cf6,#6d28d9);
 }
 
 .truck-dark{
-
     background:
         linear-gradient(135deg,#1f2937,#111827);
 }
 
-/* Glow */
-
 .truck-avatar::after{
-
     content:'';
 
     position:absolute;
 
     width:70px;
-
     height:70px;
 
     background:rgba(255,255,255,.12);
@@ -313,7 +264,6 @@ TRUCK ICON
     border-radius:50%;
 
     top:-30px;
-
     right:-20px;
 }
 
@@ -322,7 +272,6 @@ BADGES
 ========================= */
 
 .capacity-badge{
-
     background:#eef2ff;
 
     color:#4338ca;
@@ -341,7 +290,6 @@ EDIT BUTTON
 ========================= */
 
 .btn-edit{
-
     background:#fff7ed;
 
     color:#ea580c;
@@ -357,11 +305,42 @@ EDIT BUTTON
     font-weight:700;
 
     transition:.25s ease;
+
+    text-decoration:none;
 }
 
 .btn-edit:hover{
-
     background:#ffedd5;
+
+    transform:translateY(-2px);
+
+    color:#ea580c;
+}
+
+/* =========================
+DELETE BUTTON
+========================= */
+
+.btn-delete{
+    background:#fef2f2;
+
+    color:#dc2626;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:10px 14px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    transition:.25s ease;
+}
+
+.btn-delete:hover{
+    background:#fee2e2;
 
     transform:translateY(-2px);
 }
@@ -483,15 +462,11 @@ EDIT BUTTON
         <div class="mb-5 text-center">
 
             <h1 class="page-title">
-
                 Camiones
-
             </h1>
 
             <p class="page-subtitle">
-
                 Administración y monitoreo de la flota de transporte.
-
             </p>
 
         </div>
@@ -501,9 +476,7 @@ EDIT BUTTON
             <div class="table-header">
 
                 <h4>
-
                     Lista de camiones
-
                 </h4>
 
                 <div
@@ -515,16 +488,17 @@ EDIT BUTTON
                     "
                 >
 
-                    <div style="min-width:320px;">
+                    <form method="GET" action="" class="d-flex">
 
                         <input
                             type="text"
-                            id="buscador"
-                            class="buscador-pro"
+                            name="buscar"
+                            value="{{ request('buscar') }}"
+                            class="form-control buscador-pro"
                             placeholder="🔍 Buscar camión..."
                         >
 
-                    </div>
+                    </form>
 
                     <a
                         href="/admin/viajes"
@@ -550,7 +524,7 @@ EDIT BUTTON
 
             <div class="table-responsive">
 
-                <table class="table" id="tablaCamiones">
+                <table class="table">
 
                     <thead>
 
@@ -586,26 +560,26 @@ EDIT BUTTON
 
                                 @php
 
-$colores = [
+                                $colores = [
 
-    'truck-red',
-    'truck-blue',
-    'truck-green',
-    'truck-orange',
-    'truck-purple',
-    'truck-dark'
+                                    'truck-red',
+                                    'truck-blue',
+                                    'truck-green',
+                                    'truck-orange',
+                                    'truck-purple',
+                                    'truck-dark'
 
-];
+                                ];
 
-$colorClase = $colores[$loop->index % count($colores)];
+                                $colorClase = $colores[$loop->index % count($colores)];
 
-@endphp
+                                @endphp
 
-<div class="truck-avatar {{ $colorClase }}">
+                                <div class="truck-avatar {{ $colorClase }}">
 
-    🚛
+                                    🚛
 
-</div>
+                                </div>
 
                                 <div>
 
@@ -650,14 +624,46 @@ $colorClase = $colores[$loop->index % count($colores)];
 
                         <td>
 
-                            <a
-                                href="/admin/camiones/{{ $c->id }}/edit"
-                                class="btn-edit"
+                            <div
+                                style="
+                                    display:flex;
+                                    gap:10px;
+                                    align-items:center;
+                                    flex-wrap:wrap;
+                                "
                             >
 
-                                ✏️ Editar
+                                <a
+                                    href="/admin/camiones/{{ $c->id }}/edit"
+                                    class="btn-edit"
+                                >
 
-                            </a>
+                                    ✏️ Editar
+
+                                </a>
+
+                                <form
+                                    method="POST"
+                                    action="/admin/camiones/{{ $c->id }}"
+                                    onsubmit="return confirm('¿Eliminar este camión?')"
+                                    style="margin:0;"
+                                >
+
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button
+                                        type="submit"
+                                        class="btn-delete"
+                                    >
+
+                                        🗑 Eliminar
+
+                                    </button>
+
+                                </form>
+
+                            </div>
 
                         </td>
 
@@ -723,37 +729,6 @@ $colorClase = $colores[$loop->index % count($colores)];
     © {{ date('Y') }} TransportesPro
 
 </footer>
-
-<script>
-
-document
-.getElementById('buscador')
-
-.addEventListener('input', function(){
-
-    let filtro =
-        this.value.toLowerCase();
-
-    let filas =
-        document.querySelectorAll(
-            '#tablaCamiones tbody tr'
-        );
-
-    filas.forEach(fila => {
-
-        let texto =
-            fila.innerText.toLowerCase();
-
-        fila.style.display =
-            texto.includes(filtro)
-                ? ''
-                : 'none';
-
-    });
-
-});
-
-</script>
 
 </body>
 

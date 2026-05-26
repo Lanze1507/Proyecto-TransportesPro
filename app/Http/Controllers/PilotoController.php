@@ -7,11 +7,30 @@ use Illuminate\Http\Request;
 
 class PilotoController extends Controller
 {
-    public function index()
-    {
-        $pilotos = Piloto::latest()->paginate(10);
-        return view('pilotos.index', compact('pilotos'));
-    }
+    public function index(Request $request)
+{
+    $buscar = $request->buscar;
+
+    $pilotos = Piloto::query()
+
+        ->when($buscar, function ($query) use ($buscar) {
+
+            $query->where('nombre', 'like', "%{$buscar}%")
+                  ->orWhere('telefono', 'like', "%{$buscar}%")
+                  ->orWhere('licencia', 'like', "%{$buscar}%")
+                  ->orWhere('dpi', 'like', "%{$buscar}%");
+
+        })
+
+        ->paginate(20)
+
+        ->withQueryString();
+
+    return view(
+        'pilotos.index',
+        compact('pilotos')
+    );
+}
 
     public function create()
     {

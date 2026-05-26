@@ -1,31 +1,21 @@
 <!doctype html>
 
-<html class="no-js" lang="es">
+<html lang="es">
 
 <head>
 
-    <meta charset="utf-8">
+<meta charset="utf-8">
 
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Nuevo Piloto - TransportesPro</title>
+<title>Editar Camión - TransportesPro</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
+<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/slicknav.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/flaticon.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/fontawesome-all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
 <style>
 
@@ -174,6 +164,62 @@ LABELS
 }
 
 /* =========================
+TRUCK ICON
+========================= */
+
+.truck-preview{
+
+    width:88px;
+
+    height:88px;
+
+    margin:auto;
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(135deg,#3b82f6,#2563eb);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:38px;
+
+    color:#fff;
+
+    box-shadow:
+        0 20px 40px rgba(37,99,235,.25);
+
+    margin-bottom:25px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.truck-preview::after{
+
+    content:'';
+
+    position:absolute;
+
+    width:120px;
+
+    height:120px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.10);
+
+    top:-50px;
+
+    right:-20px;
+}
+
+/* =========================
 ERRORS
 ========================= */
 
@@ -238,7 +284,7 @@ ERRORS
 
                                             <li><a href="/admin/viajes">Panel Admin</a></li>
 
-                                            <li><a href="/admin/pilotos">Pilotos</a></li>
+                                            <li><a href="/admin/camiones">Camiones</a></li>
 
                                             @auth
 
@@ -304,17 +350,8 @@ ERRORS
 
         <div class="text-center mb-5">
 
-            <h1 class="page-title">
+            
 
-                Nuevo Piloto
-
-            </h1>
-
-            <p class="page-subtitle">
-
-                Registra un nuevo piloto dentro del sistema TransportesPro.
-
-            </p>
 
         </div>
 
@@ -324,7 +361,13 @@ ERRORS
 
                 <div class="form-card">
 
-                    <div class="mb-4">
+                    <div class="truck-preview">
+
+                        🚛
+
+                    </div>
+
+                    <div class="mb-4 text-center">
 
                         <h3
                             style="
@@ -334,7 +377,7 @@ ERRORS
                             "
                         >
 
-                            👨‍✈️ Información del piloto
+                            Editar Camión
 
                         </h3>
 
@@ -345,7 +388,7 @@ ERRORS
                             "
                         >
 
-                            Completa todos los datos requeridos.
+                            Modifica los datos registrados del vehículo.
 
                         </p>
 
@@ -369,9 +412,13 @@ ERRORS
 
                     @endif
 
-                    <form method="POST" action="{{ route('pilotos.store') }}">
+                    <form
+                        method="POST"
+                        action="/admin/camiones/{{ $camion->id }}"
+                    >
 
                         @csrf
+                        @method('PUT')
 
                         <div class="row">
 
@@ -379,16 +426,15 @@ ERRORS
 
                                 <label class="form-label">
 
-                                    Nombre completo
+                                    Placa
 
                                 </label>
 
                                 <input
                                     type="text"
-                                    name="nombre"
+                                    name="placa"
+                                    value="{{ $camion->placa }}"
                                     class="form-control custom-input"
-                                    placeholder="Ej: Juan Pérez"
-                                    value="{{ old('nombre') }}"
                                     required
                                 >
 
@@ -398,16 +444,15 @@ ERRORS
 
                                 <label class="form-label">
 
-                                    Teléfono
+                                    Modelo
 
                                 </label>
 
                                 <input
                                     type="text"
-                                    name="telefono"
+                                    name="modelo"
+                                    value="{{ $camion->modelo }}"
                                     class="form-control custom-input"
-                                    placeholder="Ej: 5555-5555"
-                                    value="{{ old('telefono') }}"
                                     required
                                 >
 
@@ -417,35 +462,15 @@ ERRORS
 
                                 <label class="form-label">
 
-                                    Número de licencia
+                                    Capacidad (kg)
 
                                 </label>
 
                                 <input
-                                    type="text"
-                                    name="licencia"
+                                    type="number"
+                                    name="capacidad"
+                                    value="{{ $camion->capacidad }}"
                                     class="form-control custom-input"
-                                    placeholder="Ej: LIC-2026-001"
-                                    value="{{ old('licencia') }}"
-                                    required
-                                >
-
-                            </div>
-
-                            <div class="col-12 mb-4">
-
-                                <label class="form-label">
-
-                                    DPI
-
-                                </label>
-
-                                <input
-                                    type="text"
-                                    name="dpi"
-                                    class="form-control custom-input"
-                                    placeholder="Ej: 1234567890123"
-                                    value="{{ old('dpi') }}"
                                     required
                                 >
 
@@ -456,7 +481,7 @@ ERRORS
                             >
 
                                 <a
-                                    href="/admin/pilotos"
+                                    href="/admin/camiones"
                                     class="action-btn btn-dark-pro"
                                 >
 
@@ -468,7 +493,7 @@ ERRORS
                                     class="action-btn btn-orange"
                                 >
 
-                                    💾 Guardar piloto
+                                    💾 Guardar Cambios
 
                                 </button>
 
@@ -490,12 +515,18 @@ ERRORS
 
 </main>
 
-<!-- JS -->
-<script src="{{ asset('assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
-<script src="{{ asset('assets/js/popper.min.js') }}"></script>
-<script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.slicknav.min.js') }}"></script>
-<script src="{{ asset('assets/js/main.js') }}"></script>
+<footer
+    style="
+        text-align:center;
+        padding:25px;
+        color:#9ca3af;
+        font-size:13px;
+    "
+>
+
+    © {{ date('Y') }} TransportesPro
+
+</footer>
 
 </body>
 
