@@ -63,4 +63,8 @@ class Viaje extends Model
         return $this->hasMany(ViajeHistorial::class)
             ->latest();
     }
+    public function entrega()
+{
+    return $this->hasOne(Entrega::class);
+}
 }
