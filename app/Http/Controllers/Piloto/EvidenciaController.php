@@ -11,6 +11,17 @@ use Illuminate\Http\Request;
 class EvidenciaController extends Controller
 {
     // Subir fotos de evidencia al completar un viaje
+    public function create($viaje_id)
+    {
+        $viaje = \App\Models\Viaje::with(['cliente', 'camion'])->findOrFail($viaje_id);
+
+        // Solo el piloto asignado puede subir evidencias
+        $piloto = \App\Models\Piloto::where('user_id', auth()->id())->firstOrFail();
+
+        abort_if($viaje->piloto_id !== $piloto->id, 403);
+
+        return view('pilotos.subir_evidencias', compact('viaje'));
+    }
     public function store(Request $request, $viaje_id)
     {
         $request->validate([
