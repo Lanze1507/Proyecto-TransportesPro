@@ -15,7 +15,8 @@ return new class extends Migration
         $table->id();
         $table->string('placa')->unique();
         $table->string('modelo');
-        $table->string('capacidad'); // ejemplo: 10 toneladas
+        $table->decimal('capacidad', 10, 2)->nullable();
+        $table->string('estado', 20)->default('disponible');
         $table->timestamps();
     });
 }

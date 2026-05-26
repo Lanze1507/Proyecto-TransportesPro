@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('telefono')->nullable();
             $table->string('licencia')->nullable();
             $table->string('dpi')->nullable();
+            $table->string('estado', 20)->default('activo');
             $table->timestamps();
         });
     }
