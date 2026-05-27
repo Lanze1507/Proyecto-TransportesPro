@@ -320,13 +320,17 @@ class ViajeController extends Controller
             $request->destino
         );
 
-        /*
+/*
 |--------------------------------------------------------------------------
 | LIBERAR RECURSOS ANTERIORES
 |--------------------------------------------------------------------------
 */
 
-if($pilotoAnterior && $pilotoAnterior != $request->piloto_id){
+if(
+    $pilotoAnterior
+    &&
+    $pilotoAnterior != $request->piloto_id
+){
 
     Piloto::where('id', $pilotoAnterior)
 
@@ -338,7 +342,11 @@ if($pilotoAnterior && $pilotoAnterior != $request->piloto_id){
 
 }
 
-if($camionAnterior && $camionAnterior != $request->camion_id){
+if(
+    $camionAnterior
+    &&
+    $camionAnterior != $request->camion_id
+){
 
     Camion::where('id', $camionAnterior)
 

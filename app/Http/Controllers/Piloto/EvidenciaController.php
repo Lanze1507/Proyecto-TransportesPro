@@ -48,7 +48,51 @@ class EvidenciaController extends Controller
         }
 
         // Marcar el viaje como completado
-        Viaje::findOrFail($viaje_id)->update(['estado' => 'completado']);
+        /*
+|--------------------------------------------------------------------------
+| COMPLETAR VIAJE
+|--------------------------------------------------------------------------
+*/
+
+$viaje = Viaje::findOrFail($viaje_id);
+
+$viaje->update([
+
+    'estado' => 'completado'
+
+]);
+
+/*
+|--------------------------------------------------------------------------
+| LIBERAR PILOTO
+|--------------------------------------------------------------------------
+*/
+
+if($viaje->piloto){
+
+    $viaje->piloto->update([
+
+        'estado' => 'activo'
+
+    ]);
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| LIBERAR CAMIÓN
+|--------------------------------------------------------------------------
+*/
+
+if($viaje->camion){
+
+    $viaje->camion->update([
+
+        'estado' => 'disponible'
+
+    ]);
+
+}
 
         return back()->with('success', 'Evidencias guardadas correctamente.');
     }

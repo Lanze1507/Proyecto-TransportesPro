@@ -355,19 +355,57 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/viaje/completar/{id}', function ($id) {
 
-        $viaje = Viaje::findOrFail($id);
+    $viaje = Viaje::findOrFail($id);
 
-        $viaje->estado = 'completado';
+    /*
+    |--------------------------------------------------------------------------
+    | COMPLETAR VIAJE
+    |--------------------------------------------------------------------------
+    */
 
-        $viaje->save();
+    $viaje->estado = 'completado';
 
-        return response()->json([
+    $viaje->save();
 
-            'success' => true
+    /*
+    |--------------------------------------------------------------------------
+    | LIBERAR PILOTO
+    |--------------------------------------------------------------------------
+    */
+
+    if($viaje->piloto){
+
+        $viaje->piloto->update([
+
+            'estado' => 'activo'
 
         ]);
 
-    });
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | LIBERAR CAMIÓN
+    |--------------------------------------------------------------------------
+    */
+
+    if($viaje->camion){
+
+        $viaje->camion->update([
+
+            'estado' => 'disponible'
+
+        ]);
+
+    }
+
+    return response()->json([
+
+        'success' => true
+
+    ]);
+
+});
 
     /*
     |--------------------------------------------------------------------------

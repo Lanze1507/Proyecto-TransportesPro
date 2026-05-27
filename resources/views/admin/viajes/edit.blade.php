@@ -690,6 +690,144 @@ RESPONSIVE
 
                 </div>
 
+<!-- PILOTO -->
+<div class="col-lg-6 mb-4">
+
+    <div class="input-wrap">
+
+        <label class="form-label">
+
+            Piloto
+
+        </label>
+
+        <div class="custom-search">
+
+            <input
+                type="text"
+                id="buscarPiloto"
+                class="form-control"
+                autocomplete="off"
+                value="{{ $viaje->piloto->nombre ?? '' }}"
+            >
+
+            <div id="listaPilotos" class="search-results">
+
+                @foreach($pilotos as $p)
+
+                <div
+                    class="search-item"
+                    data-id="{{ $p->id }}"
+                    data-estado="{{ $p->estado }}"
+                    data-text="{{ strtolower($p->nombre) }}"
+                >
+
+                    @if($p->estado == 'activo')
+
+                        🟢
+
+                    @elseif($p->estado == 'ocupado')
+
+                        🟠
+
+                    @else
+
+                        🔴
+
+                    @endif
+
+                    {{ $p->nombre }}
+
+                    — {{ ucfirst($p->estado) }}
+
+                </div>
+
+                @endforeach
+
+            </div>
+
+            <input
+                type="hidden"
+                name="piloto_id"
+                id="piloto_id"
+                value="{{ $viaje->piloto_id }}"
+            >
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CAMIÓN -->
+<div class="col-lg-6 mb-4">
+
+    <div class="input-wrap">
+
+        <label class="form-label">
+
+            Camión
+
+        </label>
+
+        <div class="custom-search">
+
+            <input
+                type="text"
+                id="buscarCamion"
+                class="form-control"
+                autocomplete="off"
+                value="{{ $viaje->camion->placa ?? '' }}"
+            >
+
+            <div id="listaCamiones" class="search-results">
+
+                @foreach($camiones as $c)
+
+                <div
+                    class="search-item"
+                    data-id="{{ $c->id }}"
+                    data-estado="{{ $c->estado }}"
+                    data-text="{{ strtolower($c->placa . ' ' . $c->modelo) }}"
+                >
+
+                    @if($c->estado == 'disponible')
+
+                        🟢
+
+                    @elseif($c->estado == 'ocupado')
+
+                        🟠
+
+                    @else
+
+                        🔴
+
+                    @endif
+
+                    🚛 {{ $c->placa }}
+
+                    — {{ ucfirst($c->estado) }}
+
+                </div>
+
+                @endforeach
+
+            </div>
+
+            <input
+                type="hidden"
+                name="camion_id"
+                id="camion_id"
+                value="{{ $viaje->camion_id }}"
+            >
+
+        </div>
+
+    </div>
+
+</div>
+
                 <!-- ESTADO -->
                 <div class="col-lg-6 mb-4">
 
@@ -912,6 +1050,18 @@ setupSearch(
     'buscarCliente',
     'listaClientes',
     'cliente_id'
+);
+
+setupSearch(
+    'buscarPiloto',
+    'listaPilotos',
+    'piloto_id'
+);
+
+setupSearch(
+    'buscarCamion',
+    'listaCamiones',
+    'camion_id'
 );
 
 </script>
