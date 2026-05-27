@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use App\Models\Notificacion;
 
 class RegisteredUserController extends Controller
 {
@@ -43,6 +44,21 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
+
+        
+
+        \App\Models\Notificacion::create([
+
+    'titulo' =>
+        '👤 Nuevo cliente registrado',
+
+    'mensaje' =>
+        $user->name .
+        ' se registró con el correo: '
+        . $user->email
+
+]);
+        
 
         Auth::login($user);
 

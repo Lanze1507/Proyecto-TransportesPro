@@ -757,6 +757,143 @@ FILTROS
                 <h2 class="mb-4">Viajes</h2>
                 <div
     style="
+        background:#fff;
+        border-radius:24px;
+        padding:25px;
+        margin-bottom:30px;
+        box-shadow:0 10px 40px rgba(0,0,0,.05);
+    "
+>
+
+    <div
+    style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:20px;
+        flex-wrap:wrap;
+        gap:10px;
+    "
+>
+
+    <h4
+        style="
+            font-weight:800;
+            margin:0;
+            color:#0b1c39;
+        "
+    >
+
+        🔔 Nuevos registros
+
+    </h4>
+
+    <button
+        type="button"
+        id="toggleNotificaciones"
+        style="
+            border:none;
+            background:#ff5e14;
+            color:white;
+            padding:10px 16px;
+            border-radius:12px;
+            font-size:13px;
+            font-weight:700;
+            cursor:pointer;
+        "
+    >
+
+        Ocultar
+
+    </button>
+
+</div>
+<div id="contenedorNotificaciones">
+   @forelse($notificaciones as $n)
+
+    <div
+        style="
+            padding:18px;
+            border-radius:16px;
+            background:#f8fafc;
+            margin-bottom:12px;
+            position:relative;
+        "
+    >
+
+        <form
+            method="POST"
+            action="{{ route('admin.notificaciones.delete', $n->id) }}"
+            style="
+                position:absolute;
+                top:14px;
+                right:14px;
+            "
+        >
+
+            @csrf
+            @method('DELETE')
+
+            <button
+                type="submit"
+                style="
+                    border:none;
+                    background:#fee2e2;
+                    color:#dc2626;
+                    width:32px;
+                    height:32px;
+                    border-radius:50%;
+                    cursor:pointer;
+                    font-weight:800;
+                "
+            >
+
+                ✕
+
+            </button>
+
+        </form>
+
+        <div
+            style="
+                font-weight:700;
+                color:#0b1c39;
+                margin-bottom:5px;
+            "
+        >
+
+            {{ $n->titulo }}
+
+        </div>
+
+        <div style="color:#6b7280;">
+
+            {{ $n->mensaje }}
+
+        </div>
+
+        <small style="color:#9ca3af;">
+
+            {{ $n->created_at->diffForHumans() }}
+
+        </small>
+
+    </div>
+
+@empty
+
+    <p style="color:#9ca3af;">
+
+        No hay notificaciones.
+
+    </p>
+
+@endforelse
+</div>
+
+</div>
+                <div
+    style="
         display:flex;
         gap:12px;
         flex-wrap:wrap;
@@ -1031,6 +1168,43 @@ document.querySelectorAll('.filtro-btn')
 });
 
 
+
+</script>
+<script>
+
+const btnToggle = document.getElementById(
+
+    'toggleNotificaciones'
+
+);
+
+const contenedor = document.getElementById(
+
+    'contenedorNotificaciones'
+
+);
+
+let visible = true;
+
+btnToggle.addEventListener('click', () => {
+
+    visible = !visible;
+
+    if(visible){
+
+        contenedor.style.display = 'block';
+
+        btnToggle.innerText = 'Ocultar';
+
+    }else{
+
+        contenedor.style.display = 'none';
+
+        btnToggle.innerText = 'Mostrar';
+
+    }
+
+});
 
 </script>
 </body>

@@ -19,6 +19,18 @@ use App\Http\Controllers\Operador\DashboardController as OperadorDashboardContro
 
 
 /*|--------------------------------------------------------------------------
+| RUTAS DE NOTIFICACIONES
+|--------------------------------------------------------------------------*/
+Route::delete(
+
+    '/admin/notificaciones/{id}',
+
+    [App\Http\Controllers\Admin\ViajeController::class, 'eliminarNotificacion']
+
+)->name('admin.notificaciones.delete');
+
+
+/*|--------------------------------------------------------------------------
 | RUTAS DE REPORTES
 |--------------------------------------------------------------------------*/
 

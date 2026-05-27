@@ -9,6 +9,7 @@ use App\Models\Cliente;
 use App\Models\Piloto;
 use App\Models\Camion;
 use App\Models\ViajeHistorial;
+use App\Models\Notificacion;
 
 use Illuminate\Http\Request;
 
@@ -73,6 +74,18 @@ class ViajeController extends Controller
             'completado'
         )->count();
 
+        /*
+|--------------------------------------------------------------------------
+| NOTIFICACIONES
+|--------------------------------------------------------------------------
+*/
+
+$notificaciones = Notificacion::latest()
+
+    ->take(5)
+
+    ->get();
+
         return view(
             'admin.viajes.index',
             compact(
@@ -80,7 +93,8 @@ class ViajeController extends Controller
                 'totalViajes',
                 'enRuta',
                 'pendientes',
-                'completados'
+                'completados',
+                'notificaciones'
             )
         );
     }
@@ -534,7 +548,9 @@ if(
     }
 
     public function destroy($id)
+    
 {
+    
     $viaje = Viaje::findOrFail($id);
 
     /*
@@ -582,6 +598,21 @@ if(
             'success',
             'Viaje eliminado correctamente'
         );
+}
+
+/*
+|--------------------------------------------------------------------------
+| ELIMINAR NOTIFICACIÓN
+|--------------------------------------------------------------------------
+*/
+
+public function eliminarNotificacion($id)
+{
+    Notificacion::findOrFail($id)
+
+        ->delete();
+
+    return back();
 }
 
     private function geocode($direccion)
