@@ -320,6 +320,36 @@ class ViajeController extends Controller
             $request->destino
         );
 
+        /*
+|--------------------------------------------------------------------------
+| LIBERAR RECURSOS ANTERIORES
+|--------------------------------------------------------------------------
+*/
+
+if($pilotoAnterior && $pilotoAnterior != $request->piloto_id){
+
+    Piloto::where('id', $pilotoAnterior)
+
+        ->update([
+
+            'estado' => 'activo'
+
+        ]);
+
+}
+
+if($camionAnterior && $camionAnterior != $request->camion_id){
+
+    Camion::where('id', $camionAnterior)
+
+        ->update([
+
+            'estado' => 'disponible'
+
+        ]);
+
+}
+
         $viaje->update([
 
             'cliente_id' => $request->cliente_id,
@@ -496,15 +526,55 @@ class ViajeController extends Controller
     }
 
     public function destroy($id)
-    {
-        Viaje::destroy($id);
+{
+    $viaje = Viaje::findOrFail($id);
 
-        return back()
-            ->with(
-                'success',
-                'Viaje eliminado'
-            );
+    /*
+    |--------------------------------------------------------------------------
+    | LIBERAR PILOTO
+    |--------------------------------------------------------------------------
+    */
+
+    if($viaje->piloto){
+
+        $viaje->piloto->update([
+
+            'estado' => 'activo'
+
+        ]);
+
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | LIBERAR CAMIÓN
+    |--------------------------------------------------------------------------
+    */
+
+    if($viaje->camion){
+
+        $viaje->camion->update([
+
+            'estado' => 'disponible'
+
+        ]);
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | ELIMINAR VIAJE
+    |--------------------------------------------------------------------------
+    */
+
+    $viaje->delete();
+
+    return back()
+        ->with(
+            'success',
+            'Viaje eliminado correctamente'
+        );
+}
 
     private function geocode($direccion)
     {
