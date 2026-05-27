@@ -451,6 +451,36 @@ ERRORS
 
                             </div>
 
+                            <div class="col-lg-6 mb-4">
+
+    <label class="form-label">
+
+        Estado
+
+    </label>
+
+    <select
+        name="estado"
+        class="form-control custom-input"
+        required
+    >
+
+        <option value="activo">
+
+            Activo
+
+        </option>
+
+        <option value="inactivo">
+
+            Inactivo
+
+        </option>
+
+    </select>
+
+</div>
+
                             <div
                                 class="col-12 d-flex justify-content-between align-items-center flex-wrap gap-3"
                             >

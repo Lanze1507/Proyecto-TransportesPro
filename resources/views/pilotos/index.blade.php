@@ -275,6 +275,66 @@ LICENSE BADGE
     font-weight:700;
 }
 
+/* =========================
+ACTION BUTTONS
+========================= */
+
+.btn-edit{
+
+    background:#fff7ed;
+
+    color:#ea580c;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:10px 14px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    transition:.25s ease;
+
+    text-decoration:none;
+}
+
+.btn-edit:hover{
+
+    background:#ffedd5;
+
+    transform:translateY(-2px);
+
+    color:#ea580c;
+}
+
+.btn-delete{
+
+    background:#fef2f2;
+
+    color:#dc2626;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:10px 14px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    transition:.25s ease;
+}
+
+.btn-delete:hover{
+
+    background:#fee2e2;
+
+    transform:translateY(-2px);
+}
+
 </style>
 
 </head>
@@ -491,6 +551,10 @@ LICENSE BADGE
 
                             <th>DPI</th>
 
+                            <th>Estado</th>
+
+                            <th>Acciones</th>
+
                         </tr>
 
                     </thead>
@@ -563,6 +627,91 @@ LICENSE BADGE
                                 {{ $p->dpi }}
 
                             </td>
+
+                            <td>
+
+    @if($p->estado == 'activo')
+
+        <span
+            style="
+                background:#dcfce7;
+                color:#166534;
+                padding:8px 14px;
+                border-radius:999px;
+                font-size:12px;
+                font-weight:700;
+            "
+        >
+
+            🟢 Activo
+
+        </span>
+
+    @else
+
+        <span
+            style="
+                background:#fee2e2;
+                color:#991b1b;
+                padding:8px 14px;
+                border-radius:999px;
+                font-size:12px;
+                font-weight:700;
+            "
+        >
+
+            🔴 Inactivo
+
+        </span>
+
+    @endif
+
+</td>
+
+<td>
+
+    <div
+        style="
+            display:flex;
+            gap:10px;
+            align-items:center;
+            flex-wrap:wrap;
+        "
+    >
+
+        <a
+            href="/admin/pilotos/{{ $p->id }}/edit"
+            class="btn-edit"
+        >
+
+            ✏️ Editar
+
+        </a>
+
+        <form
+            method="POST"
+            action="/admin/pilotos/{{ $p->id }}"
+            style="margin:0;"
+            onsubmit="return confirm('¿Eliminar piloto?')"
+        >
+
+            @csrf
+            @method('DELETE')
+
+            <button
+                type="submit"
+                class="btn-delete"
+            >
+
+                🗑 Eliminar
+
+            </button>
+
+        </form>
+
+    </div>
+
+</td>
 
                         </tr>
 

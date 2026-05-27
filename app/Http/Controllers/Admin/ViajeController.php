@@ -17,73 +17,72 @@ class ViajeController extends Controller
     public function index()
     {
         $search = request('search');
+
         $viajes = Viaje::with([
 
-    'cliente',
-    'piloto',
-    'camion'
+            'cliente',
+            'piloto',
+            'camion'
 
-])
+        ])
 
-->when($search, function ($query) use ($search) {
+        ->when($search, function ($query) use ($search) {
 
-    $query->where(function ($q) use ($search) {
+            $query->where(function ($q) use ($search) {
 
-        $q->where('origen', 'like', "%{$search}%")
+                $q->where('origen', 'like', "%{$search}%")
 
-        ->orWhere('destino', 'like', "%{$search}%")
+                ->orWhere('destino', 'like', "%{$search}%")
 
-        ->orWhere('estado', 'like', "%{$search}%")
+                ->orWhere('estado', 'like', "%{$search}%")
 
-        ->orWhereHas('cliente', function ($cliente) use ($search) {
+                ->orWhereHas('cliente', function ($cliente) use ($search) {
 
-            $cliente->where(
-                'nombre',
-                'like',
-                "%{$search}%"
-            );
+                    $cliente->where(
+                        'nombre',
+                        'like',
+                        "%{$search}%"
+                    );
 
-        });
+                });
 
-    });
+            });
 
-})
+        })
 
-->latest()
+        ->latest()
 
-->paginate(10)
+        ->paginate(10)
 
-->withQueryString();
+        ->withQueryString();
+
         $totalViajes = Viaje::count();
 
-$enRuta = Viaje::where(
-    'estado',
-    'en_ruta'
-)->count();
+        $enRuta = Viaje::where(
+            'estado',
+            'en_ruta'
+        )->count();
 
-$pendientes = Viaje::where(
-    'estado',
-    'pendiente'
-)->count();
+        $pendientes = Viaje::where(
+            'estado',
+            'pendiente'
+        )->count();
 
-$completados = Viaje::where(
-    'estado',
-    'completado'
-)->count();
-
-
-
+        $completados = Viaje::where(
+            'estado',
+            'completado'
+        )->count();
 
         return view(
-    'admin.viajes.index',
-    compact(
-        'viajes',
-        'totalViajes',
-        'enRuta',
-        'pendientes',
-        'completados'
-    )
-);
+            'admin.viajes.index',
+            compact(
+                'viajes',
+                'totalViajes',
+                'enRuta',
+                'pendientes',
+                'completados'
+            )
+        );
     }
 
     public function create()
@@ -170,23 +169,11 @@ $completados = Viaje::where(
 
             'estado' => $request->estado,
 
-            /*
-            |--------------------------------------------------------------------------
-            | ORIGEN
-            |--------------------------------------------------------------------------
-            */
-
             'lat_origen' =>
                 $origenCoords['lat'] ?? null,
 
             'lng_origen' =>
                 $origenCoords['lng'] ?? null,
-
-            /*
-            |--------------------------------------------------------------------------
-            | DESTINO
-            |--------------------------------------------------------------------------
-            */
 
             'lat_destino' =>
                 $destinoCoords['lat'] ?? null,
@@ -195,6 +182,36 @@ $completados = Viaje::where(
                 $destinoCoords['lng'] ?? null,
 
         ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | ACTUALIZAR ESTADOS AUTOMÁTICAMENTE
+        |--------------------------------------------------------------------------
+        */
+
+        if($viaje->estado == 'en_ruta'){
+
+            if($viaje->piloto){
+
+                $viaje->piloto->update([
+
+                    'estado' => 'inactivo'
+
+                ]);
+
+            }
+
+            if($viaje->camion){
+
+                $viaje->camion->update([
+
+                    'estado' => 'ocupado'
+
+                ]);
+
+            }
+
+        }
 
         /*
         |--------------------------------------------------------------------------
@@ -295,12 +312,6 @@ $completados = Viaje::where(
 
         $camionAnterior = $viaje->camion_id;
 
-        /*
-        |--------------------------------------------------------------------------
-        | NUEVAS COORDENADAS
-        |--------------------------------------------------------------------------
-        */
-
         $origenCoords = $this->geocode(
             $request->origen
         );
@@ -308,12 +319,6 @@ $completados = Viaje::where(
         $destinoCoords = $this->geocode(
             $request->destino
         );
-
-        /*
-        |--------------------------------------------------------------------------
-        | ACTUALIZAR VIAJE
-        |--------------------------------------------------------------------------
-        */
 
         $viaje->update([
 
@@ -345,7 +350,61 @@ $completados = Viaje::where(
 
         /*
         |--------------------------------------------------------------------------
-        | CAMBIO DE ESTADO
+        | ESTADOS AUTOMÁTICOS
+        |--------------------------------------------------------------------------
+        */
+
+        if($viaje->estado == 'completado'){
+
+            if($viaje->piloto){
+
+                $viaje->piloto->update([
+
+                    'estado' => 'activo'
+
+                ]);
+
+            }
+
+            if($viaje->camion){
+
+                $viaje->camion->update([
+
+                    'estado' => 'disponible'
+
+                ]);
+
+            }
+
+        }
+
+        if($viaje->estado == 'en_ruta'){
+
+            if($viaje->piloto){
+
+                $viaje->piloto->update([
+
+                    'estado' => 'inactivo'
+
+                ]);
+
+            }
+
+            if($viaje->camion){
+
+                $viaje->camion->update([
+
+                    'estado' => 'ocupado'
+
+                ]);
+
+            }
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | HISTORIAL
         |--------------------------------------------------------------------------
         */
 
@@ -368,12 +427,6 @@ $completados = Viaje::where(
 
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | CAMBIO DE PILOTO
-        |--------------------------------------------------------------------------
-        */
-
         if($pilotoAnterior != $viaje->piloto_id){
 
             if($viaje->piloto){
@@ -394,12 +447,6 @@ $completados = Viaje::where(
 
         }
 
-        /*
-        |--------------------------------------------------------------------------
-        | CAMBIO DE CAMIÓN
-        |--------------------------------------------------------------------------
-        */
-
         if($camionAnterior != $viaje->camion_id){
 
             if($viaje->camion){
@@ -419,12 +466,6 @@ $completados = Viaje::where(
             }
 
         }
-
-        /*
-        |--------------------------------------------------------------------------
-        | CAMBIOS GENERALES
-        |--------------------------------------------------------------------------
-        */
 
         if(
             $estadoAnterior == $viaje->estado
@@ -464,12 +505,6 @@ $completados = Viaje::where(
                 'Viaje eliminado'
             );
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | GEOCODE
-    |--------------------------------------------------------------------------
-    */
 
     private function geocode($direccion)
     {

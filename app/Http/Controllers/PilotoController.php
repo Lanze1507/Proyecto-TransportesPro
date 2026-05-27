@@ -44,6 +44,7 @@ class PilotoController extends Controller
             'telefono' => 'nullable|string|max:50',
             'licencia' => 'nullable|string|max:100',
             'dpi' => 'nullable|string|max:50',
+            'estado' => 'required|string|max:50',
         ]);
 
         Piloto::create($request->all());
@@ -71,6 +72,7 @@ class PilotoController extends Controller
             'telefono' => 'nullable|string|max:50',
             'licencia' => 'nullable|string|max:100',
             'dpi' => 'nullable|string|max:50',
+            'estado' => 'required|string|max:50',
         ]);
 
         $piloto = Piloto::findOrFail($id);

@@ -476,6 +476,42 @@ ERRORS
 
                             </div>
 
+                            <div class="col-12 mb-4">
+
+    <label class="form-label">
+
+        Estado
+
+    </label>
+
+    <select
+        name="estado"
+        class="form-control custom-input"
+        required
+    >
+
+        <option value="disponible">
+
+            Disponible
+
+        </option>
+
+        <option value="ocupado">
+
+            Ocupado
+
+        </option>
+
+        <option value="mantenimiento">
+
+            Mantenimiento
+
+        </option>
+
+    </select>
+
+</div>
+
                             <div
                                 class="col-12 d-flex justify-content-between align-items-center flex-wrap gap-3"
                             >

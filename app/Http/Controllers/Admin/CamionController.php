@@ -52,6 +52,8 @@ public function update(Request $request, $id)
 
         'capacidad' => 'required|numeric',
 
+        'estado' => 'required|string|max:50',
+
     ]);
 
     $camion = Camion::findOrFail($id);
@@ -63,6 +65,8 @@ public function update(Request $request, $id)
         'modelo' => $request->modelo,
 
         'capacidad' => $request->capacidad,
+
+        'estado' => $request->estado,
 
     ]);
 

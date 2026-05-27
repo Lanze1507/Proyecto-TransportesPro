@@ -476,6 +476,51 @@ ERRORS
 
                             </div>
 
+                            <div class="col-12 mb-4">
+
+    <label class="form-label">
+
+        Estado
+
+    </label>
+
+    <select
+        name="estado"
+        class="form-control custom-input"
+        required
+    >
+
+        <option
+            value="disponible"
+            {{ $camion->estado == 'disponible' ? 'selected' : '' }}
+        >
+
+            Disponible
+
+        </option>
+
+        <option
+            value="ocupado"
+            {{ $camion->estado == 'ocupado' ? 'selected' : '' }}
+        >
+
+            Ocupado
+
+        </option>
+
+        <option
+            value="mantenimiento"
+            {{ $camion->estado == 'mantenimiento' ? 'selected' : '' }}
+        >
+
+            Mantenimiento
+
+        </option>
+
+    </select>
+
+</div>
+
                             <div
                                 class="col-12 d-flex justify-content-between align-items-center flex-wrap gap-3"
                             >

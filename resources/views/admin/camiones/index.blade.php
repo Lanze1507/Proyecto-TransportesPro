@@ -536,6 +536,8 @@ DELETE BUTTON
 
                             <th>Capacidad</th>
 
+                            <th>Estado</th>
+
                             <th>Acciones</th>
 
                         </tr>
@@ -620,7 +622,62 @@ DELETE BUTTON
 
                             </span>
 
-                        </td>
+  <td>
+
+    @if($c->estado == 'disponible')
+
+        <span
+            style="
+                background:#dcfce7;
+                color:#166534;
+                padding:8px 14px;
+                border-radius:999px;
+                font-size:12px;
+                font-weight:700;
+            "
+        >
+
+            🚛 Disponible
+
+        </span>
+
+    @elseif($c->estado == 'ocupado')
+
+        <span
+            style="
+                background:#fef3c7;
+                color:#92400e;
+                padding:8px 14px;
+                border-radius:999px;
+                font-size:12px;
+                font-weight:700;
+            "
+        >
+
+            📦 Ocupado
+
+        </span>
+
+    @else
+
+        <span
+            style="
+                background:#fee2e2;
+                color:#991b1b;
+                padding:8px 14px;
+                border-radius:999px;
+                font-size:12px;
+                font-weight:700;
+            "
+        >
+
+            🛠 Mantenimiento
+
+        </span>
+
+    @endif
+
+</td>
 
                         <td>
 

@@ -377,6 +377,26 @@ SEARCH DROPDOWN
 }
 
 /* =========================
+DISABLED ITEMS
+========================= */
+
+.disabled-item{
+
+    opacity:.55;
+
+    cursor:not-allowed;
+
+    background:#f8fafc;
+}
+
+.disabled-item:hover{
+
+    background:#f8fafc !important;
+
+    color:#6b7280 !important;
+}
+
+/* =========================
 AUTOCOMPLETE
 ========================= */
 
@@ -662,19 +682,30 @@ RESPONSIVE
 
                             <div id="listaPilotos" class="search-results">
 
-                                @foreach($pilotos as $p)
+                            @foreach($pilotos as $p)
 
-                                <div
-                                    class="search-item"
-                                    data-id="{{ $p->id }}"
-                                    data-text="{{ strtolower($p->nombre) }}"
-                                >
+    <div
+        class="search-item"
+        data-id="{{ $p->id }}"
+        data-estado="{{ $p->estado }}"
+        data-text="{{ strtolower($p->nombre) }}"
+    >
 
-                                    {{ $p->nombre }}
+        @if($p->estado == 'activo')
 
-                                </div>
+            🟢
 
-                                @endforeach
+        @else
+
+            🔴
+
+        @endif
+
+        {{ $p->nombre }} — {{ ucfirst($p->estado) }}
+
+    </div>
+
+@endforeach
 
                             </div>
 
@@ -718,21 +749,33 @@ RESPONSIVE
 
                                 @foreach($camiones as $c)
 
-                                <div
-                                    class="search-item"
-                                    data-id="{{ $c->id }}"
-                                    data-text="{{ strtolower($c->placa . ' ' . $c->modelo . ' ' . $c->capacidad) }}"
-                                >
+    <div
+        class="search-item"
+        data-id="{{ $c->id }}"
+        data-estado="{{ $c->estado }}"
+        data-text="{{ strtolower($c->placa . ' ' . $c->modelo . ' ' . $c->capacidad) }}"
+    >
 
-                                    🚛 {{ $c->placa }}
-                                    —
-                                    {{ $c->modelo }}
-                                    —
-                                    {{ $c->capacidad }} kg
+        @if($c->estado == 'disponible')
 
-                                </div>
+            🟢
 
-                                @endforeach
+        @elseif($c->estado == 'ocupado')
+
+            🟠
+
+        @else
+
+            🔴
+
+        @endif
+
+        🚛 {{ $c->placa }}
+        — {{ ucfirst($c->estado) }}
+
+    </div>
+
+@endforeach
 
                             </div>
 
@@ -994,6 +1037,33 @@ function setupSearch(inputId, listId, hiddenId){
     items.forEach(item => {
 
         item.addEventListener('click', () => {
+
+            let estado =
+                item.dataset.estado;
+
+            // PILOTOS
+            if(
+                inputId === 'buscarPiloto'
+                &&
+                estado !== 'activo'
+            ){
+
+                alert('Piloto no disponible');
+
+                return;
+            }
+
+            // CAMIONES
+            if(
+                inputId === 'buscarCamion'
+                &&
+                estado !== 'disponible'
+            ){
+
+                alert('Camión no disponible');
+
+                return;
+            }
 
             input.value = item.innerText;
 
