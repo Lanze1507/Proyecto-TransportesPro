@@ -157,76 +157,152 @@ class ViajeController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function asignar(Request $request, $id)
-    {
-        $request->validate([
+   public function asignar(Request $request, $id)
+{
+    $request->validate([
 
-            'piloto_id' =>
-                'required|exists:pilotos,id',
+        'piloto_id' =>
+            'required|exists:pilotos,id',
 
-            'camion_id' =>
-                'required|exists:camiones,id',
+        'camion_id' =>
+            'required|exists:camiones,id',
 
-        ]);
+    ]);
 
-        $viaje = Viaje::findOrFail($id);
+    $viaje = Viaje::findOrFail($id);
 
-        $viaje->update([
+    /*
+    |--------------------------------------------------------------------------
+    | LIBERAR RECURSOS ANTERIORES
+    |--------------------------------------------------------------------------
+    */
 
-            'piloto_id' => $request->piloto_id,
+    if(
+        $viaje->piloto_id
+        &&
+        $viaje->piloto_id != $request->piloto_id
+    ){
 
-            'camion_id' => $request->camion_id,
+        Piloto::where('id', $viaje->piloto_id)
 
-            'estado' => 'en_ruta',
+            ->update([
 
-        ]);
+                'estado' => 'activo'
 
-        /*
-        |--------------------------------------------------------------------------
-        | HISTORIAL
-        |--------------------------------------------------------------------------
-        */
+            ]);
 
-        ViajeHistorial::create([
-
-            'viaje_id' => $viaje->id,
-
-            'estado' => 'en_ruta',
-
-            'descripcion' =>
-                '🚚 Viaje puesto en tránsito'
-
-        ]);
-
-        ViajeHistorial::create([
-
-            'viaje_id' => $viaje->id,
-
-            'estado' => 'en_ruta',
-
-            'descripcion' =>
-                '👨‍✈️ Piloto asignado: '
-                . $viaje->piloto->nombre
-
-        ]);
-
-        ViajeHistorial::create([
-
-            'viaje_id' => $viaje->id,
-
-            'estado' => 'en_ruta',
-
-            'descripcion' =>
-                '🚛 Camión asignado: '
-                . $viaje->camion->placa
-
-        ]);
-
-        return back()->with(
-            'success',
-            'Piloto y camión asignados.'
-        );
     }
+
+    if(
+        $viaje->camion_id
+        &&
+        $viaje->camion_id != $request->camion_id
+    ){
+
+        Camion::where('id', $viaje->camion_id)
+
+            ->update([
+
+                'estado' => 'disponible'
+
+            ]);
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | ACTUALIZAR VIAJE
+    |--------------------------------------------------------------------------
+    */
+
+    $viaje->update([
+
+        'piloto_id' => $request->piloto_id,
+
+        'camion_id' => $request->camion_id,
+
+        'estado' => 'en_ruta',
+
+    ]);
+
+    /*
+    |--------------------------------------------------------------------------
+    | OCUPAR PILOTO
+    |--------------------------------------------------------------------------
+    */
+
+    if($viaje->piloto){
+
+        $viaje->piloto->update([
+
+            'estado' => 'inactivo'
+
+        ]);
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | OCUPAR CAMIÓN
+    |--------------------------------------------------------------------------
+    */
+
+    if($viaje->camion){
+
+        $viaje->camion->update([
+
+            'estado' => 'ocupado'
+
+        ]);
+
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | HISTORIAL
+    |--------------------------------------------------------------------------
+    */
+
+    ViajeHistorial::create([
+
+        'viaje_id' => $viaje->id,
+
+        'estado' => 'en_ruta',
+
+        'descripcion' =>
+            '🚚 Viaje puesto en tránsito'
+
+    ]);
+
+    ViajeHistorial::create([
+
+        'viaje_id' => $viaje->id,
+
+        'estado' => 'en_ruta',
+
+        'descripcion' =>
+            '👨‍✈️ Piloto asignado: '
+            . $viaje->piloto->nombre
+
+    ]);
+
+    ViajeHistorial::create([
+
+        'viaje_id' => $viaje->id,
+
+        'estado' => 'en_ruta',
+
+        'descripcion' =>
+            '🚛 Camión asignado: '
+            . $viaje->camion->placa
+
+    ]);
+
+    return back()->with(
+        'success',
+        'Piloto y camión asignados.'
+    );
+}
 
     /*
     |--------------------------------------------------------------------------
