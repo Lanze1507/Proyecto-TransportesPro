@@ -163,7 +163,7 @@
                                         </div>
                                 <!-- Header-btn -->
                                 <div class="header-right-btn d-none d-lg-block ml-20">
-                                    <a href="contact.html" class="btn header-btn">Obten tu cotización</a>
+                                    <a href="#cotizacion" class="btn header-btn">Obten tu cotización</a>
                                 </div>
                             </div>
                         </div> 
@@ -375,142 +375,342 @@
     </div>
     <!-- About Area End -->
     <!--? contact-form start -->
-    <section class="contact-form-area section-bg  pt-115 pb-120 fix" data-background="assets/img/gallery/section_bg02.jpg">
-        <div class="container">
-            <div class="row justify-content-end">
-                <!-- Contact wrapper -->
-                <div class="col-xl-8 col-lg-9">
-                    <div class="contact-form-wrapper">
-                        <!-- From tittle -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <!-- Section Tittle -->
-                                <div class="section-tittle mb-50">
-                                    <span>Solicita una cotización</span>
-                                        <h2>Calcula el costo de tu envío de forma rápida y segura</h2>
-                                        <p>En TransportesPro te ofrecemos una forma sencilla de obtener una cotización personalizada para tu envío. Completa la información y te brindaremos una solución eficiente, segura y adaptada a tus necesidades.</p>
-                                        </div>
-                                        </div>
-                                        </div>
+<section
+    id="cotizacion"
+    class="contact-form-area section-bg pt-115 pb-120 fix"
+    data-background="assets/img/gallery/section_bg02.jpg"
+>
 
-                                        <form action="#" class="contact-form">
-                                            <div class="row">
-                                                
-                                                <div class="col-lg-6 col-md-6">
-                                                    <div class="input-form">
-                                                        <input type="text" placeholder="Nombre completo">
-                                                    </div>
-                                                </div>
+    <div class="container">
 
-                                                <div class="col-lg-6 col-md-6">
-                                                    <div class="input-form">
-                                                        <input type="text" placeholder="Correo electrónico">
-                                                    </div>
-                                                </div>
+        <div class="row justify-content-end">
 
-                                                <div class="col-lg-12">
-                                                    <div class="input-form">
-                                                        <input type="text" placeholder="Número de contacto">
-                                                    </div>
-                                                </div>
+            <div class="col-xl-8 col-lg-9">
 
-                                                <div class="col-lg-6">
-                                                    <div class="select-items">
-                                                        <select name="select" id="select1">
-                                                            <option value="">Tipo de carga</option>
-                                                            <option value="">Carga general</option>
-                                                            <option value="">Carga perecedera</option>
-                                                            <option value="">Carga peligrosa</option>
-                                                            <option value="">Carga refrigerada</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                <div class="contact-form-wrapper">
 
-                                                <div class="col-lg-6 col-md-6">
-                                                    <div class="input-form">
-                                                        <input type="text" placeholder="Ciudad de origen">
-                                                    </div>
-                                                </div>
+                    <!-- TITULO -->
+                    <div class="section-tittle mb-50">
 
-                                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="input-form">
-                                                        <input type="text" placeholder="Incoterms (Ej: FOB, CIF, DDP)">
-                                                    </div>
-                                                </div>
+                        <span>
+                            Solicita una cotización
+                        </span>
 
-                                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                                    <div class="input-form">
-                                                        <input type="text" placeholder="Peso total (kg)">
-                                                    </div>
-                                                </div>
+                        <h2>
+                            Calcula el costo de tu envío de forma rápida y segura
+                        </h2>
 
-                                                <!-- Dimensiones -->
-                                                <div class="col-lg-4 col-md-6 col-sm-6">
-                                                    <div class="input-form">
-                                                        <input type="text" placeholder="Altura (cm)">
-                                                    </div>
-                                                </div>
+                        <p>
+                            En TransportesPro te ofrecemos una forma sencilla de obtener una cotización personalizada para tu envío.
+                        </p>
 
-                                                <div class="col-lg-4 col-md-6 col-sm-6">
-                                                    <div class="input-form">
-                                                        <input type="text" placeholder="Ancho (cm)">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-lg-4 col-md-6 col-sm-6">
-                                                    <div class="input-form">
-                                                        <input type="text" placeholder="Largo (cm)">
-                                                    </div>
-                                                </div>
-
-                                                <!-- Servicios extra -->
-                                                <div class="col-lg-12">
-                                                    <div class="radio-wrapper mb-30 mt-15">
-                                                        <label>Servicios adicionales:</label>
-                                                        <div class="select-radio">
-                                                            
-                                                            <div class="radio">
-                                                                <input id="radio-1" name="radio" type="radio" checked>
-                                                                <label for="radio-1" class="radio-label">Transporte estándar</label>
-                                                            </div>
-
-                                                            <div class="radio">
-                                                                <input id="radio-2" name="radio" type="radio">
-                                                                <label for="radio-2" class="radio-label">Entrega exprés</label>
-                                                            </div>
-
-                                                            <div class="radio">
-                                                                <input id="radio-4" name="radio" type="radio">
-                                                                <label for="radio-4" class="radio-label">Seguro de carga</label>
-                                                            </div>
-
-                                                            <div class="radio">
-                                                                <input id="radio-5" name="radio" type="radio">
-                                                                <label for="radio-5" class="radio-label">Embalaje especializado</label>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Botón -->
-                                                <div class="col-lg-12">
-                                                    <button name="submit" class="submit-btn">
-                                                        Solicitar cotización
-                                                    </button>
-                                                </div>
-
-                                            </div>
-                                        </form>
-                                </div>
-                            </div>
-                        </form>	
                     </div>
+
+                    <!-- ALERTA -->
+                    @if(session('success'))
+
+                    <div
+                        style="
+                            background:#d1fae5;
+                            color:#065f46;
+                            padding:15px;
+                            border-radius:10px;
+                            margin-bottom:25px;
+                            font-weight:600;
+                        "
+                    >
+
+                        {{ session('success') }}
+
+                    </div>
+
+                    @endif
+
+                    <!-- FORM -->
+                    <form
+                        action="{{ route('cotizacion.store') }}"
+                        method="POST"
+                        class="contact-form"
+                    >
+
+                        @csrf
+
+                        <div class="row">
+
+                            <!-- NOMBRE -->
+                            <div class="col-lg-6 col-md-6">
+
+                                <div class="input-form">
+
+                                    <input
+                                        type="text"
+                                        name="nombre"
+                                        placeholder="Nombre completo"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+                            <!-- EMAIL -->
+                            <div class="col-lg-6 col-md-6">
+
+                                <div class="input-form">
+
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="Correo electrónico"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+                            <!-- TELEFONO -->
+                            <div class="col-lg-12">
+
+                                <div class="input-form">
+
+                                    <input
+                                        type="text"
+                                        name="telefono"
+                                        placeholder="Número de contacto"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+                            <!-- TIPO CARGA -->
+                            <div class="col-lg-6">
+
+                                <div class="select-items">
+
+                                    <select
+                                        name="tipo_carga"
+                                        id="select1"
+                                        required
+                                    >
+
+                                        <option value="">
+                                            Tipo de carga
+                                        </option>
+
+                                        <option value="Carga general">
+                                            Carga general
+                                        </option>
+
+                                        <option value="Carga perecedera">
+                                            Carga perecedera
+                                        </option>
+
+                                        <option value="Carga peligrosa">
+                                            Carga peligrosa
+                                        </option>
+
+                                        <option value="Carga refrigerada">
+                                            Carga refrigerada
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <!-- CIUDAD -->
+                            <div class="col-lg-6 col-md-6">
+
+                                <div class="input-form">
+
+                                    <input
+                                        type="text"
+                                        name="ciudad_origen"
+                                        placeholder="Ciudad de origen"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+                            <!-- INCOTERM -->
+                            <div class="col-lg-6 col-md-6">
+
+                                <div class="input-form">
+
+                                    <input
+                                        type="text"
+                                        name="incoterm"
+                                        placeholder="Incoterms (FOB, CIF, DDP)"
+                                    >
+
+                                </div>
+
+                            </div>
+
+                            <!-- PESO -->
+                            <div class="col-lg-6 col-md-6">
+
+                                <div class="input-form">
+
+                                    <input
+                                        type="number"
+                                        step="0.01"
+                                        name="peso"
+                                        placeholder="Peso total (kg)"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+                            <!-- ALTURA -->
+                            <div class="col-lg-4 col-md-4">
+
+                                <div class="input-form">
+
+                                    <input
+                                        type="number"
+                                        step="0.01"
+                                        name="alto"
+                                        placeholder="Altura (cm)"
+                                    >
+
+                                </div>
+
+                            </div>
+
+                            <!-- ANCHO -->
+                            <div class="col-lg-4 col-md-4">
+
+                                <div class="input-form">
+
+                                    <input
+                                        type="number"
+                                        step="0.01"
+                                        name="ancho"
+                                        placeholder="Ancho (cm)"
+                                    >
+
+                                </div>
+
+                            </div>
+
+                            <!-- LARGO -->
+                            <div class="col-lg-4 col-md-4">
+
+                                <div class="input-form">
+
+                                    <input
+                                        type="number"
+                                        step="0.01"
+                                        name="largo"
+                                        placeholder="Largo (cm)"
+                                    >
+
+                                </div>
+
+                            </div>
+
+                            <!-- SERVICIOS -->
+                            <div class="col-lg-12">
+
+                                <div class="radio-wrapper mb-30 mt-15">
+
+                                    <label
+                                        style="
+                                            font-weight:700;
+                                            margin-bottom:15px;
+                                            display:block;
+                                        "
+                                    >
+                                        Servicios adicionales:
+                                    </label>
+
+                                    <div
+                                        style="
+                                            display:flex;
+                                            gap:25px;
+                                            flex-wrap:wrap;
+                                        "
+                                    >
+
+                                        <label>
+
+                                            <input
+                                                type="checkbox"
+                                                name="express"
+                                                value="1"
+                                            >
+
+                                            Entrega exprés
+
+                                        </label>
+
+                                        <label>
+
+                                            <input
+                                                type="checkbox"
+                                                name="seguro"
+                                                value="1"
+                                            >
+
+                                            Seguro de carga
+
+                                        </label>
+
+                                        <label>
+
+                                            <input
+                                                type="checkbox"
+                                                name="embalaje"
+                                                value="1"
+                                            >
+
+                                            Embalaje especializado
+
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- BOTON -->
+                            <div class="col-lg-12">
+
+                                <button
+                                    type="submit"
+                                    class="submit-btn"
+                                >
+
+                                    Solicitar cotización
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
                 </div>
+
             </div>
+
         </div>
-    </section>
-    <!-- contact-form end -->
+
+    </div>
+
+</section>
+<!-- contact-form end -->
     <!--Team Ara Start -->
     <div class="team-area section-padding30">
         <div class="container">

@@ -16,6 +16,7 @@ use App\Http\Controllers\Operador\ViajeController as OperadorViajeController;
 use App\Http\Controllers\Piloto\DashboardController as PilotoDashboardController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\Operador\DashboardController as OperadorDashboardController;
+use App\Http\Controllers\CotizacionController;
 
 
 /*|--------------------------------------------------------------------------
@@ -83,6 +84,17 @@ Route::get('/seguimiento/{codigo}', function ($codigo) {
     );
 
 });
+
+/*--------------------------------------------------------------------------
+| COTIZACION (PUBLICO)
+|--------------------------------------------------------------------------*/
+Route::post(
+
+    '/cotizacion',
+
+    [CotizacionController::class, 'store']
+
+)->name('cotizacion.store');
 
 /*
 |--------------------------------------------------------------------------
@@ -225,6 +237,11 @@ Route::middleware(['auth','admin'])
     );
 
 });
+
+Route::get(
+    '/admin/cotizaciones',
+    [App\Http\Controllers\CotizacionController::class, 'index']
+)->name('cotizaciones.index');
 
 /*
 |--------------------------------------------------------------------------

@@ -651,6 +651,23 @@ body{
     <h5>
         📍 Mis Envíos
     </h5>
+<div style="margin-top:15px;">
+
+    <a
+        href="/#cotizacion"
+        class="btn-map"
+        style="
+            text-decoration:none;
+            display:inline-block;
+        "
+    >
+
+        📦 Solicitar nueva cotización
+
+    </a>
+
+</div>
+        </div>
 
     <div class="search-box">
 

@@ -967,7 +967,7 @@ FILTROS
         margin-top:10px;
         margin-bottom:30px;
         display:flex;
-        gap:14px;
+        gap:12px;
         flex-wrap:wrap;
     "
 >
@@ -976,6 +976,14 @@ FILTROS
                     <a href="/admin/pilotos" class="btn btn-info"> Gestionar Pilotos</a>
                     <a href="/admin/camiones" class="btn btn-info"> Gestionar Camiones</a>
                     <a href="/" class="btn btn-dark">🏠 Inicio</a>
+                    <a
+    href="{{ route('cotizaciones.index') }}"
+    class="btn btn-success"
+>
+
+    📦 cotizaciones
+
+</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover align-middle">
