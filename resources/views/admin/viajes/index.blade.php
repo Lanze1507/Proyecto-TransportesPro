@@ -1024,45 +1024,59 @@ FILTROS
 
     </td>
 
-    <td>
+   <td>
 
-        <div
+    <div
+        style="
+            display:flex;
+            gap:10px;
+            align-items:center;
+        "
+    >
+
+        <a
+            href="/admin/viajes/{{ $viaje->id }}/edit"
+            class="btn-table btn-edit"
+        >
+
+            ✏️ Editar
+
+        </a>
+
+        <a
+            href="{{ route('admin.viajes.evidencias', $viaje->id) }}"
+            class="btn-table"
             style="
-                display:flex;
-                gap:10px;
-                align-items:center;
+                background:#dbeafe;
+                color:#1d4ed8;
+                text-decoration:none;
             "
         >
 
-            <a
-                href="/admin/viajes/{{ $viaje->id }}/edit"
-                class="btn-table btn-edit"
-            >
+            📷 Evidencias
 
-                ✏️ Editar
+        </a>
 
-            </a>
+        <form
+            method="POST"
+            action="/admin/viajes/{{ $viaje->id }}"
+            style="margin:0;"
+        >
 
-            <form
-                method="POST"
-                action="/admin/viajes/{{ $viaje->id }}"
-                style="margin:0;"
-            >
+            @csrf
+            @method('DELETE')
 
-                @csrf
-                @method('DELETE')
+            <button class="btn-table btn-delete">
 
-                <button class="btn-table btn-delete">
+                🗑 Eliminar
 
-                    🗑 Eliminar
+            </button>
 
-                </button>
+        </form>
 
-            </form>
+    </div>
 
-        </div>
-
-    </td>
+</td>
 
 </tr>
 

@@ -197,6 +197,11 @@ Route::middleware(['auth','admin'])
         ViajeController::class
     );
 
+    Route::get(
+        '/viajes/{id}/evidencias',
+        [App\Http\Controllers\Admin\ViajeController::class, 'evidencias']
+    )->name('admin.viajes.evidencias');
+
     /*
     |--------------------------------------------------------------------------
     | PILOTOS

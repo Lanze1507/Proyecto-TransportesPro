@@ -266,11 +266,7 @@ if($request->hasFile('fotos')){
         |--------------------------------------------------------------------------
         */
 
-        $destino = public_path(
-
-            'evidencias/'.$nombre
-
-        );
+        $destino = storage_path('app/public/evidencias/' . $nombre);
 
         /*
         |--------------------------------------------------------------------------

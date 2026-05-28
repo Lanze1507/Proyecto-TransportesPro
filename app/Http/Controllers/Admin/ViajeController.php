@@ -547,6 +547,26 @@ if(
             );
     }
 
+    public function evidencias($id)
+    {
+        $viaje = \App\Models\Viaje::with([
+
+            'cliente',
+            'piloto',
+            'camion',
+            'entrega.evidencias'
+
+        ])->findOrFail($id);
+
+        return view(
+
+            'admin.viajes.evidencias',
+
+            compact('viaje')
+
+        );
+    }
+
     public function destroy($id)
     
 {
