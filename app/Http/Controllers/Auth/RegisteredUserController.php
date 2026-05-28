@@ -42,22 +42,29 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+\App\Models\Cliente::create([
+
+    'user_id' => $user->id,
+
+    'nombre' => $user->name,
+
+    'email' => $user->email,
+
+    'telefono' => '',
+
+    'direccion' => '',
+
+]);
 
         event(new Registered($user));
 
         
 
         \App\Models\Notificacion::create([
-
-    'titulo' =>
-        '👤 Nuevo cliente registrado',
-
-    'mensaje' =>
-        $user->name .
-        ' se registró con el correo: '
-        . $user->email
-
-]);
+            'titulo'  => '👤 Nuevo cliente registrado',
+            'mensaje' => $user->name . ' se registró con el correo: ' . $user->email,
+            'role'    => 'admin', // solo el admin ve esta notificación
+        ]);
         
 
         Auth::login($user);
