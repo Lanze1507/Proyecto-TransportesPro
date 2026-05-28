@@ -211,6 +211,13 @@ body{
     align-items:center;
 }
 
+.panel-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
 .panel-header h5{
 
     margin:0;
@@ -647,38 +654,25 @@ body{
     <div class="panel-card">
 
         <div class="panel-header">
-
-    <h5>
-        📍 Mis Envíos
-    </h5>
-<div style="margin-top:15px;">
-
-    <a
-        href="/#cotizacion"
-        class="btn-map"
-        style="
-            text-decoration:none;
-            display:inline-block;
-        "
-    >
-
-        📦 Solicitar nueva cotización
-
-    </a>
-
-</div>
+            <h5>📍 Mis Envíos</h5>
+            <div class="panel-actions">
+                <div class="search-box">
+                    <input
+                        type="text"
+                        id="buscadorEnvios"
+                        class="form-control search-input"
+                        placeholder="🔍 Buscar envío..."
+                    >
+                </div>
+                <a
+                    href="/#cotizacion"
+                    class="btn-map"
+                    style="text-decoration:none;display:inline-block;"
+                >
+                    📦 Solicitar nueva cotización
+                </a>
+            </div>
         </div>
-
-    <div class="search-box">
-
-        <input
-            type="text"
-            id="buscadorEnvios"
-            class="form-control search-input"
-            placeholder="🔍 Buscar envío..."
-        >
-
-    </div>
 
 </div>
 
