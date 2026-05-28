@@ -19,11 +19,17 @@ class Viaje extends Model
 
         'estado',
 
+        //Fechas del viaje
+        'fecha_salida',
+        'fecha_llegada',
+
         'lat_origen',
         'lng_origen',
 
         'lat_destino',
         'lng_destino',
+
+        //Datos de entrega
         'firma_cliente',
         'fecha_entrega',
         'recibido',
