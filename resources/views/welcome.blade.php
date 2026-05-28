@@ -633,50 +633,25 @@
                                         Servicios adicionales:
                                     </label>
 
-                                    <div
-                                        style="
-                                            display:flex;
-                                            gap:25px;
-                                            flex-wrap:wrap;
-                                        "
-                                    >
-
-                                        <label>
-
-                                            <input
-                                                type="checkbox"
-                                                name="express"
-                                                value="1"
-                                            >
-
-                                            Entrega exprés
-
+                                    <div class="addons-group">
+                                        <label class="addon">
+                                            <input type="checkbox" name="express" value="1">
+                                            <span class="addon-box">
+                                                <span class="addon-title">Entrega exprés</span>
+                                            </span>
                                         </label>
-
-                                        <label>
-
-                                            <input
-                                                type="checkbox"
-                                                name="seguro"
-                                                value="1"
-                                            >
-
-                                            Seguro de carga
-
+                                        <label class="addon">
+                                            <input type="checkbox" name="seguro" value="1">
+                                            <span class="addon-box">
+                                                <span class="addon-title">Seguro de carga</span>
+                                            </span>
                                         </label>
-
-                                        <label>
-
-                                            <input
-                                                type="checkbox"
-                                                name="embalaje"
-                                                value="1"
-                                            >
-
-                                            Embalaje especializado
-
+                                        <label class="addon">
+                                            <input type="checkbox" name="embalaje" value="1">
+                                            <span class="addon-box">
+                                                <span class="addon-title">Embalaje especializado</span>
+                                            </span>
                                         </label>
-
                                     </div>
 
                                 </div>
@@ -1043,6 +1018,20 @@
 <div id="back-top" >
     <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
 </div>
+
+    <style id="addons-style">
+      .addons-group{ display:grid; grid-template-columns:1fr; gap:16px; }
+      .addon{ display:block; position:relative; cursor:pointer; }
+      .addon input{ position:absolute; opacity:0; pointer-events:none; }
+      .addon-box{ display:flex; align-items:center; gap:12px; border:1.5px solid #e5e7eb; border-radius:12px; padding:16px 18px; min-height:56px; background:#fff; color:#374151; font-weight:600; transition:all .2s ease; }
+      .addon-box::before{ content:''; width:20px; height:20px; border:2px solid #9ca3af; border-radius:4px; background:#fff; transition:all .2s ease; flex:0 0 20px; }
+      .addon input:checked + .addon-box{ border-color:#ff5e14; background:#fff7f3; box-shadow:0 6px 18px rgba(255,94,20,.14); color:#0b1c39; }
+      .addon input:checked + .addon-box::before{ background:#ff5e14; border-color:#ff5e14; box-shadow:inset 0 0 0 3px #fff; }
+      .addon-box:hover{ transform:translateY(-1px); }
+      .addon-title{ font-size:14px; }
+      @media (min-width: 576px){ .addons-group{ grid-template-columns: repeat(2, 1fr); gap:16px; } }
+      @media (min-width: 992px){ .addons-group{ grid-template-columns: repeat(3, 1fr); gap:20px; } }
+    </style>
 
     <!-- JS here -->
 
