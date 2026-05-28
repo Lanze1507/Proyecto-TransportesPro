@@ -318,12 +318,14 @@ body { background: #f4f7fb; }
                 </div>
                 <div class="panel-body">
 
-                    <form
-                        id="form-evidencias"
-                        method="POST"
-                        action="{{ route('piloto.evidencias.store', $viaje->id) }}"
-                        enctype="multipart/form-data"
-                    >
+                    
+<form
+    id="form-evidencias"
+    action="{{ route('piloto.evidencias.store', $viaje->id) }}"
+    method="POST"
+    enctype="multipart/form-data"
+>
+
                         @csrf
 
                         {{-- Drop zone --}}
@@ -360,6 +362,73 @@ body { background: #f4f7fb; }
                                 placeholder="Ej: Entrega realizada en bodega principal, recibió el encargado Juan..."
                             >{{ old('descripcion') }}</textarea>
                         </div>
+{{-- Firma digital --}}
+<div style="margin-top:24px;">
+
+    <label class="form-label-custom">
+
+        Firma del cliente
+
+    </label>
+
+    <div
+        style="
+            border:2px dashed #d1d5db;
+            border-radius:14px;
+            background:#fff;
+            overflow:hidden;
+        "
+    >
+
+        <canvas
+            id="signature-pad"
+            width="700"
+            height="220"
+            style="
+                width:100%;
+                background:#fff;
+                cursor:crosshair;
+            "
+        ></canvas>
+
+    </div>
+
+    <input
+        type="hidden"
+        name="firma"
+        id="firma"
+    >
+
+    <div
+        style="
+            display:flex;
+            justify-content:flex-end;
+            margin-top:10px;
+        "
+    >
+
+        <button
+            type="button"
+            id="clear-signature"
+            style="
+                border:none;
+                background:#fee2e2;
+                color:#991b1b;
+                padding:8px 16px;
+                border-radius:10px;
+                font-size:13px;
+                font-weight:700;
+                cursor:pointer;
+            "
+        >
+
+            🗑 Limpiar firma
+
+        </button>
+
+    </div>
+
+</div>
 
                         {{-- Botón enviar --}}
                         <button
@@ -399,139 +468,275 @@ body { background: #f4f7fb; }
 
 <script src="{{ asset('assets/js/vendor/jquery-1.12.4.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+```html
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
     const inputFotos  = document.getElementById('input-fotos');
+
     const previewGrid = document.getElementById('preview-grid');
+
     const fotoCount   = document.getElementById('foto-count');
+
     const btnSubmit   = document.getElementById('btn-submit');
-    const dropZone    = document.getElementById('drop-zone');
-    const form        = document.getElementById('form-evidencias');
+
     const spinner     = document.getElementById('spinner');
+
     const btnText     = document.getElementById('btn-text');
 
-    // Archivos seleccionados (manejamos un array propio para permitir quitar fotos)
-    let archivos = [];
+    /*
+    |--------------------------------------------------------------------------
+    | PREVIEW SIMPLE
+    |--------------------------------------------------------------------------
+    */
 
-    // ── Selección normal ──
     inputFotos.addEventListener('change', function () {
-        agregarArchivos(Array.from(this.files));
-        // Resetear el input para que se pueda volver a seleccionar el mismo archivo
-        this.value = '';
-    });
 
-    // ── Drag & Drop ──
-    dropZone.addEventListener('dragover',  e => { e.preventDefault(); dropZone.classList.add('dragover'); });
-    dropZone.addEventListener('dragleave', ()=> dropZone.classList.remove('dragover'));
-    dropZone.addEventListener('drop', function (e) {
-        e.preventDefault();
-        dropZone.classList.remove('dragover');
-        agregarArchivos(Array.from(e.dataTransfer.files));
-    });
-
-    function agregarArchivos(nuevos) {
-        nuevos.forEach(file => {
-            // Solo imágenes y máx 5 MB
-            if (!file.type.startsWith('image/')) {
-                alert('⚠️ Solo se permiten imágenes: ' + file.name);
-                return;
-            }
-            if (file.size > 5 * 1024 * 1024) {
-                alert('⚠️ La imagen supera 5 MB: ' + file.name);
-                return;
-            }
-            archivos.push(file);
-        });
-        renderPreviews();
-    }
-
-    function renderPreviews() {
         previewGrid.innerHTML = '';
 
-        archivos.forEach((file, index) => {
+        const files = Array.from(this.files);
+
+        /*
+        |--------------------------------------------------------------------------
+        | VALIDAR
+        |--------------------------------------------------------------------------
+        */
+
+        let validFiles = [];
+
+        files.forEach(file => {
+
+            if (!file.type.startsWith('image/')) {
+
+                alert('⚠️ Solo imágenes permitidas.');
+
+                return;
+
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+
+                alert('⚠️ Máximo 5MB por imagen.');
+
+                return;
+
+            }
+
+            validFiles.push(file);
+
+        });
+
+        /*
+        |--------------------------------------------------------------------------
+        | CONTADOR
+        |--------------------------------------------------------------------------
+        */
+
+        if(validFiles.length > 0){
+
+            fotoCount.style.display = 'block';
+
+            fotoCount.textContent =
+                validFiles.length + ' foto(s) seleccionada(s)';
+
+            btnSubmit.disabled = false;
+
+        }else{
+
+            fotoCount.style.display = 'none';
+
+            btnSubmit.disabled = true;
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | PREVIEWS
+        |--------------------------------------------------------------------------
+        */
+
+        validFiles.forEach((file, index) => {
+
             const reader = new FileReader();
-            reader.onload = function (e) {
+
+            reader.onload = function(e){
+
                 const item = document.createElement('div');
+
                 item.className = 'preview-item';
+
                 item.innerHTML = `
-                    <img src="${e.target.result}" alt="foto ${index + 1}">
-                    <button type="button" class="remove-btn" data-index="${index}" title="Quitar foto">✕</button>
+                    <img src="${e.target.result}" alt="foto ${index}">
                 `;
+
                 previewGrid.appendChild(item);
 
-                // Botón quitar
-                item.querySelector('.remove-btn').addEventListener('click', function () {
-                    archivos.splice(parseInt(this.dataset.index), 1);
-                    renderPreviews();
-                });
             };
+
             reader.readAsDataURL(file);
+
         });
 
-        // Actualizar contador y botón
-        if (archivos.length > 0) {
-            fotoCount.style.display = 'block';
-            fotoCount.textContent = archivos.length + ' foto(s) seleccionada(s)';
-            btnSubmit.disabled = false;
-        } else {
-            fotoCount.style.display = 'none';
-            btnSubmit.disabled = true;
-        }
-    }
+    });
 
-    // ── Antes de enviar: sincronizar archivos al input ──
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
+    /*
+    |--------------------------------------------------------------------------
+    | SUBMIT NORMAL
+    |--------------------------------------------------------------------------
+    */
 
-        if (archivos.length === 0) {
-            alert('⚠️ Debes subir al menos una foto de evidencia.');
+    document.getElementById('form-evidencias')
+
+    .addEventListener('submit', function(){
+
+        /*
+        |--------------------------------------------------------------------------
+        | VALIDAR
+        |--------------------------------------------------------------------------
+        */
+
+        if(inputFotos.files.length === 0){
+
+            alert('⚠️ Debes subir al menos una foto.');
+
+            event.preventDefault();
+
             return;
+
         }
 
-        // Mostrar spinner
+        /*
+        |--------------------------------------------------------------------------
+        | SPINNER
+        |--------------------------------------------------------------------------
+        */
+
         spinner.style.display = 'block';
+
         btnText.textContent = 'Subiendo...';
+
         btnSubmit.disabled = true;
 
-        // Construir FormData manualmente con el array de archivos
-        const formData = new FormData(this);
-
-        // Limpiar fotos del FormData y agregar las del array
-        formData.delete('fotos[]');
-        archivos.forEach(file => formData.append('fotos[]', file));
-
-        // Enviar con fetch para mejor control
-        fetch(this.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        })
-        .then(response => {
-            // Laravel redirige en éxito → seguimos la redirección
-            if (response.redirected) {
-                window.location.href = response.url;
-            } else if (response.ok) {
-                window.location.href = '{{ route("piloto.dashboard") }}';
-            } else {
-                return response.text().then(html => {
-                    // Si hay error de validación, recargar mostrando el mensaje
-                    document.open();
-                    document.write(html);
-                    document.close();
-                });
-            }
-        })
-        .catch(() => {
-            alert('❌ Error al subir las evidencias. Intenta de nuevo.');
-            spinner.style.display = 'none';
-            btnText.textContent = '📤 Subir evidencias y completar viaje';
-            btnSubmit.disabled = false;
-        });
     });
+
 });
+</script>
+```
+
+<script>
+
+const canvas = document.getElementById('signature-pad');
+
+const ctx = canvas.getContext('2d');
+
+let drawing = false;
+
+function startPosition(e){
+
+    drawing = true;
+
+    draw(e);
+
+}
+
+function endPosition(){
+
+    drawing = false;
+
+    ctx.beginPath();
+
+}
+
+function draw(e){
+
+    if(!drawing) return;
+
+    ctx.lineWidth = 2.5;
+
+    ctx.lineCap = 'round';
+
+    ctx.strokeStyle = '#0b1c39';
+
+    const rect = canvas.getBoundingClientRect();
+
+    const x = (e.clientX || e.touches[0].clientX) - rect.left;
+
+    const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+    ctx.lineTo(x, y);
+
+    ctx.stroke();
+
+    ctx.beginPath();
+
+    ctx.moveTo(x, y);
+
+}
+
+/*
+|--------------------------------------------------------------------------
+| MOUSE
+|--------------------------------------------------------------------------
+*/
+
+canvas.addEventListener('mousedown', startPosition);
+
+canvas.addEventListener('mouseup', endPosition);
+
+canvas.addEventListener('mousemove', draw);
+
+/*
+|--------------------------------------------------------------------------
+| TOUCH
+|--------------------------------------------------------------------------
+*/
+
+canvas.addEventListener('touchstart', startPosition);
+
+canvas.addEventListener('touchend', endPosition);
+
+canvas.addEventListener('touchmove', draw);
+
+/*
+|--------------------------------------------------------------------------
+| LIMPIAR
+|--------------------------------------------------------------------------
+*/
+
+document.getElementById('clear-signature')
+
+.addEventListener('click', () => {
+
+    ctx.clearRect(
+
+        0,
+
+        0,
+
+        canvas.width,
+
+        canvas.height
+
+    );
+
+});
+
+/*
+|--------------------------------------------------------------------------
+| GUARDAR FIRMA
+|--------------------------------------------------------------------------
+*/
+
+document.getElementById('form-evidencias')
+
+.addEventListener('submit', function(){
+
+    const firma = canvas.toDataURL();
+
+    document.getElementById('firma').value = firma;
+
+});
+
 </script>
 
 </body>

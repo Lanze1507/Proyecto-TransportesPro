@@ -152,7 +152,7 @@
                                     <nav>
                                         <ul id="navigation" class="d-flex align-items-center">
                                             <li><a href="/">Inicio</a></li>
-                                            <li><a href="{{ route('operador.viajes.index') }}">Operaciones</a></li>
+                                            <li><a href="{{ route('operador.viajes.index') }}">Gestión Viajes</a></li>
                                             <li>
                                                 <form method="POST" action="{{ route('logout') }}" style="display:inline;">
                                                     @csrf

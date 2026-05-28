@@ -322,13 +322,15 @@ Route::middleware(['auth', 'piloto'])->prefix('piloto')->group(function () {
     Route::get('/dashboard', [PilotoDashboardController::class, 'index'])
         ->name('piloto.dashboard');
 
-    Route::get('/piloto/viaje/{viaje_id}/evidencias',
+    Route::get(
+    '/viaje/{viaje_id}/evidencias',
     [App\Http\Controllers\Piloto\EvidenciaController::class, 'create']
-        )->name('piloto.evidencias.create');
+)->name('piloto.evidencias.create');
 
-    Route::post('/piloto/viaje/{viaje_id}/evidencias', 
+    Route::post(
+    '/viaje/{viaje_id}/evidencias',
     [App\Http\Controllers\Piloto\EvidenciaController::class, 'store']
-        )->name('piloto.evidencias.store');
+)->name('piloto.evidencias.store');
 
 });
 
@@ -346,7 +348,7 @@ require __DIR__.'/auth.php';
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     /*
     |--------------------------------------------------------------------------

@@ -3,97 +3,389 @@
 namespace App\Http\Controllers\Piloto;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\Entrega;
 use App\Models\Evidencia;
 use App\Models\Viaje;
+use App\Models\ViajeHistorial;
+
 use Illuminate\Http\Request;
 
 class EvidenciaController extends Controller
 {
-    // Subir fotos de evidencia al completar un viaje
+    /*
+    |--------------------------------------------------------------------------
+    | FORMULARIO DE ENTREGA
+    |--------------------------------------------------------------------------
+    */
+
     public function create($viaje_id)
     {
-        $viaje = \App\Models\Viaje::with(['cliente', 'camion'])->findOrFail($viaje_id);
+        $viaje = Viaje::with([
 
-        // Solo el piloto asignado puede subir evidencias
-        $piloto = \App\Models\Piloto::where('user_id', auth()->id())->firstOrFail();
+            'cliente',
+            'camion',
+            'piloto'
 
-        abort_if($viaje->piloto_id !== $piloto->id, 403);
+        ])->findOrFail($viaje_id);
 
-        return view('pilotos.subir_evidencias', compact('viaje'));
+        /*
+        |--------------------------------------------------------------------------
+        | PILOTO AUTENTICADO
+        |--------------------------------------------------------------------------
+        */
+
+        $piloto = \App\Models\Piloto::where(
+
+            'user_id',
+            auth()->id()
+
+        )->firstOrFail();
+
+        /*
+        |--------------------------------------------------------------------------
+        | SEGURIDAD
+        |--------------------------------------------------------------------------
+        */
+
+        abort_if(
+
+            $viaje->piloto_id !== $piloto->id,
+
+            403
+
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | SOLO VIAJES ACTIVOS
+        |--------------------------------------------------------------------------
+        */
+
+        abort_if(
+
+            !in_array($viaje->estado, [
+
+                'en_ruta',
+                'en_transito'
+
+            ]),
+
+            403
+
+        );
+
+        return view(
+
+            'pilotos.subir_evidencias',
+
+            compact('viaje')
+
+        );
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | COMPLETAR ENTREGA
+    |--------------------------------------------------------------------------
+    */
+
     public function store(Request $request, $viaje_id)
     {
         $request->validate([
-            'fotos'         => 'required|array|min:1',
-            'fotos.*'       => 'image|max:5120', // máx 5MB por foto
-            'descripcion'   => 'nullable|string',
+
+            'fotos'       => 'required|array|min:1',
+
+            'fotos.*'     => 'image|max:5120',
+
+            'descripcion' => 'nullable|string|max:1000',
+
+            'firma'       => 'nullable|string',
+
         ]);
 
-        // Buscar o crear la entrega asociada al viaje
-        $entrega = Entrega::firstOrCreate(
-            ['viaje_id' => $viaje_id],
-            ['estado'   => 'entregado', 'fecha_entrega' => now()]
-        );
+        /*
+        |--------------------------------------------------------------------------
+        | VIAJE
+        |--------------------------------------------------------------------------
+        */
 
-        // Guardar cada foto
-        foreach ($request->file('fotos') as $foto) {
-            $ruta = $foto->store('evidencias', 'public');
+        $viaje = Viaje::with([
 
-            Evidencia::create([
-                'entrega_id'  => $entrega->id,
-                'foto_url'    => $ruta,
-                'descripcion' => $request->descripcion,
-            ]);
+            'piloto',
+            'camion',
+            'cliente'
+
+        ])->findOrFail($viaje_id);
+
+        /*
+        |--------------------------------------------------------------------------
+        | EVITAR DOBLE ENTREGA
+        |--------------------------------------------------------------------------
+        */
+
+        if($viaje->estado == 'completado'){
+
+            return back()->with(
+
+                'error',
+
+                'Este viaje ya fue completado.'
+
+            );
+
         }
 
-        // Marcar el viaje como completado
         /*
-|--------------------------------------------------------------------------
-| COMPLETAR VIAJE
-|--------------------------------------------------------------------------
-*/
+        |--------------------------------------------------------------------------
+        | CREAR ENTREGA
+        |--------------------------------------------------------------------------
+        */
 
-$viaje = Viaje::findOrFail($viaje_id);
-
-$viaje->update([
-
-    'estado' => 'completado'
-
-]);
-
+      
 /*
 |--------------------------------------------------------------------------
-| LIBERAR PILOTO
+| GUARDAR FIRMA COMO IMAGEN
 |--------------------------------------------------------------------------
 */
 
-if($viaje->piloto){
+$firmaPath = null;
 
-    $viaje->piloto->update([
+if($request->firma){
 
-        'estado' => 'activo'
+    $firma = $request->firma;
 
-    ]);
+    $firma = str_replace(
+
+        'data:image/png;base64,',
+
+        '',
+
+        $firma
+
+    );
+
+    $firma = str_replace(
+
+        ' ',
+
+        '+',
+
+        $firma
+
+    );
+
+    $data = base64_decode($firma);
+
+    $nombreFirma =
+
+        'firma_' .
+
+        time() .
+
+        '.png';
+
+    \Storage::disk('public')->put(
+
+        'firmas/' . $nombreFirma,
+
+        $data
+
+    );
+
+    $firmaPath =
+
+        'firmas/' . $nombreFirma;
 
 }
 
-/*
-|--------------------------------------------------------------------------
-| LIBERAR CAMIÓN
-|--------------------------------------------------------------------------
-*/
+$entrega = Entrega::updateOrCreate(
 
-if($viaje->camion){
+    [
+        'viaje_id' => $viaje_id
+    ],
 
-    $viaje->camion->update([
+    [
+        'estado' => 'entregado',
 
-        'estado' => 'disponible'
+        'firma_digital' => $firmaPath,
 
-    ]);
+        'fecha_entrega' => now(),
+    ]
+
+);
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | GUARDAR EVIDENCIAS
+        |--------------------------------------------------------------------------
+        */
+
+   
+if($request->hasFile('fotos')){
+
+    foreach($request->file('fotos') as $foto){
+
+        /*
+        |--------------------------------------------------------------------------
+        | VALIDAR
+        |--------------------------------------------------------------------------
+        */
+
+        if(!$foto){
+
+            continue;
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | NOMBRE
+        |--------------------------------------------------------------------------
+        */
+
+        $nombre = time().'_'.$foto->getClientOriginalName();
+
+        /*
+        |--------------------------------------------------------------------------
+        | LEER ARCHIVO TEMPORAL
+        |--------------------------------------------------------------------------
+        */
+
+        $contenido = file_get_contents(
+
+            $foto->getPathname()
+
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | DESTINO
+        |--------------------------------------------------------------------------
+        */
+
+        $destino = public_path(
+
+            'evidencias/'.$nombre
+
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | GUARDAR MANUALMENTE
+        |--------------------------------------------------------------------------
+        */
+
+        file_put_contents(
+
+            $destino,
+
+            $contenido
+
+        );
+
+        /*
+        |--------------------------------------------------------------------------
+        | DB
+        |--------------------------------------------------------------------------
+        */
+
+        Evidencia::create([
+
+            'entrega_id' => $entrega->id,
+
+            'foto_url' => 'evidencias/'.$nombre,
+
+            'descripcion' => $request->descripcion,
+
+        ]);
+
+    }
 
 }
 
-        return back()->with('success', 'Evidencias guardadas correctamente.');
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | COMPLETAR VIAJE
+        |--------------------------------------------------------------------------
+        */
+
+        $viaje->update([
+
+            'estado' => 'completado',
+
+            'fecha_entrega' => now(),
+
+            'firma_cliente' => $firmaPath,
+
+            'recibido' => true,
+
+        ]);
+
+        /*
+        |--------------------------------------------------------------------------
+        | LIBERAR PILOTO
+        |--------------------------------------------------------------------------
+        */
+
+        if($viaje->piloto){
+
+            $viaje->piloto->update([
+
+                'estado' => 'activo'
+
+            ]);
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | LIBERAR CAMIÓN
+        |--------------------------------------------------------------------------
+        */
+
+        if($viaje->camion){
+
+            $viaje->camion->update([
+
+                'estado' => 'disponible'
+
+            ]);
+
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | HISTORIAL
+        |--------------------------------------------------------------------------
+        */
+
+        ViajeHistorial::create([
+
+            'viaje_id' => $viaje->id,
+
+            'estado' => 'completado',
+
+            'descripcion' =>
+                '📦 Entrega completada con evidencias'
+
+        ]);
+
+        return redirect()
+
+            ->route('piloto.dashboard')
+
+            ->with(
+
+                'success',
+
+                'Entrega completada correctamente.'
+
+            );
     }
 }
