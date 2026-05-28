@@ -152,7 +152,7 @@
                                     <nav>
                                         <ul id="navigation" class="d-flex align-items-center">
                                             <li><a href="/">Inicio</a></li>
-                                            <li><a href="{{ route('operador.viajes.index') }}">Gestión Viajes</a></li>
+                                            <li><a href="{{ route('operador.viajes.index') }}">Operaciones</a></li>
                                             <li>
                                                 <form method="POST" action="{{ route('logout') }}" style="display:inline;">
                                                     @csrf
@@ -164,11 +164,46 @@
                                         </ul>
                                     </nav>
                                 </div>
-                                <div class="header-right-btn d-none d-lg-block ml-20">
-                                    <span style="color:#ccc;font-size:13px;">
-                                        👤 {{ auth()->user()->name }}
-                                        <span style="background:#ff5e14;color:#fff;padding:2px 10px;border-radius:999px;font-size:11px;margin-left:6px;">OPERADOR</span>
-                                    </span>
+                                <li>
+                                        <span style="color:#fff;font-size:13px;">
+                                            👤 {{ auth()->user()->name }}
+                                        </span>
+                                    </li>
+
+                                    <li>
+
+    <span
+        style="
+            background:#ff5e14;
+            color:#fff;
+            padding:5px 14px;
+            border-radius:999px;
+            font-size:11px;
+            font-weight:700;
+        "
+    >
+
+        @if(auth()->user()->role === 'admin')
+
+            ADMIN
+
+        @elseif(auth()->user()->role === 'operador')
+
+            OPERADOR
+
+        @elseif(auth()->user()->role === 'piloto')
+
+            PILOTO
+
+        @else
+
+            CLIENTE
+
+        @endif
+
+    </span>
+
+</li>
                                 </div>
                             </div>
                         </div>
