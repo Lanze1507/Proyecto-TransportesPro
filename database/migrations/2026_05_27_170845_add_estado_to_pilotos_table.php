@@ -10,9 +10,11 @@ return new class extends Migration
     {
         Schema::table('pilotos', function (Blueprint $table) {
 
-            $table->string('estado')
-                  ->default('activo')
-                  ->after('dpi');
+            if (!Schema::hasColumn('pilotos', 'estado')) {
+                $table->string('estado')
+                    ->default('activo')
+                    ->after('dpi');
+            }
 
         });
     }

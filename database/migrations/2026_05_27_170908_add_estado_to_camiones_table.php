@@ -10,9 +10,11 @@ return new class extends Migration
     {
         Schema::table('camiones', function (Blueprint $table) {
 
-            $table->string('estado')
-                  ->default('disponible')
-                  ->after('capacidad');
+        if (!Schema::hasColumn('camiones', 'estado')) {
+        $table->string('estado')
+                ->default('disponible')
+                ->after('capacidad');
+        }
 
         });
     }
