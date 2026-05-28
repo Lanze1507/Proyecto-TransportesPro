@@ -10,7 +10,7 @@ RUN npm run build
 FROM composer:latest AS composer
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer install --optimize-autoloader --no-scripts --no-interaction --no-dev
+RUN composer install --optimize-autoloader --no-scripts --no-interaction --no-dev --ignore-platform-reqs
 
 # Stage 3: Final image
 FROM dunglas/frankenphp:php8.3-bookworm
