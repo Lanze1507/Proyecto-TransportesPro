@@ -703,7 +703,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="single-team mb-30 text-center">
                         <div class="team-img">
-                            <img src="assets/img/gallery/Team2.png" alt="">
+                            <img src="assets/img/gallery/team2.png" alt="">
                             <div class="team-caption">
                                 <h3><a href="#">Lanse Castellanos</a></h3>
                                 <p>Desarrollador del sistema</p>
@@ -723,7 +723,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="single-team mb-30 text-center">
                         <div class="team-img">
-                            <img src="assets/img/gallery/Team3.png" alt="">
+                            <img src="assets/img/gallery/team3.png" alt="">
                             <div class="team-caption">
                                 <h3><a href="#">Cristal Muñoz</a></h3>
                                 <p>Administrador de la plataforma</p>
