@@ -143,7 +143,6 @@
                                                     style="
                                                         background:none;
                                                         border:none;
-                                                        color:white;
                                                         cursor:pointer;
                                                     "
                                                 >
