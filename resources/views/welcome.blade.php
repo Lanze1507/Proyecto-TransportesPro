@@ -67,7 +67,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                                <a href="index.html"><img src="assets/img/logo/logoNombre.png" alt="" class="img-fluid"></a>
+                                <a href="/"><img src="assets/img/logo/logoNombre.png" alt="" class="img-fluid"></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10">
@@ -336,6 +336,153 @@
     line-height: 1.7;
     color: #6c757d;
 }
+/* =========================
+   MOBILE IMPROVEMENTS
+========================= */
+
+@media (max-width: 768px){
+
+    /* Hero */
+    .hero__caption h1{
+        font-size: 32px !important;
+        line-height: 1.2;
+        text-align: center;
+    }
+
+    .hero-pera{
+        text-align:center;
+    }
+
+    /* Tracking */
+    .tracking-box{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .tracking-box input,
+    .tracking-box button{
+        width:100%;
+    }
+
+    /* Navbar */
+    .header-btn{
+        width:100%;
+        text-align:center;
+    }
+
+    /* Sections */
+    .section-tittle h2{
+        font-size:28px !important;
+        line-height:1.3;
+    }
+
+    .section-tittle span{
+        font-size:14px;
+    }
+
+    /* About */
+    .about-caption{
+        text-align:center;
+    }
+
+    /* Testimonial form */
+    .testimonial-form{
+        margin-top:30px;
+    }
+
+    .testimonial-form input,
+    .testimonial-form button{
+        width:100%;
+    }
+
+    /* Footer */
+    .footer-heading h2{
+        font-size:24px;
+        text-align:center;
+    }
+
+    .contact-number{
+        text-align:center;
+        display:block;
+        margin-top:15px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px){
+
+    .hero__caption h1{
+        font-size:26px !important;
+    }
+
+    .section-tittle h2{
+        font-size:22px !important;
+    }
+
+    .custom-cat{
+        padding:20px !important;
+    }
+
+    .custom-cat p{
+        font-size:14px;
+    }
+}
+<style>
+@media (max-width: 768px){
+
+    .header-area .logo{
+        text-align:center;
+        margin-bottom:15px;
+    }
+
+    .header-area .logo img{
+        max-width:180px;
+    }
+
+    .single-info{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .single-info .info-caption{
+        padding-left:0 !important;
+        margin-top:10px;
+    }
+
+    .team-caption{
+        position:relative !important;
+        bottom:0 !important;
+    }
+
+    .blog-cap{
+        margin-left:0 !important;
+        margin-top:15px;
+    }
+
+    .contact-form-wrapper{
+        padding:20px !important;
+    }
+
+    .about-font-img,
+    .about-back-img{
+        position:relative !important;
+        top:auto !important;
+        right:auto !important;
+    }
+
+    .about-font-img img,
+    .about-back-img img{
+        width:100%;
+    }
+
+    .footer-social{
+        text-align:center;
+        margin-top:20px;
+    }
+
+}
+</style>
 </style>
                     </div>
                 </div>
@@ -1049,6 +1196,12 @@
       @media (max-width: 575.98px) { 
         .slider-height { min-height: 60vh; padding: 40px 0; }
       }
+
+      @media (max-width:768px){
+    .header-right-btn{
+        margin-top:15px;
+    }
+}
 
       /* Tracking form stack on mobile */
       .tracking-box { gap: 10px; }
