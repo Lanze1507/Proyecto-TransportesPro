@@ -337,6 +337,12 @@ Route::middleware(['auth', 'piloto'])->prefix('piloto')->group(function () {
     [App\Http\Controllers\Piloto\EvidenciaController::class, 'store']
 )->name('piloto.evidencias.store');
 
+    // Piloto cambia estado de en_ruta → en_transito
+    Route::patch(
+    '/viaje/{viaje_id}/iniciar-traslado',
+    [App\Http\Controllers\Piloto\EvidenciaController::class, 'iniciarTraslado']
+)->name('piloto.viaje.iniciar_traslado');
+
 });
 
 /*
