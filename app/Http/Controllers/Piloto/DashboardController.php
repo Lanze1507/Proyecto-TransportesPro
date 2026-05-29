@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $stats = [
             'total'       => $piloto->viajes()->count(),
             'en_transito' => $piloto->viajes()
-                                ->where('estado', 'en_ruta')
+                                ->where('estado', 'en_ruta', 'en_transito')
                                 ->count(),
             'completados' => $piloto->viajes()
                                 ->whereIn('estado', ['completado', 'entregado'])
@@ -37,7 +37,7 @@ class DashboardController extends Controller
         // ── Viaje activo actual (si hay uno en ruta) ──
         $viaje_activo = $piloto->viajes()
             ->with(['cliente', 'camion', 'historial'])
-            ->where('estado', 'en_ruta')
+            ->where('estado', 'en_ruta', 'en_transito')
             ->latest()
             ->first();
 

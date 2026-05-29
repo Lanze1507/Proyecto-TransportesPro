@@ -201,7 +201,7 @@ body { background: #f4f7fb; }
     {{-- Header --}}
     <div class="page-header">
         <div>
-            <h1>Bienvenido, {{ $pilotos->nombre }} 👋</h1>
+            <h1>Bienvenido, {{ $piloto->nombre }} 👋</h1>
             <p>Tu panel de viajes · {{ now()->format('d/m/Y H:i') }}</p>
         </div>
     </div>
@@ -442,18 +442,18 @@ body { background: #f4f7fb; }
             {{-- Perfil --}}
             <div class="perfil-card">
                 <div class="avatar">🧑‍✈️</div>
-                <h4>{{ $pilotos->nombre }}</h4>
+                <h4>{{ $piloto->nombre }}</h4>
                 <p style="font-size:13px;color:rgba(255,255,255,.7);margin:0 0 16px;">
                     {{ auth()->user()->email }}
                 </p>
                 <div class="info-row-p">
-                    Teléfono <strong>{{ $pilotos->telefono ?? '—' }}</strong>
+                    Teléfono <strong>{{ $piloto->telefono ?? '—' }}</strong>
                 </div>
                 <div class="info-row-p">
-                    Licencia <strong>{{ $pilotos->licencia ?? '—' }}</strong>
+                    Licencia <strong>{{ $piloto->licencia ?? '—' }}</strong>
                 </div>
                 <div class="info-row-p">
-                    DPI <strong>{{ $pilotos->dpi ?? '—' }}</strong>
+                    DPI <strong>{{ $piloto->dpi ?? '—' }}</strong>
                 </div>
                 <div class="info-row-p">
                     Estado
