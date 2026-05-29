@@ -6,6 +6,7 @@
     <title>TransportesPro</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
 
@@ -900,6 +901,430 @@ document
 
 });
 
-</script>   
+</script>  
+{{--
+    ══════════════════════════════════════════════════════════════
+    CHATBOT WIDGET — TransPro Asistente IA
+    
+    INSTRUCCIONES DE USO:
+    1. Copia este bloque completo y pégalo al final de welcome.blade.php,
+       justo ANTES del cierre </body>.
+    2. Asegúrate de tener en tu .env:  ANTHROPIC_API_KEY=sk-ant-...
+    3. Agrega la ruta en web.php:       Route::post('/api/chatbot', ...)
+    4. Agrega el controlador:           app/Http/Controllers/ChatbotController.php
+    ══════════════════════════════════════════════════════════════
+--}}
+
+<style>
+/* ── Variables del widget ── */
+#transpro-chat-widget {
+    --brand:       #ff5e14;
+    --brand-dark:  #0b1c39;
+    --brand-light: rgba(255,94,20,.10);
+    --bubble-size: 60px;
+    --chat-w:      370px;
+    --chat-h:      520px;
+    --radius:      18px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+#transpro-chat-widget {
+    position: fixed; bottom: 28px; right: 28px;
+    z-index: 99999; display: flex; flex-direction: column; align-items: flex-end;
+}
+#tpw-bubble {
+    width: var(--bubble-size); height: var(--bubble-size); border-radius: 50%;
+    background: var(--brand); display: flex; align-items: center; justify-content: center;
+    cursor: pointer; position: relative;
+    box-shadow: 0 4px 20px rgba(255,94,20,.45);
+    transition: transform .2s, box-shadow .2s; flex-shrink: 0;
+}
+#tpw-bubble:hover { transform: scale(1.07); box-shadow: 0 6px 28px rgba(255,94,20,.55); }
+#tpw-bubble svg   { width: 26px; height: 26px; fill: #fff; }
+#tpw-notif {
+    position: absolute; top: -3px; right: -3px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #ef4444; border: 2px solid #f0f2f5;
+    font-size: 10px; color: #fff; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+}
+#tpw-panel {
+    width: var(--chat-w); height: var(--chat-h); background: #fff;
+    border-radius: var(--radius);
+    box-shadow: 0 20px 60px rgba(0,0,0,.18), 0 4px 16px rgba(0,0,0,.08);
+    display: flex; flex-direction: column; overflow: hidden; margin-bottom: 14px;
+    transform-origin: bottom right; transition: opacity .22s, transform .22s;
+}
+#tpw-panel.tpw-hidden {
+    opacity: 0; transform: scale(0.88) translateY(12px); pointer-events: none;
+}
+.tpw-header {
+    background: var(--brand-dark); padding: 14px 16px;
+    display: flex; align-items: center; gap: 11px; flex-shrink: 0;
+}
+.tpw-avatar {
+    width: 40px; height: 40px; border-radius: 50%; background: var(--brand);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+}
+.tpw-hinfo { flex: 1; }
+.tpw-hname  { font-size: 14px; font-weight: 700; color: #fff; }
+.tpw-hstatus {
+    font-size: 11px; color: rgba(255,255,255,.55);
+    display: flex; align-items: center; gap: 5px; margin-top: 2px;
+}
+.tpw-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+.tpw-close {
+    background: none; border: none; cursor: pointer;
+    color: rgba(255,255,255,.5); font-size: 20px;
+    line-height: 1; padding: 4px; transition: color .15s;
+}
+.tpw-close:hover { color: #fff; }
+.tpw-quick {
+    padding: 9px 13px 6px; display: flex; gap: 6px; flex-wrap: wrap;
+    border-bottom: 1px solid #f3f4f6; flex-shrink: 0;
+}
+.tpw-qa {
+    font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+    border: 1px solid #e5e7eb; background: #f9fafb; color: #374151;
+    cursor: pointer; transition: all .15s; white-space: nowrap;
+}
+.tpw-qa:hover { background: var(--brand-light); border-color: var(--brand); color: var(--brand); }
+#tpw-messages {
+    flex: 1; overflow-y: auto; padding: 14px 13px;
+    display: flex; flex-direction: column; gap: 11px; scroll-behavior: smooth;
+}
+#tpw-messages::-webkit-scrollbar { width: 4px; }
+#tpw-messages::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 4px; }
+.tpw-msg { display: flex; gap: 8px; align-items: flex-end; max-width: 88%; }
+.tpw-msg.tpw-bot  { align-self: flex-start; }
+.tpw-msg.tpw-user { align-self: flex-end; flex-direction: row-reverse; }
+.tpw-mavatar {
+    width: 27px; height: 27px; border-radius: 50%; background: var(--brand);
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px;
+}
+.tpw-mbubble {
+    padding: 9px 12px; border-radius: 14px;
+    font-size: 13px; line-height: 1.5; max-width: calc(100% - 36px);
+}
+.tpw-bot  .tpw-mbubble { background: #f3f4f6; color: #111827; border-bottom-left-radius: 4px; }
+.tpw-user .tpw-mbubble { background: var(--brand); color: #fff; border-bottom-right-radius: 4px; }
+.tpw-mtime { font-size: 10px; color: #9ca3af; margin-top: 3px; padding: 0 3px; }
+.tpw-typing { display: flex; gap: 4px; padding: 3px 2px; }
+.tpw-typing span {
+    width: 7px; height: 7px; border-radius: 50%; background: #9ca3af;
+    animation: tpwBounce 1.2s infinite;
+}
+.tpw-typing span:nth-child(2) { animation-delay: .2s; }
+.tpw-typing span:nth-child(3) { animation-delay: .4s; }
+@keyframes tpwBounce {
+    0%,60%,100% { transform: translateY(0); }
+    30%          { transform: translateY(-6px); }
+}
+.tpw-track-form {
+    background: #fff; border: 1px solid #e5e7eb;
+    border-radius: 11px; padding: 11px; margin-top: 4px; width: 210px;
+}
+.tpw-track-form p   { font-size: 12px; font-weight: 600; color: #374151; margin-bottom: 7px; }
+.tpw-track-form input {
+    width: 100%; border: 1px solid #e5e7eb; border-radius: 7px;
+    padding: 7px 9px; font-size: 12px; outline: none;
+    letter-spacing: 1px; margin-bottom: 7px; font-family: monospace;
+}
+.tpw-track-form input:focus { border-color: var(--brand); }
+.tpw-track-form button {
+    width: 100%; background: var(--brand); color: #fff;
+    border: none; border-radius: 7px; padding: 7px;
+    font-size: 12px; font-weight: 700; cursor: pointer;
+}
+.tpw-track-form button:hover { opacity: .9; }
+.tpw-footer {
+    padding: 10px 13px; border-top: 1px solid #f3f4f6;
+    display: flex; gap: 8px; align-items: flex-end; flex-shrink: 0;
+}
+#tpw-input {
+    flex: 1; border: 1px solid #e5e7eb; border-radius: 12px;
+    padding: 8px 12px; font-size: 13px; resize: none; outline: none;
+    max-height: 88px; min-height: 38px; line-height: 1.45;
+    transition: border-color .15s; font-family: inherit;
+}
+#tpw-input:focus        { border-color: var(--brand); }
+#tpw-input::placeholder { color: #9ca3af; }
+#tpw-send {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--brand); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: opacity .15s, transform .1s;
+}
+#tpw-send:hover  { opacity: .88; }
+#tpw-send:active { transform: scale(.93); }
+#tpw-send svg    { width: 16px; height: 16px; fill: #fff; }
+.tpw-powered {
+    text-align: center; font-size: 10px; color: #c4c4c4;
+    padding: 3px 0 7px; flex-shrink: 0;
+}
+@media (max-width: 480px) {
+    #transpro-chat-widget { bottom: 16px; right: 16px; }
+    #tpw-panel { width: calc(100vw - 32px); }
+}
+</style>
+
+<div id="transpro-chat-widget" role="complementary" aria-label="Asistente virtual TransPro">
+
+    <div id="tpw-panel" class="tpw-hidden" aria-live="polite">
+
+        <div class="tpw-header">
+            <div class="tpw-avatar">🚛</div>
+            <div class="tpw-hinfo">
+                <div class="tpw-hname">TransPro Asistente</div>
+                <div class="tpw-hstatus">
+                    <div class="tpw-dot"></div>
+                    En línea · responde en segundos
+                </div>
+            </div>
+            <button class="tpw-close" id="tpw-close" aria-label="Cerrar chat">×</button>
+        </div>
+
+        <div class="tpw-quick" id="tpw-quick">
+            <button class="tpw-qa" data-msg="¿Qué servicios de transporte ofrecen?">📦 Servicios</button>
+            <button class="tpw-qa" data-msg="Quiero rastrear mi envío">🔍 Rastrear</button>
+            <button class="tpw-qa" data-msg="¿Cuánto cuesta un flete?">💰 Tarifas</button>
+            <button class="tpw-qa" data-msg="Quiero hablar con un operador">👤 Operador</button>
+        </div>
+
+        <div id="tpw-messages"></div>
+
+        <div class="tpw-footer">
+            <textarea id="tpw-input" placeholder="Escribe tu mensaje..." rows="1" aria-label="Mensaje al asistente"></textarea>
+            <button id="tpw-send" aria-label="Enviar mensaje">
+                <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+            </button>
+        </div>
+        <div class="tpw-powered">Impulsado por Claude AI · TransportesPro</div>
+
+    </div>
+
+    <div id="tpw-bubble" role="button" tabindex="0" aria-label="Abrir asistente virtual">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+        </svg>
+        <div id="tpw-notif" aria-hidden="true">1</div>
+    </div>
+
+</div>
+
+<script>
+(function () {
+
+    var SYSTEM_PROMPT = [
+    'Eres TransPro Asistente de TransportesPro Guatemala. Responde en español, máximo 2 oraciones.',
+    'SERVICIOS: carga general, refrigerada, nacional e internacional, rastreo GPS, firma digital.',
+    'TARIFAS: varían por peso/distancia, no des precios exactos, deriva a operador: +502 5192-2981.',
+    'RASTREO: pide código TRX-XXXXXX y redirige a /seguimiento/{codigo}.',
+    'HORARIO: Lun-Sab 8am-6pm. Si no sabes algo, ofrece conectar con operador.',
+    ].join(' ');
+
+    var history   = [];
+    var isOpen    = false;
+    var isLoading = false;
+
+    var panel    = document.getElementById('tpw-panel');
+    var bubble   = document.getElementById('tpw-bubble');
+    var notif    = document.getElementById('tpw-notif');
+    var messages = document.getElementById('tpw-messages');
+    var input    = document.getElementById('tpw-input');
+    var btnSend  = document.getElementById('tpw-send');
+    var btnClose = document.getElementById('tpw-close');
+
+    function getTime() {
+        return new Date().toLocaleTimeString('es-GT', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function addMessage(role, text) {
+        var wrap = document.createElement('div');
+        wrap.className = 'tpw-msg tpw-' + role;
+        if (role === 'bot') {
+            var av = document.createElement('div');
+            av.className = 'tpw-mavatar';
+            av.textContent = '🚛';
+            wrap.appendChild(av);
+        }
+        var col = document.createElement('div');
+        col.style.cssText = 'display:flex;flex-direction:column;max-width:calc(100% - 36px)';
+        var bub = document.createElement('div');
+        bub.className = 'tpw-mbubble';
+        bub.textContent = text;
+        var time = document.createElement('div');
+        time.className = 'tpw-mtime';
+        time.textContent = getTime();
+        col.appendChild(bub);
+        col.appendChild(time);
+        wrap.appendChild(col);
+        messages.appendChild(wrap);
+        messages.scrollTop = messages.scrollHeight;
+        return bub;
+    }
+
+    function showTyping() {
+        var wrap = document.createElement('div');
+        wrap.className = 'tpw-msg tpw-bot';
+        wrap.id = 'tpw-typing';
+        var av = document.createElement('div');
+        av.className = 'tpw-mavatar';
+        av.textContent = '🚛';
+        var bub = document.createElement('div');
+        bub.className = 'tpw-mbubble';
+        var dots = document.createElement('div');
+        dots.className = 'tpw-typing';
+        dots.innerHTML = '<span></span><span></span><span></span>';
+        bub.appendChild(dots);
+        wrap.appendChild(av);
+        wrap.appendChild(bub);
+        messages.appendChild(wrap);
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    function removeTyping() {
+        var el = document.getElementById('tpw-typing');
+        if (el) el.remove();
+    }
+
+    function showTrackingForm() {
+        var wrap = document.createElement('div');
+        wrap.className = 'tpw-msg tpw-bot';
+        var av = document.createElement('div');
+        av.className = 'tpw-mavatar';
+        av.textContent = '🚛';
+        var bub = document.createElement('div');
+        bub.className = 'tpw-mbubble';
+        bub.style.cssText = 'background:transparent;padding:0;';
+        var form = document.createElement('div');
+        form.className = 'tpw-track-form';
+        form.innerHTML =
+            '<p>Ingresa tu código de guía</p>' +
+            '<input type="text" id="tpw-track-input" placeholder="TRX-000000" maxlength="10"/>' +
+            '<button onclick="window._tpwTrack()">Rastrear envío →</button>';
+        bub.appendChild(form);
+        wrap.appendChild(av);
+        wrap.appendChild(bub);
+        messages.appendChild(wrap);
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    window._tpwTrack = function () {
+        var inp = document.getElementById('tpw-track-input');
+        if (!inp) return;
+        var val = inp.value.trim().toUpperCase();
+        if (!/^TRX-[A-Z0-9]{6}$/.test(val)) {
+            alert('Formato inválido. Ejemplo: TRX-000123');
+            return;
+        }
+        addMessage('user', 'Rastrear envío ' + val);
+        addMessage('bot', 'Puedes rastrear tu envío en tiempo real aquí: ' + window.location.origin + '/seguimiento/' + val);
+        history.push({ role: 'user',      content: 'Rastrear envío ' + val });
+        history.push({ role: 'assistant', content: 'Puedes rastrear en: /seguimiento/' + val });
+    };
+
+    /* ══════════════════════════════════════════════════════
+       CAMBIO CLAVE: el fetch ahora apunta a /api/chatbot
+       (ruta Laravel) en lugar de llamar a Anthropic directo.
+       Esto elimina el error de CORS y mantiene la API key
+       segura en el servidor.
+    ══════════════════════════════════════════════════════ */
+    function sendMessage(text) {
+        if (!text.trim() || isLoading) return;
+        isLoading = true;
+        btnSend.disabled = true;  // ← agrega esta línea
+        btnSend.style.opacity = '0.5';  // ← y esta
+
+        addMessage('user', text);
+        history.push({ role: 'user', content: text });
+        showTyping();
+
+        fetch('/api/chatbot', {                          // ← ruta Laravel (proxy)
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                ? document.querySelector('meta[name="csrf-token"]').content
+                                : ''
+            },
+            body: JSON.stringify({
+                system:   SYSTEM_PROMPT,
+                messages: history
+            })
+        })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+            removeTyping();
+            var reply = (data.content && data.content[0] && data.content[0].text)
+                ? data.content[0].text
+                : 'Lo siento, no pude procesar tu consulta. Intenta de nuevo.';
+            addMessage('bot', reply);
+            history.push({ role: 'assistant', content: reply });
+            var askedForCode = reply.toLowerCase().includes('trx') &&
+                               reply.toLowerCase().includes('código');
+            if (askedForCode) showTrackingForm();
+        })
+        .catch(function () {
+            removeTyping();
+            addMessage('bot', 'Hubo un error de conexión. Intenta de nuevo en un momento.');
+        })
+        .finally(function () { 
+            isLoading = false; 
+            btnSend.disabled = false;      // 
+            btnSend.style.opacity = '1'; 
+        });
+    }
+
+    bubble.addEventListener('click', function () {
+        isOpen = !isOpen;
+        panel.classList.toggle('tpw-hidden', !isOpen);
+        notif.style.display = 'none';
+        if (isOpen && messages.children.length === 0) {
+            setTimeout(function () {
+                showTyping();
+                setTimeout(function () {
+                    removeTyping();
+                    addMessage('bot', '¡Hola! 👋 Soy el asistente de TransportesPro. ¿En qué puedo ayudarte hoy?');
+                }, 900);
+            }, 300);
+        }
+        if (isOpen) input.focus();
+    });
+
+    btnClose.addEventListener('click', function () {
+        isOpen = false;
+        panel.classList.add('tpw-hidden');
+    });
+
+    btnSend.addEventListener('click', function () {
+        var txt = input.value.trim();
+        if (txt) { sendMessage(txt); input.value = ''; input.style.height = 'auto'; }
+    });
+
+    input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            var txt = input.value.trim();
+            if (txt) { sendMessage(txt); input.value = ''; input.style.height = 'auto'; }
+        }
+    });
+
+    input.addEventListener('input', function () {
+        input.style.height = 'auto';
+        input.style.height = Math.min(input.scrollHeight, 88) + 'px';
+    });
+
+    document.querySelectorAll('.tpw-qa').forEach(function (btn) {
+        btn.addEventListener('click', function () { sendMessage(btn.getAttribute('data-msg')); });
+    });
+
+    bubble.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') bubble.click();
+    });
+
+})();
+</script>
+{{-- ══ FIN CHATBOT WIDGET ══ --}} 
 </body>
 </html>

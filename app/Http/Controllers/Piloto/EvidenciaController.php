@@ -101,6 +101,8 @@ class EvidenciaController extends Controller
         abort_if($viaje->estado !== 'en_ruta', 403);
 
         $viaje->update(['estado' => 'en_transito']);
+        $piloto->update(['estado' => 'activo']);
+        
 
         ViajeHistorial::create([
             'viaje_id'    => $viaje->id,
