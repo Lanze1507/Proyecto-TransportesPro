@@ -131,29 +131,20 @@
 
                                             </li>
 
-                                        @endif
+                                        @endif 
 
-                                        <li>
+                                            <li>
 
-                                            <form method="POST" action="{{ route('logout') }}">
-
-                                                @csrf
-
-                                                <button
-                                                    style="
-                                                        background:none;
-                                                        border:none;
-                                                        cursor:pointer;
-                                                    "
+                                                <a
+                                                    href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                                 >
 
                                                     Cerrar sesión
 
-                                                </button>
+                                                </a>
 
-                                            </form>
-
-                                        </li>
+                                            </li>
 
                                     @endauth
 
