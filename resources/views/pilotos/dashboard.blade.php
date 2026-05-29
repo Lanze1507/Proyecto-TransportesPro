@@ -201,7 +201,7 @@ body { background: #f4f7fb; }
     {{-- Header --}}
     <div class="page-header">
         <div>
-            <h1>Bienvenido, {{ $piloto->nombre }} 👋</h1>
+            <h1>Bienvenido, {{ $pilotos->nombre }} 👋</h1>
             <p>Tu panel de viajes · {{ now()->format('d/m/Y H:i') }}</p>
         </div>
     </div>
@@ -275,8 +275,29 @@ body { background: #f4f7fb; }
                     </div>
                 </div>
 
-                {{-- ══ BOTÓN SUBIR EVIDENCIAS ══ --}}
-                <div style="margin-top:20px;">
+                {{-- ══ BOTONES DE ACCIÓN ══ --}}
+                <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;">
+
+                    {{-- Botón iniciar traslado — solo si está en_ruta --}}
+                    @if($viaje_activo->estado === 'en_ruta')
+                    <form method="POST"
+                          action="{{ route('piloto.viaje.iniciar_traslado', $viaje_activo->id) }}">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit"
+                                style="display:inline-flex;align-items:center;gap:8px;
+                                       background:#7c3aed;color:#fff;border:none;
+                                       padding:10px 22px;border-radius:10px;
+                                       font-weight:700;font-size:13px;cursor:pointer;
+                                       transition:opacity .2s;"
+                                onmouseover="this.style.opacity='.85'"
+                                onmouseout="this.style.opacity='1'">
+                            🚛 Iniciar traslado activo
+                        </button>
+                    </form>
+                    @endif
+
+                    {{-- Botón subir evidencias — en_ruta o en_transito --}}
                     <a href="{{ route('piloto.evidencias.create', $viaje_activo->id) }}"
                        style="display:inline-flex;align-items:center;gap:8px;
                               background:#ff5e14;color:#fff;
@@ -288,6 +309,7 @@ body { background: #f4f7fb; }
                        onmouseout="this.style.opacity='1'">
                         📷 Subir evidencias de entrega
                     </a>
+
                 </div>
 
                 {{-- Mapa si hay coordenadas --}}
@@ -420,18 +442,18 @@ body { background: #f4f7fb; }
             {{-- Perfil --}}
             <div class="perfil-card">
                 <div class="avatar">🧑‍✈️</div>
-                <h4>{{ $piloto->nombre }}</h4>
+                <h4>{{ $pilotos->nombre }}</h4>
                 <p style="font-size:13px;color:rgba(255,255,255,.7);margin:0 0 16px;">
                     {{ auth()->user()->email }}
                 </p>
                 <div class="info-row-p">
-                    Teléfono <strong>{{ $piloto->telefono ?? '—' }}</strong>
+                    Teléfono <strong>{{ $pilotos->telefono ?? '—' }}</strong>
                 </div>
                 <div class="info-row-p">
-                    Licencia <strong>{{ $piloto->licencia ?? '—' }}</strong>
+                    Licencia <strong>{{ $pilotos->licencia ?? '—' }}</strong>
                 </div>
                 <div class="info-row-p">
-                    DPI <strong>{{ $piloto->dpi ?? '—' }}</strong>
+                    DPI <strong>{{ $pilotos->dpi ?? '—' }}</strong>
                 </div>
                 <div class="info-row-p">
                     Estado
