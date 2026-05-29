@@ -58,17 +58,15 @@ class EvidenciaController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | SOLO VIAJES ACTIVOS
+        | SOLO VIAJES ACTIVOS — en_ruta o en_transito
         |--------------------------------------------------------------------------
         */
 
         abort_if(
 
             !in_array($viaje->estado, [
-
                 'en_ruta',
-                'en_transito'
-
+                'en_transito',
             ]),
 
             403
@@ -82,6 +80,35 @@ class EvidenciaController extends Controller
             compact('viaje')
 
         );
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | INICIAR TRASLADO — piloto cambia estado de en_ruta a en_transito
+    |--------------------------------------------------------------------------
+    */
+
+    public function iniciarTraslado($viaje_id)
+    {
+        $piloto = \App\Models\Piloto::where('user_id', auth()->id())->firstOrFail();
+
+        $viaje = Viaje::findOrFail($viaje_id);
+
+        // Solo el piloto asignado puede hacer esto
+        abort_if($viaje->piloto_id !== $piloto->id, 403);
+
+        // Solo si está en_ruta
+        abort_if($viaje->estado !== 'en_ruta', 403);
+
+        $viaje->update(['estado' => 'en_transito']);
+
+        ViajeHistorial::create([
+            'viaje_id'    => $viaje->id,
+            'estado'      => 'en_transito',
+            'descripcion' => '🚛 Piloto inició el traslado activo',
+        ]);
+
+        return back()->with('success', 'Estado actualizado a En tránsito.');
     }
 
     /*
