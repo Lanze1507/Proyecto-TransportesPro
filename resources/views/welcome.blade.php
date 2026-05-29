@@ -29,7 +29,7 @@
         <div class="preloader-inner position-relative">
             <div class="preloader-circle"></div>
             <div class="preloader-img pere-text">
-                <img src="{{ asset('assets/img/logo/loder.jpg') }}" alt="">
+                <img src="{{ asset('assets/img/logo/loder.jpg') }}" alt="" class="img-fluid">
             </div>
         </div>
     </div>
@@ -67,7 +67,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
-                                <a href="index.html"><img src="assets/img/logo/logoNombre.png" alt=""></a>
+                                <a href="index.html"><img src="assets/img/logo/logoNombre.png" alt="" class="img-fluid"></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10">
@@ -363,10 +363,10 @@
                     <!-- about-img -->
                     <div class="about-img ">
                         <div class="about-font-img">
-                            <img src="assets/img/gallery/about2.png" alt="">
+                            <img src="assets/img/gallery/about2.png" alt="" class="img-fluid">
                         </div>
                         <div class="about-back-img d-none d-lg-block">
-                            <img src="assets/img/gallery/about1.png" alt="">
+                            <img src="assets/img/gallery/about1.png" alt="" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -703,7 +703,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="single-team mb-30 text-center">
                         <div class="team-img">
-                            <img src="assets/img/gallery/team2.png" alt="">
+                            <img src="assets/img/gallery/team2.png" alt="" class="img-fluid">
                             <div class="team-caption">
                                 <h3><a href="#">Lanse Castellanos</a></h3>
                                 <p>Desarrollador del sistema</p>
@@ -723,7 +723,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="single-team mb-30 text-center">
                         <div class="team-img">
-                            <img src="assets/img/gallery/team3.png" alt="">
+                            <img src="assets/img/gallery/team3.png" alt="" class="img-fluid">
                             <div class="team-caption">
                                 <h3><a href="#">Cristal Muñoz</a></h3>
                                 <p>Administrador de la plataforma</p>
@@ -765,7 +765,7 @@
                                 <!-- founder -->
                                 <div class="testimonial-founder d-flex align-items-center">
                                     <div class="founder-img">
-                                        <img src="assets/img/gallery/Dashboardpage_testi.png" alt="">
+                                        <img src="assets/img/gallery/Dashboardpage_testi.png" alt="" class="img-fluid">
                                     </div>
                                     <div class="founder-text">
                                         <span>Jon Smith</span>
@@ -784,7 +784,7 @@
                                 <!-- founder -->
                                 <div class="testimonial-founder d-flex align-items-center">
                                     <div class="founder-img">
-                                        <img src="assets/img/gallery/Dashboardpage_testi.png" alt="">
+                                        <img src="assets/img/gallery/Dashboardpage_testi.png" alt="" class="img-fluid">
                                     </div>
                                     <div class="founder-text">
                                         <span>Carlitos Lopez</span>
@@ -826,7 +826,7 @@
         <div class="home-blog-single mb-30">
             <div class="blog-img-cap">
                 <div class="blog-img">
-                    <img src="assets/img/gallery/blog01.png" alt="">
+                    <img src="assets/img/gallery/blog01.png" alt="" class="img-fluid">
                 </div>
             </div>
             <div class="blog-caption">
@@ -851,7 +851,7 @@
         <div class="home-blog-single mb-30">
             <div class="blog-img-cap">
                 <div class="blog-img">
-                    <img src="assets/img/gallery/blog1.png" alt="">
+                    <img src="assets/img/gallery/blog1.png" alt="" class="img-fluid">
                 </div>
             </div>
             <div class="blog-caption">
@@ -876,7 +876,7 @@
         <div class="home-blog-single mb-30">
             <div class="blog-img-cap">
                 <div class="blog-img">
-                    <img src="assets/img/gallery/blog02.png" alt="">
+                    <img src="assets/img/gallery/blog02.png" alt="" class="img-fluid">
                 </div>
             </div>
             <div class="blog-caption">
@@ -973,7 +973,7 @@
         <div class="single-footer-caption mb-50">
 
             <div class="footer-logo">
-                <a href="/"><img src="assets/img/logo/logoNombre.png" alt=""></a>
+                <a href="/"><img src="assets/img/logo/logoNombre.png" alt="" class="img-fluid"></a>
             </div>
 
             <div class="footer-tittle">
@@ -1031,6 +1031,67 @@
       .addon-title{ font-size:14px; }
       @media (min-width: 576px){ .addons-group{ grid-template-columns: repeat(2, 1fr); gap:16px; } }
       @media (min-width: 992px){ .addons-group{ grid-template-columns: repeat(3, 1fr); gap:20px; } }
+    </style>
+
+    <style id="responsive-overrides">
+      /* Generic responsive media */
+      img, video { max-width: 100%; height: auto; }
+
+      /* Header logo sizing */
+      .header-area .logo img { max-height: 48px; width: auto; height: auto; }
+
+      /* Hero title and section titles */
+      @media (max-width: 991.98px) { .hero__caption h1 { font-size: 36px; line-height: 1.2; } }
+      @media (max-width: 575.98px) { .hero__caption h1 { font-size: 28px; } .section-tittle h2 { font-size: 24px; } }
+
+      /* Slider height adjust */
+      @media (max-width: 991.98px) { .slider-height { min-height: 70vh; padding: 60px 0; } }
+      @media (max-width: 575.98px) { 
+        .slider-height { min-height: 60vh; padding: 40px 0; }
+      }
+
+      /* Tracking form stack on mobile */
+      .tracking-box { gap: 10px; }
+      @media (max-width: 575.98px) {
+        .tracking-box { flex-direction: column; align-items: stretch; }
+        .tracking-box .form-control,
+        .tracking-box .btn { width: 100%; }
+        .tracking-box .btn { margin-left: 0 !important; }
+      }
+
+      /* Contact form paddings reduce on mobile */
+      @media (max-width: 575.98px) {
+        .pt-115 { padding-top: 60px; }
+        .pb-120 { padding-bottom: 60px; }
+        .section-padding30 { padding: 30px 0; }
+      }
+
+      /* Cards adjustments */
+      @media (max-width: 575.98px) {
+        .custom-cat { padding: 28px 20px; }
+        .custom-cat h5 a { font-size: 18px; }
+        .custom-cat p { font-size: 14px; }
+      }
+
+      /* Footer text alignment on mobile */
+      @media (max-width: 575.98px) {
+        .wantToWork-caption2 h2 { font-size: 20px; }
+        .contact-number { float: none !important; display: block; margin-top: 12px; }
+      }
+
+      /* Make common block images responsive */
+      .about-img img,
+      .team-img img,
+      .blog-img img,
+      .founder-img img,
+      .footer-logo img { max-width: 100%; height: auto; }
+
+      /* Reduce margins to avoid overflow on small screens */
+      @media (max-width: 575.98px) {
+        .mb-80 { margin-bottom: 40px; }
+        .mb-70 { margin-bottom: 35px; }
+        .mb-50 { margin-bottom: 30px; }
+      }
     </style>
 
     <!-- JS here -->
