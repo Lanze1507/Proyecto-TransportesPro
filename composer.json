@@ -9,6 +9,7 @@
         "php": "^8.3",
         "ext-gd": "*",
         "barryvdh/laravel-dompdf": "^3.1",
+        "google-gemini-php/laravel": "^2.0",
         "laravel/framework": "^13.0",
         "laravel/tinker": "^3.0",
         "milon/barcode": "^13.1",

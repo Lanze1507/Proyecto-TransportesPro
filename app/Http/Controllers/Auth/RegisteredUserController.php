@@ -61,16 +61,10 @@ class RegisteredUserController extends Controller
         
 
         \App\Models\Notificacion::create([
-
-    'titulo' =>
-        '👤 Nuevo cliente registrado',
-
-    'mensaje' =>
-        $user->name .
-        ' se registró con el correo: '
-        . $user->email
-
-]);
+            'titulo'  => '👤 Nuevo cliente registrado',
+            'mensaje' => $user->name . ' se registró con el correo: ' . $user->email,
+            'role'    => 'admin', // solo el admin ve esta notificación
+        ]);
         
 
         Auth::login($user);
