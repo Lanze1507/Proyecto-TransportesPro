@@ -503,7 +503,6 @@
                         </div>
                         <p>En TransportesPro ofrecemos servicios de transporte confiables, eficientes y adaptados a tus necesidades. Nos especializamos en la gestión de envíos con seguimiento en tiempo real, garantizando seguridad y puntualidad en cada entrega.</p>
                         <p>Nuestra plataforma permite a los clientes monitorear sus envíos, gestionar rutas y optimizar procesos logísticos, brindando una experiencia moderna, rápida y segura.</p>
-                        <a href="about.html" class="btn">Mas sobre nosotros</a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
